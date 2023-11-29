@@ -1,0 +1,35 @@
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.tablet {
+  background-image: url('../../../public/images/EllipseViolet-tablet.png'),
+    url('../../../public/images/EllipsePink-tablet.png');
+  background-size: auto, auto;
+  background-repeat: no-repeat, no-repeat;
+  background-position: left bottom, right top;
+}
+
+.desktop {
+  position: relative;
+  overflow: hidden;
+  background-image: url('../../../public/images/EllipseViolet.png'),
+    linear-gradient(to bottom, #e7eaf2, #e7eaf2);
+  background-size: auto, 549px 100%;
+  background-repeat: no-repeat, no-repeat;
+  background-position: left bottom, left;
+}
+.desktop::after {
+  content: '';
+  position: absolute;
+  background-position: right 0 top 0;
+  background-image: url('../../../public/images/EllipsePink.png');
+  background-size: auto;
+  background-repeat: no-repeat;
+  filter: blur(25px);
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
