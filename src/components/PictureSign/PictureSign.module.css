@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+}
+.mobile {
+  display: none;
+}
+.tablet {
+  align-items: center;
+  margin-top: 60px;
+  margin-left: 128.5px;
+  height: 250px;
+}
+
+.desktop {
+  flex-direction: column;
+  align-items: center;
+  margin-top: 153px;
+  margin-left: 66px;
+}
+
+.picture {
+  background-image: url('../../../public/images/PictureSign.png');
+  background-size: cover;
+}
+.pictureTablet {
+  width: 274px;
+  height: 250px;
+  margin-right: 51px;
+}
+.pictureDesktop {
+  width: 452px;
+  height: 412.5px;
+  margin-bottom: 32px;
+}
+.title {
+  font-size: 30px;
+}

@@ -1,0 +1,20 @@
+.container {
+  width: 100%;
+  background-color: rgba(235, 235, 235, 0.4);
+}
+.mobile {
+  max-width: 320px;
+  margin: 0 auto;
+  overflow: auto;
+}
+.tablet {
+  max-width: 768px;
+  height: 1024px;
+  margin: 0 auto;
+}
+
+.desktop {
+  max-width: 1280px;
+  height: 720px;
+  margin: auto;
+}

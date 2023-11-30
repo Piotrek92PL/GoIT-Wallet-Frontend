@@ -1,0 +1,52 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 533px;
+  height: 616px;
+  background-color: white;
+  z-index: 2;
+  margin-left: 138px;
+  margin-top: 52px;
+  padding: 40px 65px 0px 65px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.input {
+  font-size: 18px;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  outline: none;
+  margin-bottom: 40px;
+  padding-left: 54px;
+  transition: border 0.3s ease-in-out;
+}
+
+.input:hover,
+.input:focus {
+  border-bottom: 1px solid #24cca7;
+}
+
+.formikMessage {
+  position: absolute;
+  right: 0;
+  top: 35px;
+  color: #ee374a;
+  font-size: 14px;
+}
+
+.error {
+  border-bottom: 1px solid #ee374a;
+}
