@@ -1,0 +1,22 @@
+:root {
+  --bgc-color: rgba(255, 255, 255, 0.4);
+  --bgc-modal-tablet: #e7eaf2;
+  --bgc-modal: #e7eaf2;
+
+  --color-btn: #24cca7;
+  --color-btn-second: #fff;
+  --color-btn-link-main: #4a56e2;
+  --color-btn-link-main-focus: #363fab;
+  --color-btn-link-sec: #24cca7;
+  --color-btn-link-sec-focus: #17836b;
+
+  --grey-text: #bdbdbd;
+  --black-text: #000000;
+  --white-text: #ffffff;
+  --pink-text: #ff6596;
+  --green-text: #24cca7;
+  --dark-grey-text: #a6a6a6;
+
+  --font-family-main: Circe;
+  --font-family-sec: Poppins;
+}
