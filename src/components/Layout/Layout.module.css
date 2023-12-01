@@ -1,12 +1,14 @@
 .container {
   width: 100%;
-  background-color: rgba(235, 235, 235, 0.4);
+  background-color: var(--bgc-color);
 }
+
 .mobile {
   max-width: 320px;
   margin: 0 auto;
   overflow: auto;
 }
+
 .tablet {
   max-width: 768px;
   height: 1024px;
