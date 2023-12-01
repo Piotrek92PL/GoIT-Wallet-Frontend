@@ -1,5 +1,6 @@
 :root {
-  --bgc-color: rgba(235, 235, 235, 0.4);
+  --bgc-color: rgba(255, 255, 255, 0.4);
+  --bgc-color-second: #ffffff;
   --bgc-modal-tablet: #e7eaf2;
   --bgc-modal: #e7eaf2;
 

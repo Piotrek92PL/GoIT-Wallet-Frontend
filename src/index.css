@@ -14,6 +14,7 @@ ul {
 body {
   font-family: 'Poppins', sans-serif;
   color: var(--black-text);
+  background-color: #bdbdbd;
 }
 
 img {

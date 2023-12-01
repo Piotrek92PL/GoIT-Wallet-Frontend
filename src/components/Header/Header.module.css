@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    background-color: white;
+}
+
+.mobile {
+    height: 60px;
+}
+
+.tablet {
+    height: 80px;
+}
+
+.desktop {
+    height: 80px;
+}
