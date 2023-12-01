@@ -14,7 +14,7 @@ ul {
 body {
   font-family: 'Poppins', sans-serif;
   color: var(--black-text);
-  background-color: #bdbdbd;
+
 }
 
 img {
@@ -25,7 +25,10 @@ img {
 
 #root {
   display: flex;
+  justify-content: center;
   height: 100vh;
   width: 100vw;
   overflow: auto;
+  background-color: #bdbdbd;
+  background-image: linear-gradient(var(--bgc-color), var(--bgc-color));
 }

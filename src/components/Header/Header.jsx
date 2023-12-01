@@ -1,6 +1,7 @@
 import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import css from './Header.module.css';
+import { WalletWithIcon } from 'components/WalletWithIcon/WalletWithIcon';
 // import {
 //   selectIsLoggedIn,
 //   selectIsRefreshing,
@@ -25,8 +26,13 @@ export const Header = () => {
     containerStyle += ` ${css.mobile}`;
   }
   return (
-    //   return isLoggedIn && isRefreshing ? (
-    <div className={containerStyle}></div>
+    <div className={css.header}>
+      {/* //   return isLoggedIn && isRefreshing ? ( */}
+      <div className={containerStyle}>
+        <WalletWithIcon />
+      </div>
+
+      {/* //   ) : null; */}
+    </div>
   );
-  //   ) : null;
 };

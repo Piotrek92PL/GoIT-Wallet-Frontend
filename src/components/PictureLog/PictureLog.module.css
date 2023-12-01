@@ -1,9 +1,11 @@
 .container {
   display: flex;
 }
+
 .mobile {
   display: none;
 }
+
 .tablet {
   align-items: center;
   margin-top: 60px;
@@ -22,16 +24,19 @@
   background-image: url('../../../public/images/PictureLog.png');
   background-size: cover;
 }
+
 .pictureTablet {
   width: 260px;
   height: 250px;
   margin-right: 40px;
 }
+
 .pictureDesktop {
   width: 435px;
   height: 419.5px;
   margin-bottom: 28px;
 }
+
 .title {
   font-size: 30px;
 }

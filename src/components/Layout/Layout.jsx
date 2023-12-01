@@ -11,16 +11,23 @@ export const Layout = () => {
   const isDesktop = useMediaQuery({ minWidth: 1280 });
 
   let containerStyle = css.container;
-  if (isDesktop) containerStyle += ` ${css.desktop}`;
-  else if (isTablet) containerStyle += ` ${css.tablet}`;
-  else if (isMobile) containerStyle += ` ${css.mobile}`;
+  let layoutStyle;
+  if (isDesktop) {
+    containerStyle += ` ${css.desktop}`;
+    layoutStyle = css.layoutTabletDesktop;
+  } else if (isTablet) {
+    containerStyle += ` ${css.tablet}`;
+    layoutStyle = css.layoutTabletDesktop;
+  } else if (isMobile) containerStyle += ` ${css.mobile}`;
 
   return (
-    <div className={containerStyle}>
+    <div className={layoutStyle}>
       <Header />
-      <Suspense fallback={null}>
-        <Outlet />
-      </Suspense>
+      <div className={containerStyle}>
+        <Suspense fallback={null}>
+          <Outlet />
+        </Suspense>
+      </div>
     </div>
   );
 };
