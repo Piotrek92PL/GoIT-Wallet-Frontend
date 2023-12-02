@@ -2,9 +2,32 @@
   height: 100%;
   width: 100%;
   display: flex;
+  margin: 0 auto;
+}
+
+.mobile {
+  max-width: 320px;
 }
 
 .tablet {
+  max-width: 768px;
+
+}
+
+.desktop {
+  max-width: 1280px;
+}
+
+
+
+.background {
+  height: 100vh;
+  width: 100vw;
+}
+
+
+
+.backgroundTablet {
   background-image: url('../../../public/images/EllipseViolet-tablet.png'),
     url('../../../public/images/EllipsePink-tablet.png');
   background-size: auto, auto;
@@ -12,16 +35,18 @@
   background-position: left bottom, right top;
 }
 
-.desktop {
+.backgroundDesktop {
   position: relative;
   overflow: hidden;
-  background-image: url('../../../public/images/EllipseViolet.png'),
-    linear-gradient(to bottom, #e7eaf2, #e7eaf2);
-  background-size: auto, 549px 100%;
+  background-image:
+    url('../../../public/images/EllipseViolet.png'),
+    linear-gradient(to right, #e7eaf2, transparent 57%);
+  background-size: auto, 57% 100%;
   background-repeat: no-repeat, no-repeat;
-  background-position: left bottom, left;
+  background-position: left bottom, right;
 }
-.desktop::after {
+
+.backgroundDesktop::before {
   content: '';
   position: absolute;
   background-position: right 0 top 0;

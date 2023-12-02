@@ -1,0 +1,45 @@
+.container {
+    display: flex;
+    align-items: center;
+
+}
+
+.mobile {
+    height: 60px;
+    gap: 15px;
+}
+
+.tablet {
+    height: 80px;
+    gap: 20px;
+}
+
+.desktop {
+    height: 80px;
+    gap: 20px;
+}
+
+.iconTabletDesktop {
+    width: 40px;
+    height: 40px;
+}
+
+.icon {
+    background-image: url('../../../public/images/Wallet.png');
+    background-size: cover;
+}
+
+.iconMobile {
+    width: 30px;
+    height: 30px;
+}
+
+.walletTabletDesktop {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.walletMobile {
+    font-size: 20px;
+    font-weight: 700;
+}

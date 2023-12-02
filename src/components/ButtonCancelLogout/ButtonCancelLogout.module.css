@@ -1,0 +1,17 @@
+.buttonCancel {
+    letter-spacing: 1.8px;
+    color: var(--color-btn-link-main);
+    background-color: transparent;
+    border: 1px solid var(--color-btn-link-main);
+    border-radius: 20px;
+    padding: 13px 0;
+    width: 100%;
+    max-width: 140px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out;
+}
+
+.buttonCancel:hover {
+    background-color: var(--color-btn);
+    border: 1px solid var(--color-btn);
+}
