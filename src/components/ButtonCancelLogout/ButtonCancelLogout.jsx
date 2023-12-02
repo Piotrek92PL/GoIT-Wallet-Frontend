@@ -1,5 +1,6 @@
 import React from 'react';
 import css from './ButtonCancelLogout.module.css';
+import PropTypes from 'prop-types';
 
 export const ButtonCancelLogout = ({ onClick }) => {
   return (
@@ -9,4 +10,8 @@ export const ButtonCancelLogout = ({ onClick }) => {
       </button>
     </>
   );
+};
+
+ButtonCancelLogout.propTypes = {
+  onClick: PropTypes.func.isRequired,
 };

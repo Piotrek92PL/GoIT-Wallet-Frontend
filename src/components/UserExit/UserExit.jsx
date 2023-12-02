@@ -1,6 +1,7 @@
 import { useAuth } from 'hooks';
 import css from './UserExit.module.css';
 import { useMediaQuery } from 'react-responsive';
+import PropTypes from 'prop-types';
 
 export const UserExit = ({ onClick }) => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -25,4 +26,8 @@ export const UserExit = ({ onClick }) => {
       </button>
     </div>
   );
+};
+
+UserExit.propTypes = {
+  onClick: PropTypes.func.isRequired,
 };

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import css from './ModalLogout.module.css';
 import { ButtonConfirmLogout } from 'components/ButtonConfirmLogout/ButtonConfirmLogout';
 import { ButtonCancelLogout } from 'components/ButtonCancelLogout/ButtonCancelLogout';
+import PropTypes from 'prop-types';
 
 export const ModalLogout = ({ isOpen, toggleModal, logout }) => {
   const backdropClasses = `${css.backdrop} ${
@@ -39,4 +40,10 @@ export const ModalLogout = ({ isOpen, toggleModal, logout }) => {
       </div>
     </div>
   );
+};
+
+ModalLogout.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  toggleModal: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
 };
