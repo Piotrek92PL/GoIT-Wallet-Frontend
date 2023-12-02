@@ -1,21 +1,27 @@
-import { useDispatch } from 'react-redux';
-import { logOut } from 'redux/auth/operations';
 import { useAuth } from 'hooks';
 import css from './UserExit.module.css';
+import { useMediaQuery } from 'react-responsive';
 
-export const UserExit = () => {
-  const dispatch = useDispatch();
+export const UserExit = ({ onClick }) => {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+
+  let textStyle = css.text;
+  let buttonStyle = css.buttonLogout;
+  if (isMobile) {
+    textStyle = ` ${css.textMobile}`;
+    buttonStyle += ` ${css.buttonLogoutMobile}`;
+  }
+
   const { user } = useAuth();
 
   return (
-    <div className={css.wrapper}>
-      <p className={css.userEmail}>Welcome, {user.email}</p>
-      <button
-        className={css.buttonLogout}
-        type="button"
-        onClick={() => dispatch(logOut())}
-      >
-        Logout
+    <div className={css.container}>
+      <p className={css.userEmail}>Welcome {user.email}</p>
+      <button className={buttonStyle} type="button" onClick={onClick}>
+        <svg className={css.iconExit} width="18" height="18">
+          <use href="/images/icons-sin-log.svg#icon-exit" />
+        </svg>
+        <span className={textStyle}>Exit</span>
       </button>
     </div>
   );

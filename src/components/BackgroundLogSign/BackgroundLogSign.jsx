@@ -1,6 +1,7 @@
 import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import css from './BackgroundLogSign.module.css';
+import PropTypes from 'prop-types';
 
 export const BackgroundLogSign = ({ children }) => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -25,4 +26,8 @@ export const BackgroundLogSign = ({ children }) => {
       <div className={containerStyle}>{children}</div>
     </div>
   );
+};
+
+BackgroundLogSign.propTypes = {
+  children: PropTypes.node.isRequired,
 };

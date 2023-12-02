@@ -1,0 +1,52 @@
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.userEmail {
+    font-size: 18px;
+    color: var(--grey-text);
+}
+
+.buttonLogout {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: 12px;
+    border-left: 1px solid var(--grey-text);
+    height: 30px;
+    padding-left: 12px;
+    font-size: 18px;
+    color: var(--grey-text);
+    transition: color 0.3s ease-in-out;
+}
+
+.buttonLogout:hover {
+    color: var(--color-btn);
+}
+
+.buttonLogout:hover .iconExit {
+    fill: var(--color-btn);
+}
+
+.iconExit {
+    fill: var(--grey-text);
+    transition: fill 0.3s ease-in-out;
+}
+
+.text {
+    margin-left: 8px;
+}
+
+.textMobile {
+    display: none;
+}
+
+.buttonLogoutMobile {
+    border-left: none;
+    padding: 0;
+    margin-left: 8px;
+}
