@@ -19,6 +19,7 @@ export const BackgroundLogSign = ({ children }) => {
     backgroundStyle += ` ${css.backgroundTablet}`;
   } else if (isMobile) {
     containerStyle += ` ${css.mobile}`;
+    backgroundStyle += ` ${css.backgroundMobile}`;
   }
 
   return (

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
 import css from './FormRegister.module.css';
@@ -9,6 +11,20 @@ import { LinkAuth } from 'components/LinkAuth/LinkAuth';
 import { WalletWithIcon } from 'components/WalletWithIcon/WalletWithIcon';
 
 export const FormRegister = () => {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const isTablet = useMediaQuery({ minWidth: 769, maxWidth: 1279 });
+  const isDesktop = useMediaQuery({ minWidth: 1280 });
+
+  let containerStyle = css.container;
+
+  if (isDesktop) {
+    containerStyle += ` ${css.desktop}`;
+  } else if (isTablet) {
+    containerStyle += ` ${css.tablet}`;
+  } else if (isMobile) {
+    containerStyle += ` ${css.mobile}`;
+  }
+
   const [passwordShown, setPasswordShown] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -16,6 +32,7 @@ export const FormRegister = () => {
   };
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -27,12 +44,14 @@ export const FormRegister = () => {
     validationSchema: validationSchema,
     onSubmit: values => {
       const { email, password } = values;
-      dispatch(register({ email, password }));
+      dispatch(register({ email, password }))
+        .unwrap()
+        .then(() => navigate('/home'));
     },
   });
 
   return (
-    <div className={css.container}>
+    <div className={containerStyle}>
       <WalletWithIcon />
       <form className={css.form} onSubmit={formik.handleSubmit}>
         <label htmlFor="email" className={css.label}>

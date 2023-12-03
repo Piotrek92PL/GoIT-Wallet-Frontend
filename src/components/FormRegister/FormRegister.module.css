@@ -3,13 +3,28 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 533px;
   height: 616px;
   background-color: white;
   z-index: 2;
-  margin-top: 52px;
-  padding: 40px 65px 0px 65px;
+}
+
+.mobile {
+  padding: 32px 20px 66px 20px;
+  max-width: 320px;
+}
+
+.tablet {
+  margin-top: 50px;
   border-radius: 20px;
+  max-width: 533px;
+  padding: 40px 65px 66px 65px;
+}
+
+.desktop {
+  margin-top: 52px;
+  border-radius: 20px;
+  max-width: 533px;
+  padding: 40px 65px 66px 65px;
 }
 
 .form {
@@ -24,7 +39,9 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  width: 100%;
 }
+
 
 .input {
   font-size: 18px;
@@ -68,7 +85,7 @@
   right: 0;
   top: 75px;
   color: var(--pink-text);
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .error {
