@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
@@ -31,6 +32,7 @@ export const FormRegister = () => {
   };
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -42,7 +44,9 @@ export const FormRegister = () => {
     validationSchema: validationSchema,
     onSubmit: values => {
       const { email, password } = values;
-      dispatch(register({ email, password }));
+      dispatch(register({ email, password }))
+        .unwrap()
+        .then(() => navigate('/home'));
     },
   });
 
