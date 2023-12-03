@@ -4,6 +4,9 @@ import { register } from 'redux/auth/operations';
 import css from './FormRegister.module.css';
 import { useFormik } from 'formik';
 import { validationSchema } from './validationSchema';
+import { ButtonAuth } from 'components/ButtonAuth/ButtonAuth';
+import { LinkAuth } from 'components/LinkAuth/LinkAuth';
+import { WalletWithIcon } from 'components/WalletWithIcon/WalletWithIcon';
 
 export const FormRegister = () => {
   const dispatch = useDispatch();
@@ -22,6 +25,7 @@ export const FormRegister = () => {
 
   return (
     <div className={css.container}>
+      <WalletWithIcon />
       <form className={css.form}>
         <label htmlFor="email" className={css.label}>
           <input
@@ -75,7 +79,9 @@ export const FormRegister = () => {
             <div className={css.formikMessage}>{formik.errors.name}</div>
           ) : null}
         </label>
+        <ButtonAuth onClick={formik.handleSubmit} content="Register" />
       </form>
+      <LinkAuth to="/login" content="Log in" />
     </div>
   );
 };

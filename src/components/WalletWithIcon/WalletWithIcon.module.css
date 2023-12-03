@@ -1,21 +1,13 @@
 .container {
     display: flex;
     align-items: center;
-
 }
 
 .mobile {
-    height: 60px;
     gap: 15px;
 }
 
-.tablet {
-    height: 80px;
-    gap: 20px;
-}
-
-.desktop {
-    height: 80px;
+.tabletDesktop {
     gap: 20px;
 }
 

@@ -40,8 +40,8 @@
   overflow: hidden;
   background-image:
     url('../../../public/images/EllipseViolet.png'),
-    linear-gradient(to right, #e7eaf2, transparent 57%);
-  background-size: auto, 57% 100%;
+    linear-gradient(to right, #e7eaf2, transparent 55%);
+  background-size: auto, 55% 100%;
   background-repeat: no-repeat, no-repeat;
   background-position: left bottom, right;
 }
