@@ -18,3 +18,12 @@
 .buttonAuth:hover {
     color: var(--color-btn-link-main);
 }
+
+.buttonAuth:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.buttonAuth:disabled:hover {
+    color: var(--color-btn-second);
+}

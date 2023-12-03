@@ -2,10 +2,10 @@ import React from 'react';
 import css from './ButtonAuth.module.css';
 import PropTypes from 'prop-types';
 
-export const ButtonAuth = ({ onClick, content }) => {
+export const ButtonAuth = ({ content, disabled }) => {
   return (
     <>
-      <button className={css.buttonAuth} type="submit" onClick={onClick}>
+      <button className={css.buttonAuth} type="submit" disabled={disabled}>
         {content}
       </button>
     </>
@@ -13,6 +13,6 @@ export const ButtonAuth = ({ onClick, content }) => {
 };
 
 ButtonAuth.propTypes = {
-  onClick: PropTypes.func.isRequired,
   content: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
 };

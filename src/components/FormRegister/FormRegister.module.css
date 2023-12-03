@@ -36,9 +36,31 @@
   transition: border 0.3s ease-in-out;
 }
 
-.input:hover,
-.input:focus {
+.label:hover .input,
+.label:focus .input {
   border-bottom: 1px solid var(--color-btn);
+}
+
+.label:hover .iconInput,
+.label:focus-within .iconInput {
+  fill: var(--color-btn);
+}
+
+.buttonPassword {
+  position: absolute;
+  right: 0;
+  top: 45px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.iconInput {
+  position: absolute;
+  left: 0;
+  top: 42px;
+  fill: var(--grey-text);
+  transition: fill 0.3s ease-in-out;
 }
 
 .formikMessage {
