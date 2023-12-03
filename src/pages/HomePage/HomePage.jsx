@@ -3,22 +3,19 @@ import { Helmet } from 'react-helmet';
 import { useMediaQuery } from 'react-responsive';
 
 export default function HomePage() {
-  const isMobile = useMediaQuery({ maxWidth: 768 });
   const isTablet = useMediaQuery({ minWidth: 769, maxWidth: 1279 });
   const isDesktop = useMediaQuery({ minWidth: 1280 });
 
-  let containerStyle = css.container;
+  let backgroundStyle = css.background;
 
   if (isDesktop) {
-    containerStyle += ` ${css.desktop}`;
+    backgroundStyle += ` ${css.backgroundDesktop}`;
   } else if (isTablet) {
-    containerStyle += ` ${css.tablet}`;
-  } else if (isMobile) {
-    containerStyle += ` ${css.mobile}`;
+    backgroundStyle += ` ${css.backgroundTablet}`;
   }
 
   return (
-    <div className={containerStyle}>
+    <div className={backgroundStyle}>
       <Helmet>
         <title>Finance manager</title>
       </Helmet>
