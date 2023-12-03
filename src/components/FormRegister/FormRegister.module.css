@@ -17,6 +17,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  margin-top: 20px;
 }
 
 .label {
@@ -27,11 +28,10 @@
 
 .input {
   font-size: 18px;
-  color: var(--grey-text);
   border: none;
   border-bottom: 1px solid #e0e0e0;
   outline: none;
-  margin-bottom: 40px;
+  margin-top: 40px;
   padding-left: 54px;
   transition: border 0.3s ease-in-out;
 }
@@ -44,11 +44,19 @@
 .formikMessage {
   position: absolute;
   right: 0;
-  top: 35px;
+  top: 75px;
   color: var(--pink-text);
   font-size: 14px;
 }
 
 .error {
   border-bottom: 1px solid var(--pink-text);
+}
+
+.line {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-image: linear-gradient(to right, var(--color-btn) 45%, rgba(95, 153, 140, 0.2) 55%);
+  margin-top: 6px;
 }

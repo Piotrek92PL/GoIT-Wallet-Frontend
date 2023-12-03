@@ -16,6 +16,7 @@ export const FormRegister = () => {
       name: '',
       email: '',
       password: '',
+      passwordConfirm: '',
     },
     validationSchema: validationSchema,
     onSubmit: values => {
@@ -61,7 +62,28 @@ export const FormRegister = () => {
             <div className={css.formikMessage}>{formik.errors.password}</div>
           ) : null}
         </label>
-
+        <label htmlFor="passwordConfirm" className={css.label}>
+          <input
+            id="passwordConfirm"
+            placeholder="Confirm password"
+            className={`${css.input}  ${
+              formik.touched.passwordConfirm && formik.errors.passwordConfirm
+                ? css.error
+                : ''
+            }`}
+            type="password"
+            name="passwordConfirm"
+            onChange={formik.handleChange}
+            value={formik.values.passwordConfirm}
+            onBlur={formik.handleBlur}
+          />
+          <div className={css.line}></div>
+          {formik.touched.passwordConfirm && formik.errors.passwordConfirm ? (
+            <div className={css.formikMessage}>
+              {formik.errors.passwordConfirm}
+            </div>
+          ) : null}
+        </label>
         <label htmlFor="name" className={css.label}>
           <input
             id="name"
