@@ -3,6 +3,8 @@
   width: 100%;
   display: flex;
   margin: 0 auto;
+  overflow: auto;
+  padding-bottom: 50px;
 }
 
 .mobile {
@@ -12,6 +14,7 @@
 .tablet {
   max-width: 768px;
   flex-direction: column;
+  align-items: center;
 }
 
 .desktop {
@@ -25,7 +28,9 @@
   width: 100vw;
 }
 
-
+.backgroundMobile {
+  background-image: linear-gradient(var(--bgc-color-second), var(--bgc-color-second));
+}
 
 .backgroundTablet {
   background-image: url('../../../public/images/EllipseViolet-tablet.png'),
