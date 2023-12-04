@@ -17,7 +17,7 @@ export const UserExit = ({ onClick }) => {
 
   return (
     <div className={css.container}>
-      <p className={css.userEmail}>Welcome {user.email}</p>
+      <p className={css.userEmail}>{user.email}</p>
       <button className={buttonStyle} type="button" onClick={onClick}>
         <svg className={css.iconExit} width="18" height="18">
           <use href="/images/icons-sin-log.svg#icon-exit" />

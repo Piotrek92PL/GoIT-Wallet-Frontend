@@ -11,6 +11,11 @@ const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };
 
+const token = localStorage.getItem('token');
+if (token) {
+  setAuthHeader(token);
+}
+
 export const register = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
@@ -18,10 +23,15 @@ export const register = createAsyncThunk(
       const res = await axios.post('/api/users/signup', credentials);
 
       setAuthHeader(res.data.token);
+      localStorage.setItem('token', res.data.token);
       return res.data;
     } catch (error) {
-      // console.log(error.response.data);
-      return thunkAPI.rejectWithValue(error.message);
+      if (!error.response) {
+        return thunkAPI.rejectWithValue(
+          'Problem with connecting to the server'
+        );
+      }
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -33,18 +43,25 @@ export const logIn = createAsyncThunk(
       const res = await axios.post('/api/users/login', credentials);
 
       setAuthHeader(res.data.token);
+      localStorage.setItem('token', res.data.token);
       return res.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      if (!error.response) {
+        return thunkAPI.rejectWithValue(
+          'Problem with connecting to the server'
+        );
+      }
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
 );
 
 export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
-    await axios.post('/api/users/logout');
+    await axios.get('/api/users/logout');
 
     clearAuthHeader();
+    localStorage.removeItem('token');
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
