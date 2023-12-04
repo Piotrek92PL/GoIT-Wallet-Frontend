@@ -9,6 +9,7 @@ import { validationSchema } from './validationSchema';
 import { ButtonAuth } from 'components/ButtonAuth/ButtonAuth';
 import { LinkAuth } from 'components/LinkAuth/LinkAuth';
 import { WalletWithIcon } from 'components/WalletWithIcon/WalletWithIcon';
+import { toast } from 'react-toastify';
 
 export const FormLogin = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -44,7 +45,10 @@ export const FormLogin = () => {
       const { email, password } = values;
       dispatch(logIn({ email, password }))
         .unwrap()
-        .then(() => navigate('/home'));
+        .then(() => navigate('/home'))
+        .catch(rejectedValueOrSerializedError => {
+          toast.error(rejectedValueOrSerializedError);
+        });
     },
   });
 
