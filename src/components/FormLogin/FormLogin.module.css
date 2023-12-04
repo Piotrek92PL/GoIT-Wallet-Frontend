@@ -1,0 +1,101 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: white;
+    z-index: 2;
+    height: 468px;
+}
+
+.mobile {
+    padding: 32px 20px 66px 20px;
+    max-width: 320px;
+}
+
+.tablet {
+    margin-top: 50px;
+    border-radius: 20px;
+    max-width: 533px;
+    padding: 40px 65px 66px 65px;
+}
+
+.desktop {
+    margin-top: 136px;
+    border-radius: 20px;
+    max-width: 533px;
+    padding: 40px 65px 66px 65px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+}
+
+
+.input {
+    font-size: 18px;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    outline: none;
+    margin-top: 40px;
+    padding-left: 54px;
+    transition: border 0.3s ease-in-out;
+}
+
+.label:hover .input,
+.label:focus .input {
+    border-bottom: 1px solid var(--color-btn);
+}
+
+.label:hover .iconInput,
+.label:focus-within .iconInput {
+    fill: var(--color-btn);
+}
+
+.buttonPassword {
+    position: absolute;
+    right: 0;
+    top: 45px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
+.iconInput {
+    position: absolute;
+    left: 0;
+    top: 42px;
+    fill: var(--grey-text);
+    transition: fill 0.3s ease-in-out;
+}
+
+.formikMessage {
+    position: absolute;
+    right: 0;
+    top: 75px;
+    color: var(--pink-text);
+    font-size: 12px;
+}
+
+.error {
+    border-bottom: 1px solid var(--pink-text);
+}
+
+.line {
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background-image: linear-gradient(to right, var(--color-btn) 45%, rgba(95, 153, 140, 0.2) 55%);
+    margin-top: 6px;
+}
