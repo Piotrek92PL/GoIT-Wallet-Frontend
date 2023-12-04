@@ -26,7 +26,11 @@ export const register = createAsyncThunk(
       localStorage.setItem('token', res.data.token);
       return res.data;
     } catch (error) {
-      // console.log(error.response.data);
+      if (!error.response) {
+        return thunkAPI.rejectWithValue(
+          'Problem with connecting to the server'
+        );
+      }
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
@@ -42,6 +46,11 @@ export const logIn = createAsyncThunk(
       localStorage.setItem('token', res.data.token);
       return res.data;
     } catch (error) {
+      if (!error.response) {
+        return thunkAPI.rejectWithValue(
+          'Problem with connecting to the server'
+        );
+      }
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
