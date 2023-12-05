@@ -1,70 +1,176 @@
-# Getting Started with Create React App
+# GoIt Wallet (frontend repo) by FinanSync Team
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
 
-## Available Scripts
+1. [Overview](#overview)
+2. [Installation Guide](#installation-guide)
+3. [Main Dependencies](#main-dependencies)
+4. [Dev Dependencies](#dev-dependencies)
+5. [Testing dependencies](#testing-dependencies)
+6. [Additional dependencies](#additional-dependencies)
 
-In the project directory, you can run:
+## Overview
 
-### `npm start`
+**Wallet** is a home budget management application designed to help users track
+their transactions, analyze financial statistics, and manage their budget
+effectively. The project is structured with various components, each serving
+specific functionalities such as user registration, login, transaction
+management, and data visualization.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installation Guide
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+To install the application on a local environment, follow the steps below:
 
-### `npm test`
+1. Clone the repository from GitHub:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   [HTTP](https://github.com/Piotrek92PL/GoIT-Wallet-Frontend)
 
-### `npm run build`
+2. Navigate to the project directory
+3. Install dependencies
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. Run the app
 
-### `npm run eject`
+```bash
+npm start
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Open [localhost](#http://localhost:3000) to view it in your browser.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+[Back to top](#table-of-contents)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Main Dependencies
 
-## Learn More
+- **[@reduxjs/toolkit](https://redux-toolkit.js.org/)**: Redux Toolkit for state
+  management.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  - Version: ^1.9.5
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **[axios](https://axios-http.com/)**: Promise-based HTTP client for the
+  browser and Node.js.
 
-### Code Splitting
+  - Version: ^1.5.0
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **[formik](https://formik.org/)**: Form library for React and React Native.
 
-### Analyzing the Bundle Size
+  - Version: ^2.4.5
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **[react-router-dom](https://reactrouter.com/)**: DOM bindings for React
+  Router.
 
-### Making a Progressive Web App
+  - Version: ^6.16.0
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- **[react-chartjs-2](https://www.npmjs.com/package/react-chartjs-2)**: React
+  wrapper for Chart.js.
 
-### Advanced Configuration
+  - Version: ^4.12.0
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- **[react-loader-spinner](https://www.npmjs.com/package/react-loader-spinner)**:
+  Loader spinner component for React.
 
-### Deployment
+  - Version: ^5.4.5
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- **[styled-components](https://styled-components.com/)**: Styling library for
+  React components.
 
-### `npm run build` fails to minify
+  - Version: ^6.0.8
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **[yup](https://github.com/jquense/yup)**: JavaScript schema builder for value
+  parsing and validation.
+  - Version: ^1.3.1
+
+[Back to top](#table-of-contents)
+
+### Dev Dependencies
+
+- **[@babel/plugin-proposal-private-property-in-object](https://www.npmjs.com/package/@babel/plugin-proposal-private-property-in-object)**:
+  Babel plugin for private class fields.
+
+  - Version: ^7.21.11
+
+- **[prop-types](https://www.npmjs.com/package/prop-types)**: Runtime type
+  checking for React props.
+  - Version: ^15.8.1
+
+[Back to top](#table-of-contents)
+
+### Testing Dependencies
+
+- **[@testing-library/jest-dom](https://www.npmjs.com/package/@testing-library/jest-dom)**:
+  Custom Jest matchers for asserting on DOM nodes.
+
+  - Version: ^5.17.0
+
+- **[@testing-library/react](https://www.npmjs.com/package/@testing-library/react)**:
+  Simple and complete React testing utilities.
+
+  - Version: ^13.4.0
+
+- **[@testing-library/user-event](https://www.npmjs.com/package/@testing-library/user-event)**:
+  Fire events the same way the user does.
+  - Version: ^13.5.0
+
+[Back to top](#table-of-contents)
+
+### Additional Dependencies
+
+- **[modern-normalize](https://www.npmjs.com/package/modern-normalize)**: A
+  modern alternative to CSS resets.
+
+  - Version: ^2.0.0
+
+- **[react-helmet](https://www.npmjs.com/package/react-helmet)**: React Helmet
+  provides a declarative way to manage document head.
+
+  - Version: ^6.1.0
+
+- **[react-hot-toast](https://www.npmjs.com/package/react-hot-toast)**: React
+  toast notifications.
+
+  - Version: ^2.4.1
+
+- **[react-icons](https://www.npmjs.com/package/react-icons)**: SVG icons as
+  React components.
+
+  - Version: ^4.12.0
+
+- **[react-redux](https://www.npmjs.com/package/react-redux)**: Official React
+  bindings for Redux.
+
+  - Version: ^8.1.2
+
+- **[react-responsive](https://www.npmjs.com/package/react-responsive)**: Media
+  queries in react for responsive design.
+
+  - Version: ^9.0.2
+
+- **[react-scripts](https://www.npmjs.com/package/react-scripts)**: Create React
+  App scripts.
+
+  - Version: ^5.0.1
+
+- **[react-transition-group](https://www.npmjs.com/package/react-transition-group)**:
+  High-level animation primitives for React.
+
+  - Version: ^4.4.5
+
+- **[redux](https://www.npmjs.com/package/redux)**: Predictable state container
+  for JavaScript apps.
+
+  - Version: ^4.2.1
+
+- **[redux-persist](https://www.npmjs.com/package/redux-persist)**: Persist and
+  rehydrate a redux store.
+
+  - Version: ^6.0.0
+
+- **[web-vitals](https://www.npmjs.com/package/web-vitals)**: Library for
+  measuring all the Web Vitals metrics.
+  - Version: ^2.1.4
+
+[Back to top](#table-of-contents)

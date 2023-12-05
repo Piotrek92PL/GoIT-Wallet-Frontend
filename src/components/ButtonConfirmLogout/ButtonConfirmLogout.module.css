@@ -1,0 +1,16 @@
+.buttonConfirm {
+    letter-spacing: 1.8px;
+    color: var(--color-btn-second);
+    background-color: var(--color-btn);
+    border: 1 px solid var(--color-btn);
+    border-radius: 20px;
+    padding: 13px 0;
+    width: 100%;
+    max-width: 140px;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.buttonConfirm:hover {
+    color: var(--color-btn-link-main);
+}

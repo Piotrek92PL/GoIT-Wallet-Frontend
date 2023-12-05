@@ -1,12 +1,12 @@
-import css from './HomePage.module.css';
 import { Helmet } from 'react-helmet';
+import { BackgroundContainer } from 'components/BackgroundContainer/BackgroundContainer';
 
 export default function HomePage() {
   return (
-    <div className={css.container}>
+    <BackgroundContainer>
       <Helmet>
         <title>Finance manager</title>
       </Helmet>
-    </div>
+    </BackgroundContainer>
   );
 }

@@ -1,0 +1,54 @@
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    margin: 0 auto;
+}
+
+.mobile {
+    max-width: 320px;
+    padding: 0 20px;
+}
+
+.tablet {
+    max-width: 768px;
+    padding: 0 32px;
+}
+
+.desktop {
+    max-width: 1280px;
+    padding: 0 16px;
+}
+
+
+.background {
+    width: 100%;
+}
+
+.backgroundTablet {
+    background-image:
+        url('../../../public/images/EllipsePink-tablet.png'),
+        url('../../../public/images/EllipseViolet-tablet.png');
+    background-position:
+        right 0 top 0px,
+        left 0 bottom 0px;
+    background-size: auto, auto;
+    background-repeat: no-repeat, no-repeat;
+    filter: blur(25px);
+    width: 100%;
+    min-height: calc(100vh - 80px);
+}
+
+.backgroundDesktop {
+    background-image:
+        url('../../../public/images/EllipsePink.png'),
+        url('../../../public/images/EllipseViolet.png');
+    background-position:
+        right 0 top 0px,
+        left 0 bottom 0px;
+    background-size: auto, auto;
+    background-repeat: no-repeat, no-repeat;
+    filter: blur(25px);
+    width: 100%;
+    min-height: calc(100vh - 80px);
+}
