@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
+import { setLoading } from '../global/slice';
 axios.defaults.baseURL = 'http://localhost:3000';
 
 const setAuthHeader = token => {
@@ -19,6 +19,7 @@ if (token) {
 export const register = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
+    thunkAPI.dispatch(setLoading(true));
     try {
       const res = await axios.post('/api/users/signup', credentials);
 
@@ -32,6 +33,8 @@ export const register = createAsyncThunk(
         );
       }
       return thunkAPI.rejectWithValue(error.response.data.message);
+    } finally {
+      thunkAPI.dispatch(setLoading(false));
     }
   }
 );
@@ -39,6 +42,7 @@ export const register = createAsyncThunk(
 export const logIn = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
+    thunkAPI.dispatch(setLoading(true));
     try {
       const res = await axios.post('/api/users/login', credentials);
 
@@ -52,11 +56,14 @@ export const logIn = createAsyncThunk(
         );
       }
       return thunkAPI.rejectWithValue(error.response.data.message);
+    } finally {
+      thunkAPI.dispatch(setLoading(false));
     }
   }
 );
 
 export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+  thunkAPI.dispatch(setLoading(true));
   try {
     await axios.get('/api/users/logout');
 
@@ -64,12 +71,15 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     localStorage.removeItem('token');
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
+  } finally {
+    thunkAPI.dispatch(setLoading(false));
   }
 });
 
 export const refreshUser = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
+    thunkAPI.dispatch(setLoading(true));
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
 
@@ -84,6 +94,8 @@ export const refreshUser = createAsyncThunk(
     } catch (error) {
       // console.log(error);
       return thunkAPI.rejectWithValue(error.message);
+    } finally {
+      thunkAPI.dispatch(setLoading(false));
     }
   }
 );
