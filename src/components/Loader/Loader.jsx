@@ -1,7 +1,7 @@
 import styles from './Loader.module.css';
 import { ThreeDots } from 'react-loader-spinner';
 
-const Loader = () => {
+export const Loader = () => {
   return (
     <div className={styles.loader}>
       <ThreeDots
@@ -15,5 +15,3 @@ const Loader = () => {
     </div>
   );
 };
-
-export default Loader;
