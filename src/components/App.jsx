@@ -4,13 +4,14 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import { Layout } from './Layout/Layout';
 import { RestrictedRoute } from './RestrictedRoute';
 import { refreshUser } from '../redux/auth/operations';
-import { PrivateRoute } from './PrivateRoute';
+// import { PrivateRoute } from './PrivateRoute';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+const DiagramPage = lazy(() => import('../pages/DiagramPage/DiagramPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -39,8 +40,13 @@ export const App = () => {
           <Route index element={<Navigate replace to="/home" />} />
           <Route
             path="/home"
-            element={<PrivateRoute component={<HomePage />} />}
-            // element={<HomePage />} // for work
+            // element={<PrivateRoute component={<HomePage />} />}
+            element={<HomePage />} // for work
+          />
+          <Route
+            path="/diagram"
+            // element={<PrivateRoute component={DiagramPage />} />}
+            element={<DiagramPage />} // for work
           />
           <Route
             path="/register"
