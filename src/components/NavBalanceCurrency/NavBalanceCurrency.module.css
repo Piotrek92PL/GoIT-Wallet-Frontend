@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    gap: 32px;
+
+}
+
+.desktop {
+    flex-direction: column;
+    width: 100%;
+    max-width: 393px;
+}
+
+.mobile {
+    margin: 0 auto;
+}
+
+
+.navBalance {
+    display: flex;
+    flex-direction: column;
+}
+
+.navBalanceMobile {
+    width: 100%;
+    align-items: center;
+    margin-top: 12px;
+}
+
+
+.navBalanceTabletDesktop {
+    margin-top: 40px;
+}
+
+.currencyTablet {
+    margin-top: 32px;
+}
+
+.currencyMobile {
+    display: none;
+}
