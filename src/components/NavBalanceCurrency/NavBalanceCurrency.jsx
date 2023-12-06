@@ -11,20 +11,27 @@ export const NavBalanceCurrency = () => {
 
   let containerStyle = css.container;
   let navBalanceStyle = css.navBalance;
+  let currencyStyle;
 
   if (isDesktop) {
     containerStyle += ` ${css.desktop}`;
+    navBalanceStyle += ` ${css.navBalanceTabletDesktop}`;
   } else if (isTablet) {
-    containerStyle += ` ${css.tablet}`;
+    navBalanceStyle += ` ${css.navBalanceTabletDesktop}`;
+    currencyStyle = ` ${css.currencyTablet}`;
   } else if (isMobile) {
     containerStyle += ` ${css.mobile}`;
+    currencyStyle = ` ${css.currencyMobile}`;
+    navBalanceStyle += ` ${css.navBalanceMobile}`;
   }
   return (
     <div className={containerStyle}>
       <div className={navBalanceStyle}>
         <Navigation />
       </div>
-      <Currency />
+      <div className={currencyStyle}>
+        <Currency />
+      </div>
     </div>
   );
 };

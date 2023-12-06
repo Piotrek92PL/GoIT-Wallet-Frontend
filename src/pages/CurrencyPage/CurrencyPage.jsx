@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet';
 import { BackgroundContainer } from 'components/BackgroundContainer/BackgroundContainer';
-import { Currency } from 'components/Currency/Currency';
+import { NavCurrency } from 'components/NavCurrency/NavCurrency';
 
 export default function CurrencyPage() {
   return (
@@ -8,7 +8,7 @@ export default function CurrencyPage() {
       <Helmet>
         <title>Currency</title>
       </Helmet>
-      <Currency />
+      <NavCurrency />
     </BackgroundContainer>
   );
 }
