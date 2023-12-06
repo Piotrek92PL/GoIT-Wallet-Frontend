@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import css from './Header.module.css';
 import { WalletWithIcon } from 'components/WalletWithIcon/WalletWithIcon';
 import { UserExit } from 'components/UserExit/UserExit';
 import { ModalLogout } from 'components/ModalLogout/ModalLogout';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from 'redux/auth/operations';
+import { toggleModalLogout } from 'redux/global/slice';
+import { selectIsModalLogoutOpen } from 'redux/global/selectors';
 
 export const Header = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   const dispatch = useDispatch();
+  const isModalLogoutOpen = useSelector(selectIsModalLogoutOpen);
 
   const handleToggleModal = () => {
-    setIsModalOpen(!isModalOpen);
+    dispatch(toggleModalLogout());
   };
   const logout = () => {
     handleToggleModal();
@@ -39,7 +40,7 @@ export const Header = () => {
         <WalletWithIcon />
         <UserExit onClick={handleToggleModal} />
         <ModalLogout
-          isOpen={isModalOpen}
+          isOpen={isModalLogoutOpen}
           toggleModal={handleToggleModal}
           logout={logout}
         />
