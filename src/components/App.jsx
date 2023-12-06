@@ -14,7 +14,10 @@ const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
 const DiagramPage = lazy(() => import('../pages/DiagramPage/DiagramPage'));
-const DashboardPage = lazy(() => import('../pages/DashboardPage/DashboardPage'));
+const DashboardPage = lazy(() =>
+  import('../pages/DashboardPage/DashboardPage')
+);
+const CurrencyPage = lazy(() => import('../pages/CurrencyPage/CurrencyPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -54,6 +57,11 @@ export const App = () => {
             element={<DiagramPage />} // for work
           />
           <Route
+            path="/currency"
+            // element={<PrivateRoute component={CurrencyPage />} />}
+            element={<CurrencyPage />} // for work
+          />
+          <Route
             path="/register"
             element={
               <RestrictedRoute
@@ -68,7 +76,7 @@ export const App = () => {
               <RestrictedRoute component={<LoginPage />} redirectTo="/home" />
             }
           />
-          <Route path="/dashboard" element={<DashboardPage />} />  
+          <Route path="/dashboard" element={<DashboardPage />} />
           {/* <Route path="/dashboard" element={<PrivateRoute component={<DashboardPage />} redirectTo="/login" />} /> */}
         </Route>
       </Routes>
