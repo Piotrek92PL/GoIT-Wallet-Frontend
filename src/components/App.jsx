@@ -1,6 +1,6 @@
 import { lazy, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import { Layout } from './Layout/Layout';
 import { RestrictedRoute } from './RestrictedRoute';
 import { refreshUser } from '../redux/auth/operations';
@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Loader } from './Loader/Loader';
 import { selectIsLoading } from '../redux/global/selectors';
+import { useMediaQuery } from 'react-responsive';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
@@ -18,7 +19,10 @@ const CurrencyPage = lazy(() => import('../pages/CurrencyPage/CurrencyPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isLoading = useSelector(selectIsLoading);
+
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -26,6 +30,13 @@ export const App = () => {
       dispatch(refreshUser());
     }
   }, [dispatch]);
+
+  useEffect(() => {
+    if (!isMobile && window.location.pathname === '/currency') {
+      navigate('/home');
+    }
+  }, [isMobile, navigate]);
+
   return (
     <>
       {isLoading && <Loader />}
