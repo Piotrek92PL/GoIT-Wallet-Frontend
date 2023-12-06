@@ -1,0 +1,120 @@
+import axios from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { setLoading } from '../global/slice';
+import { BACKEND_BASE_URL } from 'redux/global/constants';
+axios.defaults.baseURL = BACKEND_BASE_URL;
+
+export const getCategoryName = (nr, arr) => {
+  return arr.find(cat => cat.id === nr).name || 'Other';
+};
+
+export const getListOfCategories = createAsyncThunk(
+  'category/getList',
+  async (_, thunkAPI) => {
+    thunkAPI.dispatch(setLoading(true));
+    try {
+      const res = await axios.get('/api/category');
+      return res.data;
+    } catch (error) {
+      if (!error.response) {
+        return thunkAPI.rejectWithValue('Could not connect with the server');
+      }
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    } finally {
+      thunkAPI.dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getAllTransactions = createAsyncThunk(
+  'transactions/getAll',
+  async (_, thunkAPI) => {
+    thunkAPI.dispatch(setLoading(true));
+    try {
+      const res = await axios.get('/api/transactions');
+      return res.data;
+    } catch (error) {
+      if (!error.response) {
+        return thunkAPI.rejectWithValue('Could not connect with the server');
+      }
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    } finally {
+      thunkAPI.dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addTransaction = createAsyncThunk(
+  'transactions/add',
+  async (transaction, thunkAPI) => {
+    thunkAPI.dispatch(setLoading(true));
+    try {
+      const res = await axios.post('/api/transactions', transaction);
+      return res.data;
+    } catch (error) {
+      if (!error.response) {
+        return thunkAPI.rejectWithValue('Could not connect with the server');
+      }
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    } finally {
+      thunkAPI.dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getTransactionById = createAsyncThunk(
+  'transactions/getById',
+  async (id, thunkAPI) => {
+    thunkAPI.dispatch(setLoading(true));
+    try {
+      const res = await axios.get(`/api/transactions/${id}`);
+      return res.data;
+    } catch (error) {
+      if (!error.response) {
+        return thunkAPI.rejectWithValue('Could not connect with the server');
+      }
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    } finally {
+      thunkAPI.dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteTransaction = createAsyncThunk(
+  'transactions/delete',
+  async (id, thunkAPI) => {
+    thunkAPI.dispatch(setLoading(true));
+    try {
+      const res = await axios.delete(`/api/transactions/${id}`);
+      return res.data;
+    } catch (error) {
+      if (!error.response) {
+        return thunkAPI.rejectWithValue('Could not connect with the server');
+      }
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    } finally {
+      thunkAPI.dispatch(setLoading(false));
+    }
+  }
+);
+
+export const updateTransaction = createAsyncThunk(
+  'transactions/update',
+  async (transaction, thunkAPI) => {
+    thunkAPI.dispatch(setLoading(true));
+    try {
+      const res = await axios.put(
+        `/api/transactions/${transaction.id}`,
+        transaction
+      );
+      return res.data;
+    } catch (error) {
+      if (!error.response) {
+        return thunkAPI.rejectWithValue('Could not connect with the server');
+      }
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    } finally {
+      thunkAPI.dispatch(setLoading(false));
+    }
+  }
+);
