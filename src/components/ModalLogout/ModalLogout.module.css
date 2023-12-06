@@ -1,11 +1,11 @@
 .backdrop {
     position: fixed;
-    top: 0;
+
     left: 0;
     right: 0;
     bottom: 0;
     z-index: 550;
-    background-color: rgba(0, 0, 0, 0.25);
+
     cursor: not-allowed;
     display: flex;
     visibility: visible;
@@ -21,11 +21,25 @@
     transform: scale(0);
 }
 
+.backdropTabletDesktop {
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.backdropMobile {
+    top: 60px;
+    background-image: linear-gradient(var(--bgc-color-second), var(--bgc-color-second));
+}
+
 .modal {
     margin: auto;
     padding: 20px;
     background-color: var(--bgc-color-second);
     border-radius: 20px;
+}
+
+.modalMobile {
+    margin-top: 0;
 }
 
 .modalQuery {
