@@ -8,6 +8,10 @@ import { NavLink } from 'react-router-dom';
 export const Link = styled(NavLink)`
   &.active {
     font-weight: 700;
+
+    div div {
+      background-color: #4a56e2;
+    }
   }
 `;
 
@@ -31,8 +35,10 @@ export const Navigation = () => {
         </div>
       </Link>
       <Link to="/currency">
-        <div className={styles.navigation__item_currency}>
-          <PiCurrencyDollarSimpleBold />
+        <div>
+          <div className={styles.navigation__item_currency}>
+            <PiCurrencyDollarSimpleBold />
+          </div>
         </div>
       </Link>
     </div>
