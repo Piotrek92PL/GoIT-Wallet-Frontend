@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet';
 import { BackgroundContainer } from 'components/BackgroundContainer/BackgroundContainer';
 import { NavBalanceCurrency } from 'components/NavBalanceCurrency/NavBalanceCurrency';
+import { TransactionsList } from 'components/TransactionsList/TransactionsList';
 
 export default function HomePage() {
   return (
@@ -9,6 +10,7 @@ export default function HomePage() {
         <title>Finance manager</title>
       </Helmet>
       <NavBalanceCurrency />
+      {/* <TransactionsList /> */}
     </BackgroundContainer>
   );
 }

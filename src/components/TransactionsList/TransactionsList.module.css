@@ -1,0 +1,19 @@
+.list {
+  /* JG: this is all wrong - frontend please fix it */
+  font-size: 18px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--color-btn-second);
+  /* background-color: var(--color-btn); */
+  background-color: tomato;
+  border: 1 px solid var(--color-btn);
+  border-radius: 20px;
+  width: 100%;
+  min-width: 460px;
+  max-width: 300px;
+  height: 400px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  margin-top: 40px;
+  transition: color 0.3s ease-in-out;
+}
