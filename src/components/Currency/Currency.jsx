@@ -11,7 +11,7 @@ import {
 import CircularProgress from '@mui/material/CircularProgress';
 import styles from './Currency.module.scss';
 
-const Currency = () => {
+export const Currency = () => {
   const dispatch = useDispatch();
   const currency = useSelector(selectCurrency);
   const isLoading = useSelector(selectIsLoading);
@@ -73,5 +73,3 @@ const Currency = () => {
     </>
   );
 };
-
-export default Currency;

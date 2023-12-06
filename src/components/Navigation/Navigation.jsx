@@ -5,7 +5,7 @@ import { PiCurrencyDollarSimpleBold } from 'react-icons/pi';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-function Navigation({ onClickCurrency }) {
+export const Navigation = ({ onClickCurrency }) => {
   return (
     <div className={styles.navigation}>
       <NavLink to="/home">
@@ -16,7 +16,7 @@ function Navigation({ onClickCurrency }) {
           <div className={styles.navigation__item_home}>Home</div>
         </div>
       </NavLink>
-      <NavLink to="/statistics">
+      <NavLink to="/diagram">
         <div className={styles.navigation__icon_display}>
           <div className={styles.navigation__item}>
             <BiStats />
@@ -31,10 +31,8 @@ function Navigation({ onClickCurrency }) {
       </NavLink>
     </div>
   );
-}
+};
 
 Navigation.propTypes = {
   onClickCurrency: PropTypes.any,
 };
-
-export default Navigation;

@@ -1,14 +1,14 @@
 import { Helmet } from 'react-helmet';
 import { BackgroundContainer } from 'components/BackgroundContainer/BackgroundContainer';
-import { NavBalanceCurrency } from 'components/NavBalanceCurrency/NavBalanceCurrency';
+import { Currency } from 'components/Currency/Currency';
 
-export default function DiagramPage() {
+export default function CurrencyPage() {
   return (
     <BackgroundContainer>
       <Helmet>
-        <title>Statistics</title>
+        <title>Currency</title>
       </Helmet>
-      <NavBalanceCurrency />
+      <Currency />
     </BackgroundContainer>
   );
 }
