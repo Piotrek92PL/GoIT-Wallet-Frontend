@@ -11,7 +11,7 @@ import { Loader } from './components/Loader/Loader';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <PersistGate loading={<Loader />} persistor={persistor}>
-      <BrowserRouter>
+      <BrowserRouter basename="/GoIT-Wallet-Frontend">
         <App />
       </BrowserRouter>
     </PersistGate>
