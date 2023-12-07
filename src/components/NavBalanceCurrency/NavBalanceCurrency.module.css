@@ -1,0 +1,56 @@
+.container {
+    display: flex;
+    gap: 32px;
+
+}
+
+.desktop {
+    flex-direction: column;
+    width: 100%;
+    max-width: 393px;
+}
+
+.tablet {
+    width: 100%;
+}
+
+.mobile {
+    margin: 0 auto;
+}
+
+
+.navBalance {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.navBalanceMobile {
+    align-items: center;
+    margin-top: 12px;
+    width: 100%;
+    max-width: 280px;
+    gap: 12px;
+}
+
+
+.navBalanceTablet {
+    margin-top: 40px;
+    width: 100%;
+    max-width: 336px;
+}
+
+.navBalanceDesktop {
+    margin-top: 40px;
+}
+
+
+.currencyTablet {
+    margin-top: 32px;
+    width: 100%;
+    max-width: 336px;
+}
+
+.currencyMobile {
+    display: none;
+}

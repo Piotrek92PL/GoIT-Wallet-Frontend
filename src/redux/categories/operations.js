@@ -21,3 +21,23 @@ export const getListOfCategories = createAsyncThunk(
     }
   }
 );
+
+export const addTransaction = createAsyncThunk(
+  'transactions/add',
+  async (transactionData, thunkAPI) => {
+    thunkAPI.dispatch(setLoading(true));
+    try {
+      const res = await axios.post('/api/transactions', transactionData);
+      return res.data;
+    } catch (error) {
+      if (!error.response) {
+        return thunkAPI.rejectWithValue(
+          'Problem with connecting to the server'
+        );
+      }
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    } finally {
+      thunkAPI.dispatch(setLoading(false));
+    }
+  }
+);

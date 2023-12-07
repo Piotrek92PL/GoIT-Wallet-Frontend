@@ -1,0 +1,46 @@
+.balanceContainer {
+  width: 280px;
+  height: 80px;
+  border-radius: 30px;
+  background: #fff;
+}
+
+.balance {
+  color: #a6a6a6;
+  font-family: Circe;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+  margin-left: 32px;
+  margin-top: 8px;
+}
+
+.deposit {
+  color: #000;
+  font-family: Poppins;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-left: 32px;
+}
+
+@media only screen and (min-width: 768px) {
+  .balanceContainer {
+    width: 100%;
+
+  }
+
+  .balance,
+  .deposit {
+    margin-left: 40px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .balanceContainer {
+    width: 100%;
+  }
+}
