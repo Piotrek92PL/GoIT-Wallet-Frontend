@@ -11,7 +11,7 @@ export default function HomePage() {
         <title>Finance manager</title>
       </Helmet>
       <NavBalanceCurrency />
-      <TransactionsList />
+      {/* <TransactionsList /> */}
       <ButtonAddTransaction />
     </BackgroundContainer>
   );
