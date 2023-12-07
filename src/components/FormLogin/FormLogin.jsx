@@ -10,6 +10,7 @@ import { ButtonAuth } from 'components/ButtonAuth/ButtonAuth';
 import { LinkAuth } from 'components/LinkAuth/LinkAuth';
 import { WalletWithIcon } from 'components/WalletWithIcon/WalletWithIcon';
 import { toast } from 'react-toastify';
+import { getListOfCategories } from 'redux/categories/operations';
 
 export const FormLogin = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -49,6 +50,7 @@ export const FormLogin = () => {
         .catch(rejectedValueOrSerializedError => {
           toast.error(rejectedValueOrSerializedError);
         });
+      dispatch(getListOfCategories());
     },
   });
 

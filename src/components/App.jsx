@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Loader } from './Loader/Loader';
 import { selectIsLoading } from '../redux/global/selectors';
+import { getListOfCategories } from 'redux/categories/operations';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
@@ -27,6 +28,7 @@ export const App = () => {
     const token = localStorage.getItem('token');
     if (token) {
       dispatch(refreshUser());
+      dispatch(getListOfCategories());
     }
   }, [dispatch]);
   return (

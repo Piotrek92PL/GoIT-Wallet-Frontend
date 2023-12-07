@@ -13,8 +13,8 @@ import storage from 'redux-persist/lib/storage';
 
 import { authReducer } from './auth/slice';
 import currencyReducer from './currency/slice';
+import categoriesReducer from './categories/slice';
 import { globalReducer } from './global/slice';
-
 
 const authPersistConfig = {
   key: 'auth',
@@ -28,14 +28,21 @@ const currencyPersistConfig = {
   whitelist: ['data', 'lastFetchDate'],
 };
 
+const categoriesPersistConfig = {
+  key: 'categories',
+  storage,
+  whitelist: ['categories'],
+};
+
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
 
     currency: persistReducer(currencyPersistConfig, currencyReducer),
 
-    global: globalReducer,
+    categories: persistReducer(categoriesPersistConfig, categoriesReducer),
 
+    global: globalReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
