@@ -38,10 +38,12 @@
     margin-top: 40px;
     width: 100%;
     max-width: 336px;
+    gap: 24px;
 }
 
 .navBalanceDesktop {
     margin-top: 40px;
+    gap: 24px;
 }
 
 
