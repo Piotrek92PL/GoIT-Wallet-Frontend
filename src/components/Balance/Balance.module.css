@@ -1,11 +1,8 @@
 .balanceContainer {
-  width: 100%;
+  width: 280px;
   height: 80px;
-  flex-shrink: 0;
   border-radius: 30px;
   background: #fff;
-  margin-top: 12px;
-  margin-bottom: 32px;
 }
 
 .balance {
@@ -32,21 +29,18 @@
 
 @media only screen and (min-width: 768px) {
   .balanceContainer {
-    width: 336px;
-    height: 80px;
-    flex-shrink: 0;
-    margin-top: 28px;
-    margin-bottom: 20px;
+    width: 100%;
+
   }
+
   .balance,
   .deposit {
     margin-left: 40px;
   }
 }
+
 @media only screen and (min-width: 1280px) {
   .balanceContainer {
-    width: 395px;
-    height: 80px;
-    flex-shrink: 0;
+    width: 100%;
   }
 }
