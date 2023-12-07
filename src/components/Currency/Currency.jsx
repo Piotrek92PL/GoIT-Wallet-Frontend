@@ -3,18 +3,15 @@ import { useDispatch } from 'react-redux';
 import { fetchCurrency } from '../../redux/currency/thunk';
 import { useSelector } from 'react-redux';
 import {
-  selectIsLoading,
   selectIsError,
   selectCurrency,
   selectLastFetchDate,
 } from '../../redux/currency/selectors';
-import CircularProgress from '@mui/material/CircularProgress';
 import styles from './Currency.module.scss';
 
 export const Currency = () => {
   const dispatch = useDispatch();
   const currency = useSelector(selectCurrency);
-  const isLoading = useSelector(selectIsLoading);
   const isError = useSelector(selectIsError);
   const lastFetchDate = useSelector(selectLastFetchDate);
 
@@ -34,13 +31,8 @@ export const Currency = () => {
       {isError && <p>{isError[0]}</p>}
       <div className={styles.Currency__container}>
         <div className={styles.Currency__bgGraph} />
-        {isLoading && (
-          <div className={styles.Currency__spinnerContainer}>
-            <CircularProgress className={styles.Currency__spinner} />
-          </div>
-        )}
-
-        {!isLoading && !isError && (
+        
+        {!isError && (
           <table className={styles.Currency__table}>
             <thead>
               <tr>
