@@ -1,0 +1,58 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "date": "15.11.21",
+      "Expenses": true,
+      "category": "Produkty",
+      "comment": "",
+      "sum": 300,
+      "balance": 9700.0
+    },
+    {
+      "id": "2",
+      "date": "15.11.21",
+      "Expenses": false,
+      "category": "Dochód",
+      "comment": "",
+      "sum": 10000,
+      "balance": 19700.0
+    },
+    {
+      "id": "3",
+      "date": "15.11.21",
+      "Expenses": true,
+      "category": "Towary domowe",
+      "comment": "sofa",
+      "sum": 11000,
+      "balance": 8700.0
+    },
+    {
+      "id": "1",
+      "date": "15.11.21",
+      "Expenses": true,
+      "category": "Produkty",
+      "comment": "",
+      "sum": 300,
+      "balance": 9700.0
+    },
+    {
+      "id": "2",
+      "date": "15.11.21",
+      "Expenses": false,
+      "category": "Dochód",
+      "comment": "",
+      "sum": 10000,
+      "balance": 19700.0
+    },
+    {
+      "id": "3",
+      "date": "15.11.21",
+      "Expenses": true,
+      "category": "Towary domowe",
+      "comment": "sofa",
+      "sum": 11000,
+      "balance": 8700.0
+    }
+  ]
+}

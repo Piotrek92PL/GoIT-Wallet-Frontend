@@ -71,8 +71,13 @@ export const FormRegister = () => {
             value={formik.values.email}
             onBlur={formik.handleBlur}
           />
-          <svg className={css.iconInput} width="24" height="24">
-            <use href="/images/icons-sin-log.svg#icon-email" />
+          <svg
+            className={css.iconInput}
+            width="24"
+            height="24"
+            viewBox="0 0 33 32"
+          >
+            <path d="M27.333 5.333H6A2.663 2.663 0 0 0 3.347 8l-.013 16c0 1.467 1.2 2.667 2.667 2.667h21.333c1.467 0 2.667-1.2 2.667-2.667V8c0-1.467-1.2-2.667-2.667-2.667zm0 5.334-10.667 6.667-10.667-6.667V8l10.667 6.667L27.333 8v2.667z" />
           </svg>
           {formik.touched.email && formik.errors.email ? (
             <div className={css.formikMessage}>{formik.errors.email}</div>
@@ -91,8 +96,13 @@ export const FormRegister = () => {
             value={formik.values.password}
             onBlur={formik.handleBlur}
           />
-          <svg className={css.iconInput} width="24" height="24">
-            <use href="/images/icons-sin-log.svg#icon-lock" />
+          <svg
+            className={css.iconInput}
+            width="24"
+            height="24"
+            viewBox="0 0 33 32"
+          >
+            <path d="M24.667 10.667h-1.333V8c0-3.68-2.987-6.667-6.667-6.667S10 4.32 10 8v2.667H8.667A2.675 2.675 0 0 0 6 13.334v13.333c0 1.467 1.2 2.667 2.667 2.667h16c1.467 0 2.667-1.2 2.667-2.667V13.334c0-1.467-1.2-2.667-2.667-2.667zm-8 12C15.2 22.667 14 21.467 14 20s1.2-2.667 2.667-2.667c1.467 0 2.667 1.2 2.667 2.667s-1.2 2.667-2.667 2.667zm4.133-12h-8.267V8c0-2.28 1.853-4.133 4.133-4.133S20.799 5.72 20.799 8v2.667z" />
           </svg>
           <button
             className={css.buttonPassword}
@@ -130,8 +140,13 @@ export const FormRegister = () => {
             value={formik.values.passwordConfirm}
             onBlur={formik.handleBlur}
           />
-          <svg className={css.iconInput} width="24" height="24">
-            <use href="/images/icons-sin-log.svg#icon-lock" />
+          <svg
+            className={css.iconInput}
+            width="24"
+            height="24"
+            viewBox="0 0 33 32"
+          >
+            <path d="M24.667 10.667h-1.333V8c0-3.68-2.987-6.667-6.667-6.667S10 4.32 10 8v2.667H8.667A2.675 2.675 0 0 0 6 13.334v13.333c0 1.467 1.2 2.667 2.667 2.667h16c1.467 0 2.667-1.2 2.667-2.667V13.334c0-1.467-1.2-2.667-2.667-2.667zm-8 12C15.2 22.667 14 21.467 14 20s1.2-2.667 2.667-2.667c1.467 0 2.667 1.2 2.667 2.667s-1.2 2.667-2.667 2.667zm4.133-12h-8.267V8c0-2.28 1.853-4.133 4.133-4.133S20.799 5.72 20.799 8v2.667z" />
           </svg>
           <button
             className={css.buttonPassword}
@@ -170,8 +185,13 @@ export const FormRegister = () => {
             value={formik.values.name}
             onBlur={formik.handleBlur}
           />
-          <svg className={css.iconInput} width="24" height="24">
-            <use href="/images/icons-sin-log.svg#icon-user" />
+          <svg
+            className={css.iconInput}
+            width="24"
+            height="24"
+            viewBox="0 0 33 32"
+          >
+            <path d="M4.667 6.667v18.667a2.666 2.666 0 0 0 2.667 2.667h18.667c1.467 0 2.667-1.2 2.667-2.667V6.667C28.668 5.2 27.468 4 26.001 4H7.334c-1.48 0-2.667 1.2-2.667 2.667zm16 5.333c0 2.213-1.787 4-4 4s-4-1.787-4-4 1.787-4 4-4 4 1.787 4 4zm-12 10.667c0-2.667 5.333-4.133 8-4.133s8 1.467 8 4.133V24h-16v-1.333z" />
           </svg>
           {formik.touched.name && formik.errors.name ? (
             <div className={css.formikMessage}>{formik.errors.name}</div>
