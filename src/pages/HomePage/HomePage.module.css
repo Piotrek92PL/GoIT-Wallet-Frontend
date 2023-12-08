@@ -1,0 +1,11 @@
+.lineMobileTablet {
+    display: none;
+}
+
+.lineDesktop {
+    width: 1px;
+    background-image: linear-gradient(#E7E5F2, #E7E5F2);
+    filter: drop-shadow(1px 0px 0px rgba(255, 255, 255, 0.60)) drop-shadow(-1px 0px 0px rgba(0, 0, 0, 0.05));
+    height: 100vh;
+    margin-left: 69px;
+}
