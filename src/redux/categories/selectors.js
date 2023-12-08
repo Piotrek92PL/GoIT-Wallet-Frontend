@@ -1,4 +1,3 @@
-export const selectIsLoading = state => state.categories.isLoading;
 export const selectIsError = state => state.categories.isError;
 export const selectCategories = state => state.categories.data;
 
