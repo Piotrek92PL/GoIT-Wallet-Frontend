@@ -39,6 +39,7 @@
   flex-direction: column;
   position: relative;
   width: 100%;
+  font-family: Circe;
 }
 
 
@@ -74,7 +75,7 @@
 .iconInput {
   position: absolute;
   left: 0;
-  top: 42px;
+  top: 40px;
   fill: var(--grey-text);
   transition: fill 0.3s ease-in-out;
 }
@@ -84,7 +85,7 @@
   right: 0;
   top: 75px;
   color: var(--pink-text);
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .error {
