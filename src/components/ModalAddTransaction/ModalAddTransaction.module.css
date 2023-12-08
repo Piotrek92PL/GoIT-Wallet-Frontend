@@ -60,6 +60,13 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 20px;
+  position: relative;
+  margin-bottom: 0;
+}
+
+.rangeContainerExpense {
+  margin-bottom: 42px;
 }
 
 .income {
@@ -70,19 +77,44 @@ button {
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  margin-right: 20px;
+  margin-left: 120px;
 }
 
 .expense {
-  color: var(--Gray-5, #e0e0e0);
+  color: var(--Gray-5, #ff6596);
   font-family: Circe;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  margin-left: 20px;
+  margin-right: 120px;
+}
+.nohighlight {
+  color: #e0e0e0;
 }
 
+.toggleButton {
+  width: 80px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 30px;
+  border: 1px solid var(--Gray-5, #e0e0e0);
+  background: #fff;
+}
+.toggleButtonIncome {
+  position: absolute;
+  top: -10px;
+  left: 177px;
+}
+.toggleButtonExpense {
+  position: absolute;
+  top: -10px;
+  right: 180px;
+}
+.toggleButtonInput {
+  width: 1px;
+  display: none;
+}
 .range {
   width: 80px;
   height: 40px;
@@ -90,6 +122,23 @@ button {
   border-radius: 30px;
   border: 1px solid var(--Gray-5, #e0e0e0);
   background: #fff;
+}
+.category {
+  width: 280px;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+}
+.category option {
+  background-color: #fff;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.7);
+  color: #000;
+  font-family: Circe;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .form {
@@ -99,17 +148,17 @@ button {
   align-items: center;
 }
 .sumLabel {
-  width: 100%;
-  margin-left: 20px;
+  width: 280px;
+  text-align: center;
 }
 .sumInput {
-  max-width: 280px;
+  width: 280px;
   border: none;
   color: #bdbdbd;
   font-family: Circe;
   font-size: 18px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   line-height: normal;
   margin-top: 40px;
   padding: 8px;
@@ -118,7 +167,7 @@ button {
 }
 
 .comment {
-  max-width: 300px;
+  width: 280px;
   height: 84px;
   color: var(--Gray-4, #bdbdbd);
   font-family: Circe;
@@ -129,7 +178,7 @@ button {
   border: none;
   resize: none;
   margin-top: 40px;
-  margin-left: 10px;
+  margin-left: 0;
   margin-right: 20px;
   margin-bottom: 40px;
   padding-left: 20.5px;
@@ -176,6 +225,25 @@ button {
   margin-bottom: 37px;
 }
 
+.dateLabel {
+  width: 280px;
+}
+.dateContainer {
+  width: 280px;
+  padding-right: 16px;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+}
+.selectCategory {
+  color: var(--Gray-4, #bdbdbd);
+  font-family: Circe;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
 @media only screen and (min-width: 768px) {
   .modalOverlay {
     top: 0;
@@ -188,10 +256,16 @@ button {
     flex-shrink: 0;
     position: relative;
   }
+  .category {
+    width: 394px;
+  }
+  .modalExpense {
+    height: 603px;
+  }
   .headline {
     font-size: 30px;
     margin-top: 0;
-    margin-bottom: 42px;
+    margin-bottom: 40px;
   }
   .form {
     flex-direction: row;
@@ -208,12 +282,27 @@ button {
   .sumLabel {
     margin: 0px;
   }
-  .sumInput { 
+  .sumInput {
     width: 181px;
+    margin-top: 33px;
+    text-align: center;
+  }
+  .rangeContainerExpense {
+    margin-bottom: 42px;
   }
 
   .dateLabel {
     width: 181px;
+  }
+
+  .dateContainer {
+    width: 181px;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+  }
+  .closeBtn {
+    margin-bottom: 10px;
   }
   .comment {
     width: 394px;
@@ -222,5 +311,4 @@ button {
     height: 30px;
     margin-bottom: 40px;
   }
-
 }
