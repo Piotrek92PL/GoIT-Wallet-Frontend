@@ -1,0 +1,88 @@
+.mobile-list {
+  list-style: none;
+  border-radius: 10px;
+  border-left: 5px solid #ff6596;
+  background-color: #fff;
+  padding: 0;
+  &--plus {
+    border-left-color: #24cca7;
+  }
+
+  &_item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    min-height: 47px;
+    &:not(:last-child) {
+      border-bottom: 1px solid #dcdcdf;
+    }
+  }
+  &_category {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.5;
+
+    text-align: right;
+  }
+  &_data {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: right;
+    &--plus {
+      color: #24cca7;
+    }
+    &--minus {
+      color: #ff6596;
+    }
+  }
+  .delete-button {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: 'Circe';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    border-radius: 18px;
+    background: #24cca7;
+
+    transition: background-color 250ms ease;
+  }
+  .delete-button:hover,
+  .delete-button:focus {
+    background: #1b977c;
+  }
+}
+.edit-button {
+  background-color: transparent;
+  border: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  color: rgba(0, 0, 0, 0.8);
+  text-align: center;
+  font-family: Circe;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.28px;
+
+  padding: 0;
+
+  transition: background-color 250ms ease;
+}
+.edit-button:hover,
+.edit-button:focus {
+  color: #1b977c;
+}
