@@ -1,0 +1,36 @@
+.doughnut {
+	position: relative;
+	margin-right: 20px;
+	width: 280px;
+	height: 280px;
+	margin-bottom: 32px;
+}
+
+.balance {
+	color: #000;
+	text-align: center;
+	font-family: Circe;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	position: absolute;
+	top: 45%;
+	left: 36%;
+}
+
+@media screen and (min-width: 768px) {
+	.doughnut {
+		width: 336px;
+		height: 336px;
+		margin-bottom: none;
+		/* margin-right: 32px; */
+	}
+}
+
+@media screen and (min-width: 1280px) {
+	.doughnut {
+		width: 288px;
+		height: 288px;
+	}
+}
