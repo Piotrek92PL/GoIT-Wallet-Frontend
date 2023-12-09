@@ -1,20 +1,69 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Datetime from 'react-datetime';
 import PropTypes from 'prop-types';
 import 'react-datetime/css/react-datetime.css';
 import css from './ModalAddTransaction.module.css';
+import { selectCategories } from 'redux/categories/selectors';
+import { useFormik } from 'formik';
+import { transactionValidationSchema } from './validationSchema';
+import { useDispatch } from 'react-redux';
+import { addTransaction } from 'redux/transactions/operations';
 
 export const ModalAddTransaction = ({ isOpen, onClose }) => {
+  const dispatch = useDispatch();
+  const categories = useSelector(selectCategories);
+
   const [isIncome, setIsIncome] = useState(true);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedCategory, setSelectedCategory] = useState('');
+
+  const formik = useFormik({
+    initialValues: {
+      type: '',
+      category: '',
+      amount: '',
+      date: new Date(),
+      comment: '',
+    },
+    validationSchema: transactionValidationSchema,
+    onSubmit: (values, { resetForm }) => {
+      const transaction = {
+        type: isIncome ? 'income' : 'expense',
+        category: isIncome ? '1' : values.category,
+        amount: values.amount,
+        date: values.date,
+        comment: values.comment,
+      };
+
+      dispatch(addTransaction(transaction));
+      resetForm();
+      onClose();
+    },
+  });
 
   useEffect(() => {
     setSelectedDate(new Date());
   }, []);
 
+  useEffect(() => {
+    if (isIncome) {
+      formik.setFieldValue('category', '1');
+      setSelectedCategory('1');
+    } else {
+      formik.setFieldValue('category', '');
+      setSelectedCategory('');
+    }
+  }, [isIncome, formik]);
+
   const handleCheckboxChange = e => {
-    const newValue = e.target.checked;
-    setIsIncome(newValue);
+    setIsIncome(e.target.checked);
+  };
+
+  const handleCategoryChange = e => {
+    const newCategory = e.target.value;
+    setSelectedCategory(newCategory);
+    formik.setFieldValue('category', newCategory);
   };
 
   //income/expense checkbox
@@ -40,8 +89,8 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
             <g filter="url(#filter0_d_19664_746)">
               <circle cx="37" cy="31" r="22" fill="#24CCA7" />
             </g>
-            <path d="M37 21V41" stroke="white" stroke-width="2" />
-            <path d="M27 31L47 31" stroke="white" stroke-width="2" />
+            <path d="M37 21V41" stroke="white" strokeWidth="2" />
+            <path d="M27 31L47 31" stroke="white" strokeWidth="2" />
             <defs>
               <filter
                 id="filter0_d_19664_746"
@@ -50,9 +99,9 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
                 width="74"
                 height="74"
                 filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB"
+                colorInterpolationFilters="sRGB"
               >
-                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feFlood floodOpacity="0" result="BackgroundImageFix" />
                 <feColorMatrix
                   in="SourceAlpha"
                   type="matrix"
@@ -91,7 +140,7 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
             <g filter="url(#filter0_d_19664_1473)">
               <circle cx="37" cy="31" r="22" fill="#FF6596" />
             </g>
-            <path d="M27 31L47 31" stroke="white" stroke-width="2" />
+            <path d="M27 31L47 31" stroke="white" strokeWidth="2" />
             <defs>
               <filter
                 id="filter0_d_19664_1473"
@@ -100,9 +149,9 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
                 width="74"
                 height="74"
                 filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB"
+                colorInterpolationFilters="sRGB"
               >
-                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feFlood floodOpacity="0" result="BackgroundImageFix" />
                 <feColorMatrix
                   in="SourceAlpha"
                   type="matrix"
@@ -135,19 +184,19 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
   );
 
   //calendar
-  const renderInput = (props, openCalendar, closeCalendar) => {
+  const renderInput = props => {
     return (
-      <div class={css.dateContainer} style={{ position: 'relative' }}>
+      <div className={css.dateContainer} style={{ position: 'relative' }}>
         <input className={css.dateInput} {...props} />
         <svg
-          class={css.calendarIcon}
+          className={css.calendarIcon}
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
           viewBox="0 0 24 24"
           fill="none"
         >
-          <g clip-path="url(#clip0_7_312)">
+          <g clipPath="url(#clip0_7_312)">
             <path
               d="M9 11H7V13H9V11ZM13 11H11V13H13V11ZM17 11H15V13H17V11ZM19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4ZM19 20H5V9H19V20Z"
               fill="#4A56E2"
@@ -209,37 +258,69 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
               </span>
             </div>
             {!isIncome ? (
-              <select className={css.category} name="category">
-                <option defaultValue>Select a category</option>
-                <option value="main">Main Expenses</option>
-                <option value="products">Products</option>
-                <option value="car">Car</option>
-                <option value="selfCare">Self Care</option>
-                <option value="childCare">Child care</option>
-                <option value="Household">Household products</option>
-                <option value="education">Education</option>
-                <option value="leisure">Leisure</option>
-              </select>
+              <div className={css.categoryWrapper}>
+                <select
+                  className={`${css.category} ${
+                    formik.touched.category && formik.errors.category
+                      ? css.error
+                      : ''
+                  }`}
+                  name="category"
+                  value={selectedCategory}
+                  onChange={handleCategoryChange}
+                  onBlur={formik.handleBlur}
+                  required
+                >
+                  <option value="" disabled>
+                    Select a category
+                  </option>
+                  {categories.map(cat => (
+                    <option key={cat.id} value={cat.id}>
+                      {cat.name}
+                    </option>
+                  ))}
+                </select>
+                {formik.touched.category && formik.errors.category && (
+                  <div className={css.formikMessageRequired}>
+                    {formik.errors.category}
+                  </div>
+                )}
+              </div>
             ) : null}
             <label className={css.sumLabel}>
               <input
-                className={css.sumInput}
+                className={`${css.sumInput} ${
+                  formik.touched.amount && formik.errors.amount ? css.error : ''
+                }`}
                 type="number"
                 placeholder="0.00"
-                name="sum"
+                {...formik.getFieldProps('amount')}
               />
+              {formik.touched.amount && formik.errors.amount && (
+                <div className={css.formikMessage}>{formik.errors.amount}</div>
+              )}
             </label>
             <label className={css.dateLabel}>
               <Datetime
                 value={selectedDate}
-                onChange={date => setSelectedDate(date)}
+                onChange={date => {
+                  setSelectedDate(date);
+                  formik.setFieldValue('date', date);
+                }}
                 renderInput={renderInput}
                 dateFormat="DD-MM-YYYY"
                 timeFormat={false}
                 name="date"
               />
+              {formik.touched.date && formik.errors.date && (
+                <div className={css.formikMessage}>{formik.errors.date}</div>
+              )}
             </label>
-            <textarea className={css.comment} placeholder="Comment" />
+            <textarea
+              className={css.comment}
+              placeholder="Comment"
+              {...formik.getFieldProps('comment')}
+            />
             <button className={css.addBtn} type="submit">
               Add
             </button>
