@@ -15,7 +15,7 @@ import {
 import { Doughnut } from 'react-chartjs-2';
 import { BACKEND_BASE_URL } from 'redux/global/constants';
 import localStorage from 'redux-persist/es/storage';
-import { getCategoryColor, selectCategories } from 'redux/categories/selectors';
+import { selectCategories } from 'redux/categories/selectors';
 import { useSelector } from 'react-redux';
 
 axios.defaults.baseURL = BACKEND_BASE_URL;

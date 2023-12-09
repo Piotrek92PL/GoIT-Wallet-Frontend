@@ -1,22 +1,21 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import css from './ButtonAddTransaction.module.css';
-import { useState } from 'react';
 import ModalAddTransaction from 'components/ModalAddTransaction/ModalAddTransaction';
+import { toggleModalAddTransaction } from 'redux/global/slice';
+import { selectIsModalAddTransaction } from 'redux/global/selectors';
 
 export const ButtonAddTransaction = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleCloseModal = () => {
-    console.log('modal is closed');
-    setIsModalOpen(false);
+  const dispatch = useDispatch();
+  const isModalAddTransaction = useSelector(selectIsModalAddTransaction);
+
+  const handleToggleModal = () => {
+    dispatch(toggleModalAddTransaction());
   };
 
-  const handleClick = () => {
-    setIsModalOpen(true);
-    console.log('modal is open');
-  };
   return (
     <div>
-      <button className={css.button} onClick={handleClick}>
+      <button className={css.button} onClick={handleToggleModal}>
         <svg
           className={css.icon}
           xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +67,10 @@ export const ButtonAddTransaction = () => {
           </defs>
         </svg>
       </button>
-      <ModalAddTransaction isOpen={isModalOpen} onClose={handleCloseModal} />
+      <ModalAddTransaction
+        isOpen={isModalAddTransaction}
+        onClose={handleToggleModal}
+      />
     </div>
   );
 };

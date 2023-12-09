@@ -31,7 +31,7 @@ export const ModalLogout = ({ isOpen, toggleModal, logout }) => {
 
   useEffect(() => {
     const handleEscapeKey = event => {
-      if (event.key === 'Escape') {
+      if (isOpen && event.key === 'Escape') {
         toggleModal();
       }
     };
@@ -41,7 +41,7 @@ export const ModalLogout = ({ isOpen, toggleModal, logout }) => {
     return () => {
       document.removeEventListener('keydown', handleEscapeKey);
     };
-  }, [toggleModal]);
+  }, [toggleModal, isOpen]);
 
   return (
     <div className={backdropClasses} onClick={handleBackdropClick}>

@@ -1,4 +1,5 @@
 .modalOverlay {
+  z-index: 550;
   position: fixed;
   top: 60px;
   left: 0;
@@ -9,16 +10,13 @@
   justify-content: center;
   align-items: center;
   cursor: not-allowed;
-  transform: scale(1);
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out,
-    visibility 0.3s ease-in-out;
 }
 
 .modal {
   width: 100vh;
   background: #fff;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 20px;
   width: 100%;
   height: 100%;
   overflow: auto;
@@ -89,6 +87,7 @@ button {
   line-height: normal;
   margin-right: 120px;
 }
+
 .nohighlight {
   color: #e0e0e0;
 }
@@ -100,21 +99,26 @@ button {
   border-radius: 30px;
   border: 1px solid var(--Gray-5, #e0e0e0);
   background: #fff;
+  cursor: pointer;
 }
+
 .toggleButtonIncome {
   position: absolute;
   top: -10px;
   left: 177px;
 }
+
 .toggleButtonExpense {
   position: absolute;
   top: -10px;
   right: 180px;
 }
+
 .toggleButtonInput {
   width: 1px;
   display: none;
 }
+
 .range {
   width: 80px;
   height: 40px;
@@ -123,22 +127,56 @@ button {
   border: 1px solid var(--Gray-5, #e0e0e0);
   background: #fff;
 }
+
+.categoryWrapper {
+  position: relative;
+}
+
 .category {
   width: 280px;
   border: none;
   border-bottom: 1px solid #e0e0e0;
+  background-color: transparent;
+  color: var(--Gray-4, #bdbdbd);
+  font-family: 'Circe', sans-serif;
+  padding-bottom: 8px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: right 10px top 50%;
+  cursor: pointer;
+  transition: border 0.3s ease-in-out;
+  padding-left: 20px;
 }
+
+.categoryWrapper::after {
+  content: '\22C1';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--Gray-4, #bdbdbd);
+  pointer-events: none;
+  font-size: 20px;
+}
+
 .category option {
   background-color: #fff;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-  background: rgba(255, 255, 255, 0.7);
   color: #000;
-  font-family: Circe;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  transition: background-color 0.3s ease;
+}
+
+.category:focus,
+.category:hover {
+  border-bottom: 1px solid var(--color-btn);
+}
+
+.category option:hover,
+.category option:focus {
+  background-color: #e0e0e0;
+
 }
 
 .form {
@@ -146,12 +184,17 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
 }
+
 .sumLabel {
   width: 280px;
   text-align: center;
+  position: relative;
 }
+
 .sumInput {
+
   width: 280px;
   border: none;
   color: #bdbdbd;
@@ -164,6 +207,14 @@ button {
   padding: 8px;
   border-bottom: 1px solid #e0e0e0;
   margin-bottom: 40px;
+  outline: none;
+  padding-left: 20px;
+  transition: border 0.3s ease-in-out;
+}
+
+.sumLabel:hover .sumInput,
+.sumLabel:focus .sumInput {
+  border-bottom: 1px solid var(--color-btn);
 }
 
 .comment {
@@ -181,10 +232,17 @@ button {
   margin-left: 0;
   margin-right: 20px;
   margin-bottom: 40px;
-  padding-left: 20.5px;
+  padding-left: 20px;
   padding-bottom: 50px;
   border-bottom: 1px solid #e0e0e0;
   overflow-y: 'hidden';
+  outline: none;
+  transition: border 0.3s ease-in-out;
+}
+
+.comment:hover,
+.comment:focus {
+  border-bottom: 1px solid var(--color-btn);
 }
 
 .addBtn {
@@ -204,6 +262,12 @@ button {
   text-transform: uppercase;
   border: none;
   margin-bottom: 20px;
+  transition: color 0.3s ease-in-out;
+}
+
+.addBtn:hover,
+.addBtn:focus {
+  color: var(--color-btn-link-main);
 }
 
 .closeBtn {
@@ -223,11 +287,19 @@ button {
   letter-spacing: 1.8px;
   text-transform: uppercase;
   margin-bottom: 37px;
+  transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out;
+}
+
+.closeBtn:hover,
+.closeBtn:focus {
+  background-color: var(--color-btn);
+  border: 1px solid var(--color-btn);
 }
 
 .dateLabel {
   width: 280px;
 }
+
 .dateContainer {
   width: 280px;
   padding-right: 16px;
@@ -235,7 +307,14 @@ button {
   border-bottom: 1px solid #e0e0e0;
   display: flex;
   justify-content: space-between;
+  transition: border 0.3s ease-in-out;
 }
+
+.dateContainer:hover,
+.dateContainer:focus {
+  border-bottom: 1px solid var(--color-btn);
+}
+
 .selectCategory {
   color: var(--Gray-4, #bdbdbd);
   font-family: Circe;
@@ -244,11 +323,33 @@ button {
   font-weight: 400;
   line-height: normal;
 }
+
+.formikMessage {
+  position: absolute;
+  right: 0;
+  top: 80px;
+  color: var(--pink-text);
+  font-size: 14px;
+}
+
+.formikMessageRequired {
+  position: absolute;
+  right: 0;
+  top: 32px;
+  color: var(--pink-text);
+  font-size: 14px;
+}
+
+.error {
+  border-bottom: 1px solid var(--pink-text);
+}
+
 @media only screen and (min-width: 768px) {
   .modalOverlay {
     top: 0;
     background-color: rgba(0, 0, 0, 0.25);
   }
+
   .modal {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     width: 540px;
@@ -256,22 +357,28 @@ button {
     flex-shrink: 0;
     position: relative;
   }
+
   .category {
     width: 394px;
+    padding-left: 0;
   }
+
   .modalExpense {
     height: 603px;
   }
+
   .headline {
     font-size: 30px;
     margin-top: 0;
     margin-bottom: 40px;
   }
+
   .form {
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
   }
+
   .closeButton {
     display: block;
     padding: 0;
@@ -279,14 +386,21 @@ button {
     top: 20px;
     right: 20px;
   }
+
   .sumLabel {
     margin: 0px;
-  }
-  .sumInput {
     width: 181px;
+    margin-right: 32px;
+  }
+
+  .sumInput {
+    width: 190px;
     margin-top: 33px;
     text-align: center;
+    padding-left: 0;
   }
+
+
   .rangeContainerExpense {
     margin-bottom: 42px;
   }
@@ -300,10 +414,13 @@ button {
     border: none;
     border-bottom: 1px solid #e0e0e0;
     display: flex;
+    margin-right: 20px;
   }
+
   .closeBtn {
     margin-bottom: 10px;
   }
+
   .comment {
     width: 394px;
     padding: 0;
