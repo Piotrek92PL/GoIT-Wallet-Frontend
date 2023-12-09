@@ -340,6 +340,14 @@ button {
   font-size: 14px;
 }
 
+.formikMessageData {
+  position: absolute;
+  right: 73px;
+  top: 306px;
+  color: var(--pink-text);
+  font-size: 14px;
+}
+
 .error {
   border-bottom: 1px solid var(--pink-text);
 }

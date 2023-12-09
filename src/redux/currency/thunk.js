@@ -8,8 +8,10 @@ export const fetchCurrency = createAsyncThunk(
   async (_, thunkAPI) => {
     thunkAPI.dispatch(setLoading(true));
     try {
-      axios.defaults.baseURL = 'https://api.nbp.pl/api/';
-      const response = await axios.get(`exchangerates/tables/c`);
+      const axiosInstance = axios.create({
+        baseURL: 'https://api.nbp.pl/api/',
+      });
+      const response = await axiosInstance.get(`exchangerates/tables/c`);
       try {
         await CurrencySchema.validate(response.data[0].rates);
         return response.data[0].rates;
