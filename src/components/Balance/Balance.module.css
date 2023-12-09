@@ -1,46 +1,52 @@
-.balanceContainer {
-  width: 280px;
-  height: 80px;
+/*Mobile*/
+.balance {
+  background-color: white;
   border-radius: 30px;
-  background: #fff;
+  padding: 8px 32px;
+  width: 100%;
+  max-width: 380px;
+  height: 80px;
+  margin-bottom: 20px;
 }
 
-.balance {
-  color: #a6a6a6;
-  font-family: Circe;
-  font-size: 12px;
+.balance__text {
+  color: var(--primary-gray-font-color);
+  font-family: "Circe";
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  font-size: 12px;
+  line-height: 1.5;
   text-transform: uppercase;
-  margin-left: 32px;
-  margin-top: 8px;
+  padding-left: 15px;
 }
 
-.deposit {
-  color: #000;
-  font-family: Poppins;
-  font-size: 30px;
-  font-style: normal;
+.balance__amount {
+  font-family: "Poppins";
   font-weight: 700;
-  line-height: normal;
-  margin-left: 32px;
+  font-size: 30px;
+  line-height: 1.5;
+  display: flex;
+  overflow: hidden;
 }
 
-@media only screen and (min-width: 768px) {
-  .balanceContainer {
-    width: 100%;
+.balance__currency {
+  font-weight: 600;
+  margin-right: 10px;
+}
 
-  }
-
-  .balance,
-  .deposit {
-    margin-left: 40px;
+/*Tablet*/
+@media screen and (min-width: 768px) {
+  .balance {
+    min-width: 336px;
+    margin-bottom: 0;
   }
 }
 
-@media only screen and (min-width: 1280px) {
-  .balanceContainer {
-    width: 100%;
+/*Desktop*/
+@media screen and (min-width: 1280px) {
+  .balance {
+    max-width: 395px;
+    margin-top: 5px;
+    margin-bottom: 25px;
   }
 }
