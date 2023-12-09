@@ -1,0 +1,207 @@
+/* Styles for HomeTabDesktop */
+.table {
+  display: block;
+  min-width: 688px;
+  margin-left: 80px;
+  margin-right: 85px;
+}
+
+@media screen and (min-width: 1280px) {
+  .table {
+    width: 700px;
+  }
+}
+
+.tableHead {
+  display: block;
+}
+
+.tableHeadRow {
+  padding: 16px 21px 15px 20px;
+  background-color: #fff;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.tableHeadData {
+  font-family: 'Circe', 'Manrope', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: left;
+  flex-basis: 72px;
+  margin-right: 10px;
+  /* ... additional styles for other tableHeadData elements ... */
+}
+
+.tableBody {
+  text-align: center;
+  display: block;
+  max-height: 60vh;
+  overflow: auto;
+  padding: 8px;
+}
+
+@media screen and (min-width: 1280px) {
+  .tableBody {
+    max-height: 80vh;
+  }
+}
+
+.tableBodyRow {
+  display: flex;
+  align-items: center;
+  min-height: 54px;
+  padding: 0px 21px 0px 20px;
+  /* ... additional styles for tableBodyRow ... */
+}
+
+.tableBodyData {
+  font-family: 'Circe', 'Manrope', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: left;
+  flex-basis: 72px;
+  margin-right: 10px;
+  /* ... additional styles for other tableBodyData elements ... */
+}
+
+.tableBodyDataPlus {
+  color: #24cca7;
+}
+
+.tableBodyDataMinus {
+  color: #ff6596;
+}
+
+.buttonEdit {
+  background-color: transparent;
+  border: none;
+  color: black;
+  transition: background-color 250ms ease;
+}
+
+.buttonEdit:hover,
+.buttonEdit:focus {
+  color: #1b977c;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-family: 'Circe';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border-radius: 18px;
+  background: #24cca7;
+  transition: background-color 250ms ease;
+}
+
+.button:hover,
+.button:focus {
+  background: #1b977c;
+}
+
+/* Styles for HomeTabMobile */
+.mobileList {
+  list-style: none;
+  border-radius: 10px;
+  border-left: 5px solid #ff6596;
+  background-color: #fff;
+  padding: 0;
+}
+
+.mobileListPlus {
+  border-left-color: #24cca7;
+}
+
+.mobileListItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  min-height: 47px;
+  border-bottom: 1px solid #dcdcdf;
+}
+
+.mobileListCategory {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: right;
+}
+
+.mobileListData {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: right;
+}
+
+.mobileListDataPlus {
+  color: #24cca7;
+}
+
+.mobileListDataMinus {
+  color: #ff6596;
+}
+
+.deleteButton {
+  background-color: transparent;
+    border: none;
+    color: #fff;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: 'Circe';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    border-radius: 18px;
+    background: #24cca7;
+
+    transition: background-color 250ms ease;
+}
+
+.deleteButton:hover,
+.deleteButton:focus {
+  background: #1b977c;
+}
+
+.editButton {
+   background-color: transparent;
+  border: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  color: rgba(0, 0, 0, 0.8);
+  text-align: center;
+  font-family: Circe;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.28px;
+
+  padding: 0;
+
+  transition: background-color 250ms ease;
+}
+
+.editButton:hover,
+.editButton:focus {
+   color: #1b977c;
+}
