@@ -9,14 +9,21 @@ import { useFormik } from 'formik';
 import { transactionValidationSchema } from './validationSchema';
 import { useDispatch } from 'react-redux';
 import { addTransaction } from 'redux/transactions/operations';
+import { useSpring, animated } from 'react-spring';
 
 export const ModalAddTransaction = ({ isOpen, onClose }) => {
+  const animation = useSpring({
+    transform: isOpen ? 'scale(1)' : 'scale(0)',
+    opacity: isOpen ? 1 : 0,
+    visibility: isOpen ? 'visible' : 'hidden',
+    config: { duration: 300 },
+  });
+
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
 
   const [isIncome, setIsIncome] = useState(true);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedCategory, setSelectedCategory] = useState('');
 
   const formik = useFormik({
     initialValues: {
@@ -38,33 +45,45 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
 
       dispatch(addTransaction(transaction));
       resetForm();
+      animation.opacity.reverse();
+      animation.transform.reverse();
+      animation.visibility.reverse();
       onClose();
     },
   });
 
-  useEffect(() => {
-    setSelectedDate(new Date());
-  }, []);
-
-  useEffect(() => {
-    if (isIncome) {
-      formik.setFieldValue('category', '1');
-      setSelectedCategory('1');
-    } else {
-      formik.setFieldValue('category', '');
-      setSelectedCategory('');
-    }
-  }, [isIncome, formik]);
-
   const handleCheckboxChange = e => {
     setIsIncome(e.target.checked);
+    formik.setFieldValue('category', e.target.checked ? '1' : '');
   };
 
   const handleCategoryChange = e => {
     const newCategory = e.target.value;
-    setSelectedCategory(newCategory);
     formik.setFieldValue('category', newCategory);
   };
+
+  const handleClose = e => {
+    if (e.target.id === 'modalBackdrop') {
+      onClose();
+    }
+  };
+
+  const handleKeyDown = e => {
+    if (e.key === 'Escape') {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+    // eslint-disable-next-line
+  }, [isOpen, onClose]);
 
   //income/expense checkbox
   const toggleButton = (
@@ -215,7 +234,12 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className={css.modalOverlay}>
+    <animated.div
+      style={animation}
+      id="modalBackdrop"
+      className={css.modalOverlay}
+      onClick={handleClose}
+    >
       <div
         className={isIncome ? css.modal : `${css.modal} ${css.modalExpense}`}
       >
@@ -266,7 +290,7 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
                       : ''
                   }`}
                   name="category"
-                  value={selectedCategory}
+                  value={formik.values.category}
                   onChange={handleCategoryChange}
                   onBlur={formik.handleBlur}
                   required
@@ -274,7 +298,7 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
                   <option value="" disabled>
                     Select a category
                   </option>
-                  {categories.map(cat => (
+                  {categories.slice(1).map(cat => (
                     <option key={cat.id} value={cat.id}>
                       {cat.name}
                     </option>
@@ -330,7 +354,7 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
           </form>
         </div>
       </div>
-    </div>
+    </animated.div>
   );
 };
 
