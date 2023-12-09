@@ -27,7 +27,14 @@ export const addTransaction = createAsyncThunk(
   async (transaction, thunkAPI) => {
     thunkAPI.dispatch(setLoading(true));
     try {
-      const res = await axios.post('/api/transactions', transaction);
+      const formattedTransaction = {
+        ...transaction,
+        category: parseInt(transaction.category, 10),
+        date: transaction.date.toDate(),
+        amount: parseFloat(transaction.amount),
+      };
+
+      const res = await axios.post('/api/transactions', formattedTransaction);
       return res.data;
     } catch (error) {
       if (!error.response) {

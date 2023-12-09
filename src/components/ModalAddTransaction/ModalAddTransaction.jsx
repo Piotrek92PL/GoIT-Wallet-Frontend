@@ -10,6 +10,7 @@ import { transactionValidationSchema } from './validationSchema';
 import { useDispatch } from 'react-redux';
 import { addTransaction } from 'redux/transactions/operations';
 import { useSpring, animated } from 'react-spring';
+import { toast } from 'react-toastify';
 
 export const ModalAddTransaction = ({ isOpen, onClose }) => {
   const animation = useSpring({
@@ -27,7 +28,7 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
 
   const formik = useFormik({
     initialValues: {
-      type: '',
+      type: isIncome ? 'income' : 'expense',
       category: '',
       amount: '',
       date: new Date(),
@@ -35,6 +36,7 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
     },
     validationSchema: transactionValidationSchema,
     onSubmit: (values, { resetForm }) => {
+      console.log(values);
       const transaction = {
         type: isIncome ? 'income' : 'expense',
         category: isIncome ? '1' : values.category,
@@ -43,12 +45,16 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
         comment: values.comment,
       };
 
-      dispatch(addTransaction(transaction));
-      resetForm();
-      animation.opacity.reverse();
-      animation.transform.reverse();
-      animation.visibility.reverse();
-      onClose();
+      dispatch(addTransaction(transaction))
+        .unwrap()
+        .then(() => {
+          resetForm();
+          onClose();
+        })
+        .catch(rejectedValueOrSerializedError => {
+          console.error(rejectedValueOrSerializedError);
+          toast.error(rejectedValueOrSerializedError);
+        });
     },
   });
 
@@ -86,121 +92,6 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
   }, [isOpen, onClose]);
 
   //income/expense checkbox
-  const toggleButton = (
-    <label className={css.toggleButtonLabel}>
-      <input
-        type="checkbox"
-        checked={isIncome}
-        onChange={handleCheckboxChange}
-        className={css.toggleButtonInput}
-        name="type"
-      />
-      <div className={css.toggleButton}>
-        {isIncome ? (
-          <svg
-            className={css.toggleButtonIncome}
-            xmlns="http://www.w3.org/2000/svg"
-            width="74"
-            height="74"
-            viewBox="0 0 74 74"
-            fill="none"
-          >
-            <g filter="url(#filter0_d_19664_746)">
-              <circle cx="37" cy="31" r="22" fill="#24CCA7" />
-            </g>
-            <path d="M37 21V41" stroke="white" strokeWidth="2" />
-            <path d="M27 31L47 31" stroke="white" strokeWidth="2" />
-            <defs>
-              <filter
-                id="filter0_d_19664_746"
-                x="0"
-                y="0"
-                width="74"
-                height="74"
-                filterUnits="userSpaceOnUse"
-                colorInterpolationFilters="sRGB"
-              >
-                <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                <feColorMatrix
-                  in="SourceAlpha"
-                  type="matrix"
-                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                  result="hardAlpha"
-                />
-                <feOffset dy="6" />
-                <feGaussianBlur stdDeviation="7.5" />
-                <feColorMatrix
-                  type="matrix"
-                  values="0 0 0 0 0.141176 0 0 0 0 0.8 0 0 0 0 0.654902 0 0 0 0.5 0"
-                />
-                <feBlend
-                  mode="normal"
-                  in2="BackgroundImageFix"
-                  result="effect1_dropShadow_19664_746"
-                />
-                <feBlend
-                  mode="normal"
-                  in="SourceGraphic"
-                  in2="effect1_dropShadow_19664_746"
-                  result="shape"
-                />
-              </filter>
-            </defs>
-          </svg>
-        ) : (
-          <svg
-            className={css.toggleButtonExpense}
-            xmlns="http://www.w3.org/2000/svg"
-            width="74"
-            height="74"
-            viewBox="0 0 74 74"
-            fill="none"
-          >
-            <g filter="url(#filter0_d_19664_1473)">
-              <circle cx="37" cy="31" r="22" fill="#FF6596" />
-            </g>
-            <path d="M27 31L47 31" stroke="white" strokeWidth="2" />
-            <defs>
-              <filter
-                id="filter0_d_19664_1473"
-                x="0"
-                y="0"
-                width="74"
-                height="74"
-                filterUnits="userSpaceOnUse"
-                colorInterpolationFilters="sRGB"
-              >
-                <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                <feColorMatrix
-                  in="SourceAlpha"
-                  type="matrix"
-                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                  result="hardAlpha"
-                />
-                <feOffset dy="6" />
-                <feGaussianBlur stdDeviation="7.5" />
-                <feColorMatrix
-                  type="matrix"
-                  values="0 0 0 0 1 0 0 0 0 0.395833 0 0 0 0 0.589401 0 0 0 0.5 0"
-                />
-                <feBlend
-                  mode="normal"
-                  in2="BackgroundImageFix"
-                  result="effect1_dropShadow_19664_1473"
-                />
-                <feBlend
-                  mode="normal"
-                  in="SourceGraphic"
-                  in2="effect1_dropShadow_19664_1473"
-                  result="shape"
-                />
-              </filter>
-            </defs>
-          </svg>
-        )}
-      </div>
-    </label>
-  );
 
   //calendar
   const renderInput = props => {
@@ -257,7 +148,120 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
             </svg>
           </button>
           <p className={css.headline}>Add Transaction</p>
-          <form className={css.form}>
+          <form className={css.form} onSubmit={formik.handleSubmit}>
+            <label className={css.toggleButtonLabel}>
+              <input
+                type="checkbox"
+                checked={isIncome}
+                onChange={handleCheckboxChange}
+                className={css.toggleButtonInput}
+                name="type"
+              />
+              <div className={css.toggleButton}>
+                {isIncome ? (
+                  <svg
+                    className={css.toggleButtonIncome}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="74"
+                    height="74"
+                    viewBox="0 0 74 74"
+                    fill="none"
+                  >
+                    <g filter="url(#filter0_d_19664_746)">
+                      <circle cx="37" cy="31" r="22" fill="#24CCA7" />
+                    </g>
+                    <path d="M37 21V41" stroke="white" strokeWidth="2" />
+                    <path d="M27 31L47 31" stroke="white" strokeWidth="2" />
+                    <defs>
+                      <filter
+                        id="filter0_d_19664_746"
+                        x="0"
+                        y="0"
+                        width="74"
+                        height="74"
+                        filterUnits="userSpaceOnUse"
+                        colorInterpolationFilters="sRGB"
+                      >
+                        <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                        <feColorMatrix
+                          in="SourceAlpha"
+                          type="matrix"
+                          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                          result="hardAlpha"
+                        />
+                        <feOffset dy="6" />
+                        <feGaussianBlur stdDeviation="7.5" />
+                        <feColorMatrix
+                          type="matrix"
+                          values="0 0 0 0 0.141176 0 0 0 0 0.8 0 0 0 0 0.654902 0 0 0 0.5 0"
+                        />
+                        <feBlend
+                          mode="normal"
+                          in2="BackgroundImageFix"
+                          result="effect1_dropShadow_19664_746"
+                        />
+                        <feBlend
+                          mode="normal"
+                          in="SourceGraphic"
+                          in2="effect1_dropShadow_19664_746"
+                          result="shape"
+                        />
+                      </filter>
+                    </defs>
+                  </svg>
+                ) : (
+                  <svg
+                    className={css.toggleButtonExpense}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="74"
+                    height="74"
+                    viewBox="0 0 74 74"
+                    fill="none"
+                  >
+                    <g filter="url(#filter0_d_19664_1473)">
+                      <circle cx="37" cy="31" r="22" fill="#FF6596" />
+                    </g>
+                    <path d="M27 31L47 31" stroke="white" strokeWidth="2" />
+                    <defs>
+                      <filter
+                        id="filter0_d_19664_1473"
+                        x="0"
+                        y="0"
+                        width="74"
+                        height="74"
+                        filterUnits="userSpaceOnUse"
+                        colorInterpolationFilters="sRGB"
+                      >
+                        <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                        <feColorMatrix
+                          in="SourceAlpha"
+                          type="matrix"
+                          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                          result="hardAlpha"
+                        />
+                        <feOffset dy="6" />
+                        <feGaussianBlur stdDeviation="7.5" />
+                        <feColorMatrix
+                          type="matrix"
+                          values="0 0 0 0 1 0 0 0 0 0.395833 0 0 0 0 0.589401 0 0 0 0.5 0"
+                        />
+                        <feBlend
+                          mode="normal"
+                          in2="BackgroundImageFix"
+                          result="effect1_dropShadow_19664_1473"
+                        />
+                        <feBlend
+                          mode="normal"
+                          in="SourceGraphic"
+                          in2="effect1_dropShadow_19664_1473"
+                          result="shape"
+                        />
+                      </filter>
+                    </defs>
+                  </svg>
+                )}
+              </div>
+            </label>
             <div
               className={
                 isIncome
@@ -272,7 +276,7 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
               >
                 Income
               </span>
-              <span>{toggleButton}</span>
+
               <span
                 className={
                   isIncome ? `${css.expense} ${css.nohighlight}` : css.expense
@@ -324,7 +328,11 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
                 <div className={css.formikMessage}>{formik.errors.amount}</div>
               )}
             </label>
-            <label className={css.dateLabel}>
+            <label
+              className={`${css.dateLabel} ${
+                formik.touched.date && formik.errors.date ? css.error : ''
+              }`}
+            >
               <Datetime
                 value={selectedDate}
                 onChange={date => {
@@ -337,7 +345,9 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
                 name="date"
               />
               {formik.touched.date && formik.errors.date && (
-                <div className={css.formikMessage}>{formik.errors.date}</div>
+                <div className={css.formikMessageData}>
+                  {formik.errors.date}
+                </div>
               )}
             </label>
             <textarea
