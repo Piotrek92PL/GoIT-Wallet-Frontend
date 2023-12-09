@@ -15,62 +15,41 @@ import {
 import { Doughnut } from 'react-chartjs-2';
 import { BACKEND_BASE_URL } from 'redux/global/constants';
 import localStorage from 'redux-persist/es/storage';
+import { getCategoryColor, selectCategories } from 'redux/categories/selectors';
+import { useSelector } from 'react-redux';
 
 axios.defaults.baseURL = BACKEND_BASE_URL;
 
 ChartJS.register(ArcElement, Tooltip, Colors, Legend);
 
-const Chart = ({ dataToRender }) => {
-  const dataStats = dataToRender.stats;
-  //do zmiany po skonczonym logowaniu
-  //Get: http://localhost:3000/api/transactions
-  const dataStatsArr = [
-    {
-      _id: '6571f6d95da7401f5932fac0',
-      type: 'expense',
-      category: 9,
-      amount: 1000,
-      date: '2023-12-07T16:46:17.967Z',
-      comment: null,
-      owner: '6571f5325da7401f5932fa9e',
-      __v: 0,
-    },
-    {
-      _id: '6571f6e55da7401f5932fac4',
-      type: 'expense',
-      category: 9,
-      amount: 2000,
-      date: '2023-12-07T16:46:29.887Z',
-      comment: null,
-      owner: '6571f5325da7401f5932fa9e',
-      __v: 0,
-    },
-    {
-      _id: '6571f6f05da7401f5932fac8',
-      type: 'income',
-      category: 9,
-      amount: 20000,
-      date: '2023-12-07T16:46:40.665Z',
-      comment: null,
-      owner: '6571f5325da7401f5932fa9e',
-      __v: 0,
-    },
-  ];
+const Chart = () => {
+  const categoriesArr = useSelector(selectCategories);
+  const [balance, setBalance] = useState(null);
+  const [transactionsArr, setTransactionsArr] = useState([]);
+  const [fetched, setFetched] = useState(false); //prevents neverending fetching
 
-  for (const obj in dataStats) {
-    dataStatsArr.push(dataStats[obj]);
-  }
-  //kolory
-  const allColors = {
-    expense: '#ff0000',
-    income: '#0000ff',
+  //category colors
+  const makePalette = () => {
+    const paletteArray = categoriesArr.map(cat => {
+      return { [cat.id]: cat.color };
+    });
+    const palette = Object.assign({}, ...paletteArray);
+    return palette;
   };
+  const allColors = makePalette();
+  // category names
+  const makeNames = () => {
+    const namesArray = categoriesArr.map(cat => {
+      return { [cat.id]: cat.name };
+    });
+    const names = Object.assign({}, ...namesArray);
+    return names;
+  };
+  const allNames = makeNames();
 
-  //const categories = dataStatsArr.map(item => item.category);
-  const categories = dataStatsArr.map(item => item.type);
-  const values = dataStatsArr.map(item => item.amount);
-  const colors = dataStatsArr.map(item => allColors[item.type]);
-  //const colors = dataStatsArr.map(item => item.color);
+  const categories = transactionsArr.map(item => allNames[item.category]);
+  const values = transactionsArr.map(item => item.amount);
+  const colors = transactionsArr.map(item => allColors[item.category]);
 
   const data = {
     labels: categories,
@@ -85,27 +64,26 @@ const Chart = ({ dataToRender }) => {
     ],
   };
 
-  const [balance, setBalance] = useState(null);
-  // const token = useSelector(selectUserToken);
-  const token = localStorage.getItem('token');
-
   useEffect(() => {
+    const token = localStorage.getItem('token');
     async function fetch() {
       const response = await axios.get('/api/transactions');
-      //   const response = await axios.get(
-      //     ' http://localhost:443/api/transactions'
-      //     // {
-      //     //   headers: {
-      //     //     Authorization: `Bearer ${token}`,
-      //     //   },
-      //     // }
-      //   );
-      setBalance(response.data.data.balance);
+      if (balance !== 1997) {
+        console.log('setting balance');
+        setBalance(1997);
+        // setBalance(response.data.balance); //jeszcze nie ma balance na backendzie
+      }
+      if (transactionsArr !== response.data.data) {
+        console.log('setting transactions');
+        setTransactionsArr(response.data.data);
+      }
+      // console.log('/api/transactions', response);
     }
-    if (token) {
+    if (token && !fetched) {
+      setFetched(true);
       fetch();
     }
-  }, [balance, token]);
+  }, [balance, transactionsArr, fetched]);
 
   const textCenter = {
     id: 'textCenter',
