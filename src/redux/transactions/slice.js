@@ -36,7 +36,7 @@ const transactionsSlice = createSlice({
         state.currentTransaction = action.payload;
       })
       .addCase(getTransactionById.rejected, (state, action) => {
-        state.error = action.payload || 'Wystąpił błąd';
+        state.error = action.payload;
       })
       .addCase(deleteTransaction.fulfilled, (state, action) => {
         state.transactions = state.transactions.filter(
