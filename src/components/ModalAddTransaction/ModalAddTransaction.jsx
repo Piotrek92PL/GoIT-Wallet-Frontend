@@ -68,6 +68,12 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
     formik.setFieldValue('category', newCategory);
   };
 
+  const handleDataChange = date => {
+    const formattedDate = date ? date.toDate() : null;
+    setSelectedDate(formattedDate);
+    formik.setFieldValue('date', formattedDate);
+  };
+
   const handleClose = e => {
     if (e.target.id === 'modalBackdrop') {
       onClose();
@@ -335,14 +341,12 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
             >
               <Datetime
                 value={selectedDate}
-                onChange={date => {
-                  setSelectedDate(date);
-                  formik.setFieldValue('date', date);
-                }}
+                onChange={handleDataChange}
                 renderInput={renderInput}
                 dateFormat="DD-MM-YYYY"
                 timeFormat={false}
                 name="date"
+                onBlur={formik.handleBlur}
               />
               {formik.touched.date && formik.errors.date && (
                 <div className={css.formikMessageData}>

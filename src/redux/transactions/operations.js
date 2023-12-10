@@ -30,14 +30,16 @@ export const addTransaction = createAsyncThunk(
       const formattedTransaction = {
         ...transaction,
         category: parseInt(transaction.category, 10),
-        date: transaction.date.toDate(),
+        date: new Date(transaction.date),
         amount: parseFloat(transaction.amount),
       };
 
       const res = await axios.post('/api/transactions', formattedTransaction);
+      console.log(res);
       return res.data;
     } catch (error) {
       if (!error.response) {
+        console.log(error);
         return thunkAPI.rejectWithValue('Could not connect with the server');
       }
       return thunkAPI.rejectWithValue(error.response.data.message);
