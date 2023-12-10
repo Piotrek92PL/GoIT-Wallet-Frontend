@@ -4,7 +4,7 @@ import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import { Layout } from './Layout/Layout';
 import { RestrictedRoute } from './RestrictedRoute';
 import { refreshUser } from '../redux/auth/operations';
-// import { PrivateRoute } from './PrivateRoute';
+import { PrivateRoute } from './PrivateRoute';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Loader } from './Loader/Loader';
@@ -66,18 +66,18 @@ export const App = () => {
           <Route index element={<Navigate replace to="/home" />} />
           <Route
             path="/home"
-            // element={<PrivateRoute component={<HomePage />} />}
-            element={<HomePage />} // for work
+            element={<PrivateRoute component={<HomePage />} />}
+            // element={<HomePage />} // for work
           />
           <Route
             path="/diagram"
-            // element={<PrivateRoute component={DiagramPage />} />}
-            element={<DiagramPage />} // for work
+            element={<PrivateRoute component={<DiagramPage />} />}
+            // element={<DiagramPage />} // for work
           />
           <Route
             path="/currency"
-            // element={<PrivateRoute component={CurrencyPage />} />}
-            element={<CurrencyPage />} // for work
+            element={<PrivateRoute component={<CurrencyPage />} />}
+            // element={<CurrencyPage />} // for work
           />
           <Route
             path="/register"
