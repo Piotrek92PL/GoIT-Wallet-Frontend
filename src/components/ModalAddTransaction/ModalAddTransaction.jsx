@@ -23,7 +23,7 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
 
-  const [isIncome, setIsIncome] = useState(true);
+  const [isIncome, setIsIncome] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const formik = useFormik({
@@ -50,6 +50,7 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
         .then(() => {
           resetForm();
           onClose();
+          toast.success('Transaction added successfully');
         })
         .catch(rejectedValueOrSerializedError => {
           console.error(rejectedValueOrSerializedError);
