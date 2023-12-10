@@ -12,7 +12,11 @@ import { updateTransaction } from 'redux/transactions/operations';
 import { useSpring, animated } from 'react-spring';
 import { toast } from 'react-toastify';
 
-export const ModalAddTransaction = ({ isOpen, onClose, transactionToEdit }) => {
+export const ModalEditTransaction = ({
+  isOpen,
+  onClose,
+  transactionToEdit,
+}) => {
   const animation = useSpring({
     transform: isOpen ? 'scale(1)' : 'scale(0)',
     opacity: isOpen ? 1 : 0,
@@ -57,6 +61,10 @@ export const ModalAddTransaction = ({ isOpen, onClose, transactionToEdit }) => {
         });
     },
   });
+
+  console.log('formik', formik.values);
+  console.log('formik', formik.errors);
+  console.log('updateTranasction', updateTransaction);
 
   const handleCheckboxChange = e => {
     setIsIncome(e.target.checked);
@@ -372,9 +380,15 @@ export const ModalAddTransaction = ({ isOpen, onClose, transactionToEdit }) => {
   );
 };
 
-ModalAddTransaction.propTypes = {
+ModalEditTransaction.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  // transactionToEdit: PropTypes.shape({
+  //   id: PropTypes.string.isRequired,
+  //   type: PropTypes.string.isRequired,
+  //   category: PropTypes.string.isRequired,
+  //   amount: PropTypes.number.isRequired,
+  //   date: PropTypes.string.isRequired,
+  //   comment: PropTypes.string.isRequired,
+  // }).isRequired,
 };
-
-export default ModalAddTransaction;

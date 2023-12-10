@@ -5,6 +5,7 @@ import { NavBalanceCurrency } from 'components/NavBalanceCurrency/NavBalanceCurr
 import { ButtonAddTransaction } from 'components/ButtonAddTransaction/ButtonAddTransaction';
 import css from './HomePage.module.css';
 import { useMediaQuery } from 'react-responsive';
+import { Helper } from 'components/Helper/Helper';
 
 export default function HomePage() {
   const isMobilTablet = useMediaQuery({ maxWidth: 1279 });
@@ -26,6 +27,7 @@ export default function HomePage() {
       <NavBalanceCurrency />
       <div className={lineStyle}></div>
       {/* <TransactionsList /> */}
+      <Helper />
       <ButtonAddTransaction />
     </BackgroundContainer>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import css from './ButtonAddTransaction.module.css';
-import ModalAddTransaction from 'components/ModalAddTransaction/ModalAddTransaction';
+import { ModalAddTransaction } from 'components/ModalAddTransaction/ModalAddTransaction';
 import { toggleModalAddTransaction } from 'redux/global/slice';
 import { selectIsModalAddTransaction } from 'redux/global/selectors';
 

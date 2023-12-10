@@ -55,8 +55,10 @@ export const getTransactionById = createAsyncThunk(
     thunkAPI.dispatch(setLoading(true));
     try {
       const res = await axios.get(`/api/transactions/${id}`);
+      console.log(res);
       return res.data;
     } catch (error) {
+      console.log(error);
       if (!error.response) {
         return thunkAPI.rejectWithValue('Could not connect with the server');
       }
