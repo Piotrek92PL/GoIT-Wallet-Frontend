@@ -4,6 +4,11 @@ const initialState = {
 };
 
 const updateTotalBalance = transactions => {
+  if (!Array.isArray(transactions)) {
+    console.error('Array?:', transactions);
+    return 0;
+  }
+
   return transactions.reduce((acc, transaction) => {
     return transaction.type === 'income'
       ? acc + transaction.amount
@@ -14,6 +19,10 @@ const updateTotalBalance = transactions => {
 const financeReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'transactions/getAll/fulfilled':
+      if (!Array.isArray(action.payload)) {
+        console.error('Array?:', action.payload);
+        return { ...state, totalBalance: 0 };
+      }
       return {
         ...state,
         transactions: action.payload,
@@ -30,16 +39,13 @@ const financeReducer = (state = initialState, action) => {
             : -action.payload.amount),
       };
     case 'transactions/delete/fulfilled':
+      const filteredTransactions = state.transactions.filter(
+        transaction => transaction.id !== action.payload.id
+      );
       return {
         ...state,
-        transactions: state.transactions.filter(
-          transaction => transaction.id !== action.payload.id
-        ),
-        totalBalance: updateTotalBalance(
-          state.transactions.filter(
-            transaction => transaction.id !== action.payload.id
-          )
-        ),
+        transactions: filteredTransactions,
+        totalBalance: updateTotalBalance(filteredTransactions),
       };
     case 'transactions/update/fulfilled':
       const updatedTransactions = state.transactions.map(transaction =>

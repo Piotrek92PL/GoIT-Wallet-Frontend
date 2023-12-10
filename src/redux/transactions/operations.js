@@ -35,11 +35,9 @@ export const addTransaction = createAsyncThunk(
       };
 
       const res = await axios.post('/api/transactions', formattedTransaction);
-      console.log(res);
       return res.data;
     } catch (error) {
       if (!error.response) {
-        console.log(error);
         return thunkAPI.rejectWithValue('Could not connect with the server');
       }
       return thunkAPI.rejectWithValue(error.response.data.message);
@@ -55,10 +53,8 @@ export const getTransactionById = createAsyncThunk(
     thunkAPI.dispatch(setLoading(true));
     try {
       const res = await axios.get(`/api/transactions/${id}`);
-      console.log(res);
       return res.data;
     } catch (error) {
-      console.log(error);
       if (!error.response) {
         return thunkAPI.rejectWithValue('Could not connect with the server');
       }

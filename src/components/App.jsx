@@ -10,6 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Loader } from './Loader/Loader';
 import { selectIsLoading } from '../redux/global/selectors';
 import { getListOfCategories } from 'redux/categories/operations';
+import { getAllTransactions } from 'redux/transactions/operations';
+import { selectAllTransactions } from 'redux/transactions/selectors';
 import { useMediaQuery } from 'react-responsive';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
@@ -30,8 +32,14 @@ export const App = () => {
     if (token) {
       dispatch(refreshUser());
       dispatch(getListOfCategories());
+      dispatch(getAllTransactions());
     }
   }, [dispatch]);
+
+  const allTransactions = useSelector(selectAllTransactions);
+  useEffect(() => {
+    console.log('List of transactions:', allTransactions);
+  }, [allTransactions]);
 
   useEffect(() => {
     if (!isMobile && window.location.pathname === '/currency') {
