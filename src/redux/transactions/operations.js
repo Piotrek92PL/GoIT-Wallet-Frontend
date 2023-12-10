@@ -90,9 +90,15 @@ export const updateTransaction = createAsyncThunk(
   async (transaction, thunkAPI) => {
     thunkAPI.dispatch(setLoading(true));
     try {
+      const formattedTransaction = {
+        ...transaction,
+        category: parseInt(transaction.category, 10),
+        date: new Date(transaction.date),
+        amount: parseFloat(transaction.amount),
+      };
       const res = await axios.put(
         `/api/transactions/${transaction.id}`,
-        transaction
+        formattedTransaction
       );
       return res.data;
     } catch (error) {
