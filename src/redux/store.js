@@ -18,7 +18,6 @@ import { globalReducer } from './global/slice';
 import { transactionsReducer } from './transactions/slice';
 import financeReducer from './reducers/financeReducer';
 
-
 const authPersistConfig = {
   key: 'auth',
   storage,
@@ -37,6 +36,12 @@ const categoriesPersistConfig = {
   whitelist: ['categories'],
 };
 
+const transactionsPersistConfig = {
+  key: 'transactions',
+  storage,
+  whitelist: ['transactions'],
+};
+
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
@@ -45,8 +50,13 @@ export const store = configureStore({
 
     categories: persistReducer(categoriesPersistConfig, categoriesReducer),
 
-    global: globalReducer, //co to jest? moze trzeba skasowac
-    transactions: transactionsReducer,
+    global: globalReducer,
+
+    transactions: persistReducer(
+      transactionsPersistConfig,
+      transactionsReducer
+    ),
+
     finance: financeReducer,
   },
   middleware: getDefaultMiddleware =>
