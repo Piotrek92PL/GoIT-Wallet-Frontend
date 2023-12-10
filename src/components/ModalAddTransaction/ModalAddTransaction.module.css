@@ -58,9 +58,10 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 120px;
   position: relative;
   margin-bottom: 0;
+  transform: translateX(5px);
 }
 
 .rangeContainerExpense {
@@ -76,6 +77,7 @@ button {
   font-weight: 700;
   line-height: normal;
   margin-left: 120px;
+  display: block;
 }
 
 .expense {
@@ -86,6 +88,7 @@ button {
   font-weight: 700;
   line-height: normal;
   margin-right: 120px;
+  display: block;
 }
 
 .nohighlight {
@@ -93,6 +96,7 @@ button {
 }
 
 .toggleButton {
+  position: absolute;
   width: 80px;
   height: 40px;
   flex-shrink: 0;
@@ -100,18 +104,25 @@ button {
   border: 1px solid var(--Gray-5, #e0e0e0);
   background: #fff;
   cursor: pointer;
+  top: 96px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
 }
 
 .toggleButtonIncome {
   position: absolute;
-  top: -10px;
-  left: 177px;
+  top: -12px;
+  left: -18px;
+  z-index: 2;
 }
+
 
 .toggleButtonExpense {
   position: absolute;
-  top: -10px;
-  right: 180px;
+  top: -12px;
+  left: 22px;
+  z-index: 2;
 }
 
 .toggleButtonInput {
@@ -184,7 +195,6 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 
 .sumLabel {
@@ -194,7 +204,6 @@ button {
 }
 
 .sumInput {
-
   width: 280px;
   border: none;
   color: #bdbdbd;
@@ -298,6 +307,7 @@ button {
 
 .dateLabel {
   width: 280px;
+  position: relative;
 }
 
 .dateContainer {
@@ -327,7 +337,7 @@ button {
 .formikMessage {
   position: absolute;
   right: 0;
-  top: 80px;
+  top: 86px;
   color: var(--pink-text);
   font-size: 14px;
 }
@@ -342,8 +352,8 @@ button {
 
 .formikMessageData {
   position: absolute;
-  right: 73px;
-  top: 306px;
+  right: 0;
+  top: 41px;
   color: var(--pink-text);
   font-size: 14px;
 }
@@ -435,5 +445,13 @@ button {
     margin: 0;
     height: 30px;
     margin-bottom: 40px;
+  }
+
+  .toggleButton {
+    top: 107px;
+  }
+
+  .formikMessage {
+    top: 80px;
   }
 }

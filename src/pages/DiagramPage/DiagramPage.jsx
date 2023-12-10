@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet';
 import { BackgroundContainer } from 'components/BackgroundContainer/BackgroundContainer';
-// import { NavBalanceCurrency } from 'components/NavBalanceCurrency/NavBalanceCurrency';
+import { NavBalanceCurrency } from 'components/NavBalanceCurrency/NavBalanceCurrency';
 // import Chart from 'components/Chart/Chart';
 // import { useSelector } from 'react-redux';
 // import { selectTransactionsData } from 'redux/finance/financeSelectors';
@@ -12,7 +12,7 @@ export default function DiagramPage() {
       <Helmet>
         <title>Statistics</title>
       </Helmet>
-      {/* <NavBalanceCurrency /> */}
+      <NavBalanceCurrency />
       {/* <Chart /> */}
       {/* <selectTransactionsDataChart dataToRender={dataToRender} /> */}
     </BackgroundContainer>
