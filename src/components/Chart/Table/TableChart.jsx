@@ -29,7 +29,7 @@ const monthToNumber = {
 
 const TableChart = () => {
   const categoriesArr = useSelector(selectCategories);
-  const transactions = useSelector(selectAllTransactions).data;
+  const transactions = useSelector(selectAllTransactions);
   const balance = useSelector(selectBalance);
   const dataIncome = useSelector(selectIncome);
   const dataExpenses = useSelector(selectExpense);
@@ -66,6 +66,7 @@ const TableChart = () => {
     });
     return dataArr;
   };
+
   const chartArr =
     Array.isArray(transactions) && transactions.length > 0
       ? makeChartArr(transactions)
