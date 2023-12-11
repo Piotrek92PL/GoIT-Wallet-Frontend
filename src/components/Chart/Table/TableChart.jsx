@@ -36,8 +36,6 @@ const TableChart = () => {
   const moneyFormat = number =>
     !isNaN(parseFloat(number)) ? parseFloat(number).toFixed(2) : '0.00';
   const displayBalance = moneyFormat(balance);
-  const formattedExpenses = moneyFormat(dataExpenses);
-  const formattedIncome = moneyFormat(dataIncome);
 
   const incomeNr = categoriesArr.find(cat => cat.name === 'Income').id;
   const makeChartArr = data => {
@@ -152,11 +150,11 @@ const TableChart = () => {
           <div className={css.resultsWrap}>
             <div className={css.results}>
               <p className={css.resultsTitle}>Expenses:</p>
-              <p className={css.resultsExpenses}>{formattedExpenses}</p>
+              <p className={css.resultsExpenses}>{moneyFormat(dataExpenses)}</p>
             </div>
             <div className={css.results}>
               <p className={css.resultsTitle}>Income:</p>
-              <p className={css.resultsIncome}>{formattedIncome}</p>
+              <p className={css.resultsIncome}>{moneyFormat(dataIncome)}</p>
             </div>
           </div>
         </div>
