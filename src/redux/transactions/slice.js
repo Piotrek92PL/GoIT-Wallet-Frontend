@@ -21,7 +21,7 @@ const transactionsSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(addTransaction.fulfilled, (state, action) => {
-        state.transactions.push(action.payload);
+        state.transactions = [...state.transactions, action.payload];
       })
       .addCase(addTransaction.rejected, (state, action) => {
         state.error = action.error.message;

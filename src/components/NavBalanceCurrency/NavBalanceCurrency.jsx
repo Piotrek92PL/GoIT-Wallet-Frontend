@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getAllTransactions } from 'redux/transactions/operations';
 import { useMediaQuery } from 'react-responsive';
 import css from './NavBalanceCurrency.module.css';
 import { Navigation } from 'components/Navigation/Navigation';
@@ -9,6 +11,11 @@ export const NavBalanceCurrency = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const isTablet = useMediaQuery({ minWidth: 769, maxWidth: 1279 });
   const isDesktop = useMediaQuery({ minWidth: 1280 });
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllTransactions());
+  }, [dispatch]);
 
   let containerStyle = css.container;
   let navBalanceStyle = css.navBalance;
