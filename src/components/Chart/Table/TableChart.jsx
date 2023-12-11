@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 // import { useDispatch } from 'react-redux';
 import css from './TableChart.module.css';
 import { nanoid } from 'nanoid';
@@ -45,6 +45,7 @@ const TableChart = () => {
 
   const incomeNr = categoriesArr.find(cat => cat.name === 'Income').id;
   const makeChartArr = data => {
+    // console.log(`TableChart makeChartArr data:`, data);
     let dataArr = [];
     data.forEach(tr => {
       if (tr.type === 'income') {
@@ -63,16 +64,12 @@ const TableChart = () => {
         };
       }
     });
-    // for (let index = dataArr.length - 1; index > 0; index--) {
-    //   if (dataArr[index] == null) {
-    //     console.log(`dataArr before slice [${index}]`, dataArr);
-    //     dataArr.slice(0, index).join(dataArr.slice(index, dataArr.length));
-    //     console.log(`dataArr after slice [${index}]`, dataArr);
-    //   }
-    // }
     return dataArr;
   };
-  const chartArr = makeChartArr(transactions);
+  const chartArr =
+    Array.isArray(transactions) && transactions.length > 0
+      ? makeChartArr(transactions)
+      : [];
 
   const [selectedMonth, setSelectedMonth] = useState('10');
   const [selectedYear, setSelectedYear] = useState('2023');
@@ -169,18 +166,18 @@ const TableChart = () => {
   );
 };
 
-TableChart.propTypes = {
-  dataToRender: PropTypes.shape({
-    stats: PropTypes.arrayOf(
-      PropTypes.shape({
-        category: PropTypes.string.isRequired,
-        total: PropTypes.number.isRequired,
-        color: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-    expenses: PropTypes.number.isRequired,
-    income: PropTypes.number.isRequired,
-  }).isRequired,
-};
+// TableChart.propTypes = {
+//   dataToRender: PropTypes.shape({
+//     stats: PropTypes.arrayOf(
+//       PropTypes.shape({
+//         category: PropTypes.string.isRequired,
+//         total: PropTypes.number.isRequired,
+//         color: PropTypes.string.isRequired,
+//       })
+//     ).isRequired,
+//     expenses: PropTypes.number.isRequired,
+//     income: PropTypes.number.isRequired,
+//   }).isRequired,
+// };
 
 export default TableChart;
