@@ -1,19 +1,20 @@
 /* Styles for HomeTabDesktop */
 .table {
   display: block;
-  min-width: 688px;
-  margin-left: 80px;
-  margin-right: 85px;
+  min-width: 704px;
+  margin-left: 10px;
+  margin-top: 40px;
 }
 
 @media screen and (min-width: 1280px) {
   .table {
-    width: 700px;
+    width: 715px;
   }
 }
 
 .tableHead {
   display: block;
+  min-width: 543px;
 }
 
 .tableHeadRow {
@@ -31,7 +32,7 @@
   font-size: 18px;
   line-height: 1.5;
   text-align: left;
-  flex-basis: 72px;
+  flex-basis: 105px;
   margin-right: 10px;
   /* ... additional styles for other tableHeadData elements ... */
 }
@@ -55,7 +56,11 @@
   align-items: center;
   min-height: 54px;
   padding: 0px 21px 0px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
   /* ... additional styles for tableBodyRow ... */
+}
+.tableBodyRow:last-child {
+  border-bottom: none;
 }
 
 .tableBodyData {
@@ -65,9 +70,22 @@
   font-size: 16px;
   line-height: 1.5;
   text-align: left;
-  flex-basis: 72px;
+  flex-basis: 110px;
   margin-right: 10px;
+
   /* ... additional styles for other tableBodyData elements ... */
+}
+.tableBodyData:nth-child(2) {
+  padding-left: 15px;
+}
+.tableBodyData:nth-child(3) {
+  padding-left: 40px;
+}
+.tableBodyData:nth-child(4) {
+  padding-left: 50px;
+}
+.tableBodyData:nth-child(5) {
+  padding-left: 50px;
 }
 
 .tableBodyDataPlus {
@@ -131,6 +149,9 @@
   min-height: 47px;
   border-bottom: 1px solid #dcdcdf;
 }
+.mobileListItem:last-child {
+  margin-bottom: 10px;
+}
 
 .mobileListCategory {
   font-style: normal;
@@ -158,20 +179,20 @@
 
 .deleteButton {
   background-color: transparent;
-    border: none;
-    color: #fff;
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-family: 'Circe';
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    border-radius: 18px;
-    background: #24cca7;
+  border: none;
+  color: #fff;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: 'Circe';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border-radius: 18px;
+  background: #24cca7;
 
-    transition: background-color 250ms ease;
+  transition: background-color 250ms ease;
 }
 
 .deleteButton:hover,
@@ -180,7 +201,7 @@
 }
 
 .editButton {
-   background-color: transparent;
+  background-color: transparent;
   border: none;
   color: black;
   display: flex;
@@ -203,5 +224,5 @@
 
 .editButton:hover,
 .editButton:focus {
-   color: #1b977c;
+  color: #1b977c;
 }
