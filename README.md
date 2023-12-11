@@ -44,133 +44,54 @@ Open [localhost](#http://localhost:3000) to view it in your browser.
 
 [Back to top](#table-of-contents)
 
-## Main Dependencies
+### Main Dependencies
 
-- **[@reduxjs/toolkit](https://redux-toolkit.js.org/)**: Redux Toolkit for state
-  management.
-
-  - Version: ^1.9.5
-
-- **[axios](https://axios-http.com/)**: Promise-based HTTP client for the
-  browser and Node.js.
-
-  - Version: ^1.5.0
-
-- **[formik](https://formik.org/)**: Form library for React and React Native.
-
-  - Version: ^2.4.5
-
-- **[react-router-dom](https://reactrouter.com/)**: DOM bindings for React
-  Router.
-
-  - Version: ^6.16.0
-
-- **[react-chartjs-2](https://www.npmjs.com/package/react-chartjs-2)**: React
-  wrapper for Chart.js.
-
-  - Version: ^4.12.0
-
-- **[react-loader-spinner](https://www.npmjs.com/package/react-loader-spinner)**:
-  Loader spinner component for React.
-
-  - Version: ^5.4.5
-
-- **[styled-components](https://styled-components.com/)**: Styling library for
-  React components.
-
-  - Version: ^6.0.8
-
-- **[yup](https://github.com/jquense/yup)**: JavaScript schema builder for value
-  parsing and validation.
-  - Version: ^1.3.1
-
-[Back to top](#table-of-contents)
+- **[@emotion/react](https://emotion.sh/docs/introduction):** ^11.11.1
+- **[@emotion/styled](https://emotion.sh/docs/introduction):** ^11.11.0
+- **[@mui/material](https://mui.com/):** ^5.14.20
+- **[@redux-devtools/extension](https://github.com/reduxjs/redux-devtools):** ^3.2.5
+- **[@reduxjs/toolkit](https://redux-toolkit.js.org/):** ^1.9.5
+- **[@testing-library/jest-dom](https://testing-library.com/docs/queries/about/):** ^5.17.0
+- **[@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/):** ^13.4.0
+- **[@testing-library/user-event](https://testing-library.com/docs/ecosystem-user-event/):** ^13.5.0
+- **[axios](https://axios-http.com/docs/intro):** ^1.5.0
+- **[chart.js](https://www.chartjs.org/docs/latest/):** ^4.4.1
+- **[classnames](https://github.com/JedWatson/classnames):** ^2.3.2
+- **[clsx](https://github.com/lukeed/clsx):** ^2.0.0
+- **[formik](https://formik.org/docs/overview):** ^2.4.5
+- **[modern-normalize](https://github.com/sindresorhus/modern-normalize):** ^2.0.0
+- **[nanoid](https://github.com/ai/nanoid):** ^5.0.4
+- **[notiflix](https://www.notiflix.com/):** ^3.2.6
+- **[react](https://reactjs.org/docs/getting-started.html):** ^18.2.0
+- **[react-chartjs-2](https://reactchartjs.github.io/react-chartjs-2/):** ^5.2.0
+- **[react-datetime](https://github.com/YouCanBookMe/react-datetime):** ^3.2.0
+- **[react-dom](https://reactjs.org/docs/react-dom.html):** ^18.2.0
+- **[react-helmet](https://react-helmet.com/):** ^6.1.0
+- **[react-hot-toast](https://react-hot-toast.com/):** ^2.4.1
+- **[react-icons](https://react-icons.github.io/react-icons/):** ^4.12.0
+- **[react-loader-spinner](https://www.npmjs.com/package/react-loader-spinner):** ^5.4.5
+- **[react-media](https://www.npmjs.com/package/react-media):** ^1.10.0
+- **[react-paginate](https://www.npmjs.com/package/react-paginate):** ^8.2.0
+- **[react-redux](https://react-redux.js.org/):** ^8.1.2
+- **[react-responsive](https://www.npmjs.com/package/react-responsive):** ^9.0.2
+- **[react-router-dom](https://reactrouter.com/web/guides/quick-start):** ^6.16.0
+- **[react-scripts](https://create-react-app.dev/docs/getting-started/):** ^5.0.1
+- **[react-spring](https://react-spring.io/):** ^9.7.3
+- **[react-toastify](https://fkhadra.github.io/react-toastify/introduction/):** ^9.1.3
+- **[react-transition-group](https://reactcommunity.org/react-transition-group/):** ^4.4.5
+- **[react-use](https://react-hooks-library.com/):** ^17.4.2
+- **[redux](https://redux.js.org/):** ^4.2.1
+- **[redux-persist](https://redux-toolkit.js.org/rtk-query/usage/rtk-query-setup#redux-persist-integration):** ^6.0.0
+- **[styled-components](https://styled-components.com/docs):** ^6.0.8
+- **[web-vitals](https://web.dev/vitals/):** ^2.1.4
+- **[yup](https://github.com/jquense/yup):** ^1.3.1
 
 ### Dev Dependencies
 
-- **[@babel/plugin-proposal-private-property-in-object](https://www.npmjs.com/package/@babel/plugin-proposal-private-property-in-object)**:
-  Babel plugin for private class fields.
+- **[@babel/plugin-proposal-private-property-in-object](https://babeljs.io/docs/en/babel-plugin-proposal-private-property-in-object):** ^7.21.11
+- **[gh-pages](https://www.npmjs.com/package/gh-pages):** ^6.1.0
+- **[prop-types](https://reactjs.org/docs/typechecking-with-proptypes.html):** ^15.8.1
+- **[sass](https://sass-lang.com/documentation):** ^1.69.5
 
-  - Version: ^7.21.11
-
-- **[prop-types](https://www.npmjs.com/package/prop-types)**: Runtime type
-  checking for React props.
-  - Version: ^15.8.1
-
-[Back to top](#table-of-contents)
-
-### Testing Dependencies
-
-- **[@testing-library/jest-dom](https://www.npmjs.com/package/@testing-library/jest-dom)**:
-  Custom Jest matchers for asserting on DOM nodes.
-
-  - Version: ^5.17.0
-
-- **[@testing-library/react](https://www.npmjs.com/package/@testing-library/react)**:
-  Simple and complete React testing utilities.
-
-  - Version: ^13.4.0
-
-- **[@testing-library/user-event](https://www.npmjs.com/package/@testing-library/user-event)**:
-  Fire events the same way the user does.
-  - Version: ^13.5.0
-
-[Back to top](#table-of-contents)
-
-### Additional Dependencies
-
-- **[modern-normalize](https://www.npmjs.com/package/modern-normalize)**: A
-  modern alternative to CSS resets.
-
-  - Version: ^2.0.0
-
-- **[react-helmet](https://www.npmjs.com/package/react-helmet)**: React Helmet
-  provides a declarative way to manage document head.
-
-  - Version: ^6.1.0
-
-- **[react-hot-toast](https://www.npmjs.com/package/react-hot-toast)**: React
-  toast notifications.
-
-  - Version: ^2.4.1
-
-- **[react-icons](https://www.npmjs.com/package/react-icons)**: SVG icons as
-  React components.
-
-  - Version: ^4.12.0
-
-- **[react-redux](https://www.npmjs.com/package/react-redux)**: Official React
-  bindings for Redux.
-
-  - Version: ^8.1.2
-
-- **[react-responsive](https://www.npmjs.com/package/react-responsive)**: Media
-  queries in react for responsive design.
-
-  - Version: ^9.0.2
-
-- **[react-scripts](https://www.npmjs.com/package/react-scripts)**: Create React
-  App scripts.
-
-  - Version: ^5.0.1
-
-- **[react-transition-group](https://www.npmjs.com/package/react-transition-group)**:
-  High-level animation primitives for React.
-
-  - Version: ^4.4.5
-
-- **[redux](https://www.npmjs.com/package/redux)**: Predictable state container
-  for JavaScript apps.
-
-  - Version: ^4.2.1
-
-- **[redux-persist](https://www.npmjs.com/package/redux-persist)**: Persist and
-  rehydrate a redux store.
-
-  - Version: ^6.0.0
-
-- **[web-vitals](https://www.npmjs.com/package/web-vitals)**: Library for
-  measuring all the Web Vitals metrics.
-  - Version: ^2.1.4
 
 [Back to top](#table-of-contents)
