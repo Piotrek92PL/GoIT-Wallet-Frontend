@@ -9,6 +9,11 @@ import {
 import { selectAllTransactions } from '../../redux/transactions/selectors';
 import { useMedia } from 'react-use';
 // import { nanoid } from 'nanoid';
+import { ModalEditTransaction } from 'components/ModalEditTransaction/ModalEditTransaction';
+import { toggleModalEditTransaction } from 'redux/global/slice';
+import { selectIsModalEditTransaction } from 'redux/global/selectors';
+import { getTransactionById } from 'redux/transactions/operations';
+import { selectCurrentTransaction } from 'redux/transactions/selectors';
 
 function convertStringToDate(str = '2022-12-01T00:00:00.000Z') {
   return str.split('T')[0].split('-').reverse().join('.');
@@ -26,7 +31,33 @@ function HomeTab() {
   }, [dispatch]);
 
   const handleDelete = transactionId => {
-    dispatch(deleteTransaction(transactionId));
+    dispatch(deleteTransaction(transactionId)).then(() => {
+      dispatch(getAllTransactions());
+    });
+  };
+
+  const isModalEditTransaction = useSelector(selectIsModalEditTransaction);
+  const transactionFromSelector = useSelector(selectCurrentTransaction);
+  if (!transactionFromSelector) {
+  }
+  if (transactionFromSelector) {
+  }
+
+  const transactionToEdit = transactionFromSelector || {
+    type: '',
+    category: '',
+    amount: '',
+    date: new Date(),
+    comment: '',
+  };
+
+  const handleToggleModal = transactionId => {
+    dispatch(toggleModalEditTransaction());
+    if (!isModalEditTransaction && transactionId) {
+      dispatch(getTransactionById(transactionId));
+    } else {
+      dispatch(getAllTransactions());
+    }
   };
 
   const renderDesktop = () => {
@@ -42,44 +73,45 @@ function HomeTab() {
           </tr>
         </thead>
         <tbody className={styles.tableBody}>
-          {Array.isArray(transactions) && transactions.map(item => {
-            const result = item.Expenses ? '-' : '+';
-            return (
-              <tr key={item.id} className={styles.tableBodyRow}>
-                <td className={styles.tableBodyData}>
-                  {convertStringToDate(item.date)}
-                </td>
-                <td className={styles.tableBodyData}>{result}</td>
-                <td className={styles.tableBodyData}>{item.category}</td>
-                <td className={styles.tableBodyData}>{item.comment}</td>
-                <td
-                  className={
-                    result === '+'
-                      ? styles.tableBodyDataPlus
-                      : styles.tableBodyDataMinus
-                  }
-                >
-                  {item.sum}
-                </td>
-                <td>
-                  <button
-                    className={styles.buttonEdit}
-                    onClick={() => console.log('Edit', item.id)}
+          {Array.isArray(transactions) &&
+            transactions.map(item => {
+              const result = item.Expenses ? '-' : '+';
+              return (
+                <tr key={item._id} className={styles.tableBodyRow}>
+                  <td className={styles.tableBodyData}>
+                    {convertStringToDate(item.date)}
+                  </td>
+                  <td className={styles.tableBodyData}>{result}</td>
+                  <td className={styles.tableBodyData}>{item.category}</td>
+                  <td className={styles.tableBodyData}>{item.comment}</td>
+                  <td
+                    className={
+                      result === '+'
+                        ? styles.tableBodyDataPlus
+                        : styles.tableBodyDataMinus
+                    }
                   >
-                    <MdEdit size={24} />
-                  </button>
-                </td>
-                <td>
-                  <button
-                    className={styles.button}
-                    onClick={() => handleDelete(item.id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
+                    {item.amount}
+                  </td>
+                  <td>
+                    <button
+                      className={styles.buttonEdit}
+                      onClick={() => handleToggleModal(item._id)}
+                    >
+                      <MdEdit size={24} />
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      className={styles.button}
+                      onClick={() => handleDelete(item._id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     );
@@ -93,7 +125,7 @@ function HomeTab() {
           const result = item.Expenses ? '-' : '+';
           return (
             <ul
-              key={item.id}
+              key={item._id}
               className={
                 result === '+' ? styles.mobileListPlus : styles.mobileList
               }
@@ -126,19 +158,19 @@ function HomeTab() {
                       : styles.mobileListDataMinus
                   }
                 >
-                  {item.sum}
+                  {item.amount}
                 </span>
               </li>
               <li className={styles.mobileListItem}>
                 <button
                   className={styles.deleteButton}
-                  onClick={() => handleDelete(item.id)}
+                  onClick={() => handleDelete(item._id)}
                 >
                   Delete
                 </button>
                 <button
                   className={styles.editButton}
-                  onClick={() => console.log('Edit', item.id)}
+                  onClick={() => handleToggleModal(item._id)}
                 >
                   <MdEdit size={18} />
                   Edit
@@ -151,7 +183,17 @@ function HomeTab() {
     );
   };
 
-  return <div>{isMobile ? renderMobile() : renderDesktop()}</div>;
+  return (
+    <div>
+      {isMobile ? renderMobile() : renderDesktop()}
+
+      <ModalEditTransaction
+        transactionToEdit={transactionToEdit}
+        isOpen={isModalEditTransaction}
+        onClose={() => handleToggleModal(null)}
+      />
+    </div>
+  );
 }
 
 export default HomeTab;
