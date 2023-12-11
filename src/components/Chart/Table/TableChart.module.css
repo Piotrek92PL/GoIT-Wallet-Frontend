@@ -1,191 +1,188 @@
 .dateBox {
-	margin-bottom: 20px;
-	
+  margin-bottom: 20px;
 }
 
 .selectMonth,
 .selectYear {
-	margin: 0 auto;
-	padding-left: 20px;
-	padding-right: 20px;
-	display: flex;
-	max-width: 280px;
-	width: 100%;
-	height: 50px;
-	justify-content: space-between;
-	align-items: center;
-	background: transparent;
-	border-radius: 30px;
-	border: 2px solid #000;
-	cursor: pointer;
-	transition: background-color 0.3s ease;
-	color: #000000;
-	font-family: Circe;
-	font-size: 16px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: normal;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  max-width: 280px;
+  width: 100%;
+  height: 50px;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  border-radius: 30px;
+  border: 2px solid #000;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: #000000;
+  font-family: Circe;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .selectYear {
-	margin-top: 20px;
+  margin-top: 20px;
 }
 
 @media screen and (min-width: 768px) {
-	.dateBox {
-		margin: 0 auto;
-		max-width: 336px;
-		margin-bottom: 20px;
-		display: flex;
-		position: relative;
-	}
-	.selectMonth {
-		width: 160px;
-	}
-	.selectYear {
-		margin-top: 0px;
-		margin-left: 16px;
-		cursor: pointer;
-
-	}
+  .dateBox {
+    margin: 0 auto;
+    max-width: 336px;
+    margin-bottom: 20px;
+    display: flex;
+    position: relative;
+  }
+  .selectMonth {
+    width: 160px;
+  }
+  .selectYear {
+    margin-top: 0px;
+    margin-left: 16px;
+    cursor: pointer;
+  }
 }
 
 @media screen and (min-width: 1280px) {
-	.dateBox {
-		margin: 0;
-		margin-bottom: 20px;
-		max-width: 395px;
-		display: flex;
-		
-	}
-	.selectMonth {
-		cursor: pointer;
-		width: 181px;
-	}
-	.selectYear {
-		margin-left: 32px;
-		cursor: pointer;
-		width: 181px;
-	}
+  .dateBox {
+    margin: 0;
+    margin-bottom: 20px;
+    max-width: 395px;
+    display: flex;
+  }
+  .selectMonth {
+    cursor: pointer;
+    width: 181px;
+  }
+  .selectYear {
+    margin-left: 32px;
+    cursor: pointer;
+    width: 181px;
+  }
 }
 
 .statisticsList {
-	color: #000000;
-	width: 280px;
-	background-color: transparent;
-	margin: 0 auto;
+  color: #000000;
+  width: 280px;
+  background-color: transparent;
+  margin: 0 auto;
 }
 
 .header {
-	display: flex;
-	color: #000000;
-	width: 100%;
-	justify-content: space-between;
-	border-radius: 30px;
-	background: #fff;
+  display: flex;
+  color: #000000;
+  width: 100%;
+  justify-content: space-between;
+  border-radius: 30px;
+  background: #fff;
 }
 
 .headerItem {
-	color: #000000;
-	font-family: Circe;
-	font-size: 18px;
-	font-style: normal;
-	font-weight: 700;
-	line-height: normal;
-	margin: 0;
-	padding: 15px 20px;
+  color: #000000;
+  font-family: Circe;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+  padding: 15px 20px;
 }
 
 .headerItem:first-child {
-	border-top-left-radius: 30px;
-	border-bottom-left-radius: 30px;
-	padding-left: 20px;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  padding-left: 20px;
 }
 
 .headerItem:last-child {
-	border-top-right-radius: 30px;
-	border-bottom-right-radius: 30px;
-	padding-right: 20px;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  padding-right: 20px;
 }
 
 .results {
-	display: flex;
-	justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .listItemWrap {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .colorBox {
-	width: 24px;
-	height: 24px;
-	border-radius: 2px;
-	margin-right: 16px;
+  width: 24px;
+  height: 24px;
+  border-radius: 2px;
+  margin-right: 16px;
 }
 
 .list {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	gap: 28px;
-	/* margin-bottom: 30px; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  /* margin-bottom: 30px; */
 }
 
 .listItem {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 14px 20px;
-	stroke-width: 1px;
-	border-bottom: 1px solid #dcdcdf;
-	stroke: #dcdcdf;
-	filter: drop-shadow(0px 1px 0px rgba(255, 255, 255, 0.6));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  stroke-width: 1px;
+  border-bottom: 1px solid #dcdcdf;
+  stroke: #dcdcdf;
+  filter: drop-shadow(0px 1px 0px rgba(255, 255, 255, 0.6));
 }
 
 .category {
-	color: #000000;
-	font-family: Circe;
-	font-size: 16px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: normal;
-	text-wrap: wrap;
+  color: #000000;
+  font-family: Circe;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-wrap: wrap;
 }
 
 .resultsWrap {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	gap: 17px;
-	margin-top: 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  margin-top: 16px;
 }
 
 .resultsTitle,
 .resultsExpenses,
 .resultsIncome {
-	font-weight: 700;
-	font-size: 16px;
-	padding: 14px 20px;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 14px 20px;
 }
 
 .resultsExpenses {
-	color: #ff6596;
+  color: #ff6596;
 }
 
 .resultsIncome {
-	color: #24cca7;
+  color: #24cca7;
 }
 
 @media screen and (min-width: 768px) {
-	.statisticsList {
-		width: 336px;
-	}
+  .statisticsList {
+    width: 336px;
+  }
 }
 
 @media screen and (min-width: 1280px) {
-	.statisticsList {
-		width: 395px;
-	}
+  .statisticsList {
+    width: 395px;
+  }
 }
