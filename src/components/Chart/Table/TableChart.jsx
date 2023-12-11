@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import css from './TableChart.module.css';
 import { nanoid } from 'nanoid';
 import { useSelector } from 'react-redux';
-import { selectCategories } from 'redux/categories/selectors';
+import { getCategoryName, selectCategories } from 'redux/categories/selectors';
 import {
   selectAllTransactions,
   selectBalance,
@@ -33,15 +33,11 @@ const TableChart = () => {
   const balance = useSelector(selectBalance);
   const dataIncome = useSelector(selectIncome);
   const dataExpenses = useSelector(selectExpense);
-  const displayBalance = !isNaN(parseFloat(balance))
-    ? parseFloat(balance).toFixed(2)
-    : '0.00';
-  const formattedExpenses = !isNaN(parseFloat(dataExpenses))
-    ? parseFloat(balance).toFixed(2)
-    : '0.00';
-  const formattedIncome = !isNaN(parseFloat(dataIncome))
-    ? parseFloat(balance).toFixed(2)
-    : '0.00';
+  const moneyFormat = number =>
+    !isNaN(parseFloat(number)) ? parseFloat(number).toFixed(2) : '0.00';
+  const displayBalance = moneyFormat(balance);
+  const formattedExpenses = moneyFormat(dataExpenses);
+  const formattedIncome = moneyFormat(dataIncome);
 
   const incomeNr = categoriesArr.find(cat => cat.name === 'Income').id;
   const makeChartArr = data => {
@@ -134,7 +130,7 @@ const TableChart = () => {
             <div className={css.headerItem}>Sum</div>
           </div>
 
-          {dataStatsArr.map(({ category, color, total }) => (
+          {dataStatsArr.map(({ category, color, amount }) => (
             <ul className={css.list} key={nanoid()}>
               <li className={css.listItem}>
                 <div className={css.listItemWrap}>
@@ -144,9 +140,11 @@ const TableChart = () => {
                       backgroundColor: color,
                     }}
                   ></div>
-                  <p className={css.category}>{category}</p>
+                  <p className={css.category}>
+                    {getCategoryName(category, categoriesArr)}
+                  </p>
                 </div>
-                <p>{displayBalance}</p>
+                <p>{moneyFormat(amount)}</p>
               </li>
             </ul>
           ))}
