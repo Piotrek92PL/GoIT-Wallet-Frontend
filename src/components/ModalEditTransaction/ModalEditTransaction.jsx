@@ -15,8 +15,6 @@ export const ModalEditTransaction = ({
   onClose,
   transactionToEdit,
 }) => {
-  console.log('transactionToEditBefore', transactionToEdit);
-
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
 
@@ -50,18 +48,6 @@ export const ModalEditTransaction = ({
       setTransactionId(transactionData._id || null);
     }
   }, [transactionToEdit]);
-
-  console.log('transactionToEditAfter', transactionToEdit);
-  useEffect(() => {
-    console.log(
-      isIncome,
-      category,
-      amount,
-      selectedDate,
-      comment,
-      transactionId
-    );
-  }, [isIncome, category, amount, selectedDate, comment, transactionId]);
 
   const handleSubmit = e => {
     e.preventDefault();

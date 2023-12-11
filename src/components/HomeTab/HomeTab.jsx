@@ -31,17 +31,16 @@ function HomeTab() {
   }, [dispatch]);
 
   const handleDelete = transactionId => {
-    dispatch(deleteTransaction(transactionId));
-    dispatch(getAllTransactions());
+    dispatch(deleteTransaction(transactionId)).then(() => {
+      dispatch(getAllTransactions());
+    });
   };
 
   const isModalEditTransaction = useSelector(selectIsModalEditTransaction);
   const transactionFromSelector = useSelector(selectCurrentTransaction);
   if (!transactionFromSelector) {
-    console.log('transactionFromSelector is null');
   }
   if (transactionFromSelector) {
-    console.log('tarnsaction', transactionFromSelector);
   }
 
   const transactionToEdit = transactionFromSelector || {
@@ -53,11 +52,12 @@ function HomeTab() {
   };
 
   const handleToggleModal = transactionId => {
+    dispatch(toggleModalEditTransaction());
     if (!isModalEditTransaction && transactionId) {
       dispatch(getTransactionById(transactionId));
+    } else {
+      dispatch(getAllTransactions());
     }
-    dispatch(toggleModalEditTransaction());
-    dispatch(getAllTransactions());
   };
 
   const renderDesktop = () => {
@@ -91,7 +91,7 @@ function HomeTab() {
                         : styles.tableBodyDataMinus
                     }
                   >
-                    {item.sum}
+                    {item.amount}
                   </td>
                   <td>
                     <button
@@ -158,7 +158,7 @@ function HomeTab() {
                       : styles.mobileListDataMinus
                   }
                 >
-                  {item.sum}
+                  {item.amount}
                 </span>
               </li>
               <li className={styles.mobileListItem}>
