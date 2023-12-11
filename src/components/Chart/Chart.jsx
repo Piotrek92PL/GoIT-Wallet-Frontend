@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import css from './Chart.module.css';
 import { useEffect, useState } from 'react';
 // import { selectUserToken } from '../../redux/user/userSelectors';
@@ -17,6 +16,10 @@ import { BACKEND_BASE_URL } from 'redux/global/constants';
 import localStorage from 'redux-persist/es/storage';
 import { selectCategories } from 'redux/categories/selectors';
 import { useSelector } from 'react-redux';
+import {
+  selectAllTransactions,
+  selectBalance,
+} from 'redux/transactions/selectors';
 
 axios.defaults.baseURL = BACKEND_BASE_URL;
 
@@ -24,9 +27,41 @@ ChartJS.register(ArcElement, Tooltip, Colors, Legend);
 
 const Chart = () => {
   const categoriesArr = useSelector(selectCategories);
-  const [balance, setBalance] = useState(null);
-  const [transactionsArr, setTransactionsArr] = useState([]);
-  const [fetched, setFetched] = useState(false); //prevents neverending fetching
+  const transactions = useSelector(selectAllTransactions).data;
+  const balance = useSelector(selectBalance);
+  const displayBalance = !isNaN(parseFloat(balance))
+    ? parseFloat(balance).toFixed(2)
+    : '0.00';
+  const incomeNr = categoriesArr.find(cat => cat.name === 'Income').id;
+  const makeChartArr = data => {
+    let dataArr = [];
+    data.forEach(tr => {
+      if (tr.type === 'income') {
+        if (dataArr[incomeNr] && dataArr[incomeNr].amount) {
+          dataArr[incomeNr].amount += tr.amount;
+        } else {
+          dataArr[incomeNr] = { ...tr, category: incomeNr };
+        }
+      } else {
+        dataArr[tr.category] = {
+          ...tr,
+          amount:
+            (dataArr[tr.category] && dataArr[tr.category].amount
+              ? dataArr[tr.category].amount
+              : 0) + tr.amount,
+        };
+      }
+    });
+    // for (let index = dataArr.length - 1; index > 0; index--) {
+    //   if (dataArr[index] == null) {
+    //     console.log(`dataArr before slice [${index}]`, dataArr);
+    //     dataArr.slice(0, index).join(dataArr.slice(index, dataArr.length));
+    //     console.log(`dataArr after slice [${index}]`, dataArr);
+    //   }
+    // }
+    return dataArr;
+  };
+  const chartArr = makeChartArr(transactions);
 
   //category colors
   const makePalette = () => {
@@ -47,9 +82,10 @@ const Chart = () => {
   };
   const allNames = makeNames();
 
-  const categories = transactionsArr.map(item => allNames[item.category]);
-  const values = transactionsArr.map(item => item.amount);
-  const colors = transactionsArr.map(item => allColors[item.category]);
+  // !(Array.isArray(chartArr))? [] :
+  const categories = chartArr.map(item => allNames[item.category]);
+  const values = chartArr.map(item => item.amount);
+  const colors = chartArr.map(item => allColors[item.category]);
 
   const data = {
     labels: categories,
@@ -63,27 +99,6 @@ const Chart = () => {
       },
     ],
   };
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    async function fetch() {
-      const response = await axios.get('/api/transactions');
-      if (balance !== 1997) {
-        console.log('setting balance');
-        setBalance(1997);
-        // setBalance(response.data.balance); //jeszcze nie ma balance na backendzie
-      }
-      if (transactionsArr !== response.data.data) {
-        console.log('setting transactions');
-        setTransactionsArr(response.data.data);
-      }
-      // console.log('/api/transactions', response);
-    }
-    if (token && !fetched) {
-      setFetched(true);
-      fetch();
-    }
-  }, [balance, transactionsArr, fetched]);
 
   const textCenter = {
     id: 'textCenter',
@@ -114,30 +129,9 @@ const Chart = () => {
   return (
     <div className={css.doughnut}>
       <Doughnut data={data} options={options} plugins={[textCenter]}></Doughnut>
-      {balance !== null && (
-        <p className={css.balance}>
-          ${' '}
-          {balance
-            .toLocaleString('en-US', { minimumFractionDigits: 2 })
-            .replace(',', ' ')}
-        </p>
-      )}
+      {balance !== null && <p className={css.balance}>$ {displayBalance}</p>}
     </div>
   );
-};
-
-Chart.propTypes = {
-  dataToRender: PropTypes.shape({
-    stats: PropTypes.arrayOf(
-      PropTypes.shape({
-        category: PropTypes.string.isRequired,
-        total: PropTypes.number.isRequired,
-        color: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-    expenses: PropTypes.number.isRequired,
-    income: PropTypes.number.isRequired,
-  }).isRequired,
 };
 
 export default Chart;
