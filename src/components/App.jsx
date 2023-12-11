@@ -37,9 +37,7 @@ export const App = () => {
   }, [dispatch]);
 
   const allTransactions = useSelector(selectAllTransactions);
-  useEffect(() => {
-    console.log('List of transactions:', allTransactions);
-  }, [allTransactions]);
+  useEffect(() => {}, [allTransactions]);
 
   useEffect(() => {
     if (!isMobile && window.location.pathname === '/currency') {
