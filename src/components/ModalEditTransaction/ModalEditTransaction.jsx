@@ -35,20 +35,33 @@ export const ModalEditTransaction = ({
   const [transactionId, setTransactionId] = useState(null);
 
   useEffect(() => {
-    if (transactionToEdit) {
-      setIsIncome(transactionToEdit.type === 'income');
-      setCategory(transactionToEdit.category ? transactionToEdit.category : '');
-      setAmount(transactionToEdit.amount || 0);
-      setSelectedDate(
-        transactionToEdit.date ? new Date(transactionToEdit.date) : new Date()
-      );
-      setComment(transactionToEdit.comment || '');
-      setTransactionId(transactionToEdit._id || null);
+    if (
+      transactionToEdit &&
+      transactionToEdit.data &&
+      transactionToEdit.data.length > 0
+    ) {
+      const transactionData = transactionToEdit.data[0];
+
+      setIsIncome(transactionData.type === 'income');
+      setCategory(transactionData.category?.toString() || '');
+      setAmount(transactionData.amount || 0);
+      setSelectedDate(new Date(transactionData.date || new Date()));
+      setComment(transactionData.comment || '');
+      setTransactionId(transactionData._id || null);
     }
   }, [transactionToEdit]);
 
   console.log('transactionToEditAfter', transactionToEdit);
-  console.log(isIncome, category, amount, selectedDate, comment, transactionId);
+  useEffect(() => {
+    console.log(
+      isIncome,
+      category,
+      amount,
+      selectedDate,
+      comment,
+      transactionId
+    );
+  }, [isIncome, category, amount, selectedDate, comment, transactionId]);
 
   const handleSubmit = e => {
     e.preventDefault();
