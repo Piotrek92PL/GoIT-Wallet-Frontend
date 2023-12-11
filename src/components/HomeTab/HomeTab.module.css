@@ -46,9 +46,7 @@
 }
 
 @media screen and (min-width: 1280px) {
-  .tableBody {
-    max-height: 80vh;
-  }
+  .tableBody {}
 }
 
 .tableBodyRow {
@@ -225,4 +223,8 @@
 .editButton:hover,
 .editButton:focus {
   color: #1b977c;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> main

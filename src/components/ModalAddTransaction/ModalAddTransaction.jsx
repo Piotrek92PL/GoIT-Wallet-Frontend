@@ -9,6 +9,7 @@ import { useFormik } from 'formik';
 import { transactionValidationSchema } from './validationSchema';
 import { useDispatch } from 'react-redux';
 import { addTransaction } from 'redux/transactions/operations';
+import { getAllTransactions } from '../../redux/transactions/operations';
 import { useSpring, animated } from 'react-spring';
 import { toast } from 'react-toastify';
 
@@ -51,6 +52,9 @@ export const ModalAddTransaction = ({ isOpen, onClose }) => {
           resetForm();
           onClose();
           toast.success('Transaction added successfully');
+        })
+        .then(() => {
+          dispatch(getAllTransactions());
         })
         .catch(rejectedValueOrSerializedError => {
           console.error(rejectedValueOrSerializedError);

@@ -31,6 +31,7 @@ export const ModalEditTransaction = ({
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [comment, setComment] = useState('');
   const [transactionId, setTransactionId] = useState(null);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (
@@ -39,7 +40,6 @@ export const ModalEditTransaction = ({
       transactionToEdit.data.length > 0
     ) {
       const transactionData = transactionToEdit.data[0];
-
       setIsIncome(transactionData.type === 'income');
       setCategory(transactionData.category?.toString() || '');
       setAmount(transactionData.amount || 0);
@@ -47,29 +47,47 @@ export const ModalEditTransaction = ({
       setComment(transactionData.comment || '');
       setTransactionId(transactionData._id || null);
     }
-  }, [transactionToEdit]);
+
+    setErrors({});
+  }, [transactionToEdit, isOpen]);
+
+  const validate = () => {
+    const validationErrors = {};
+    if (!amount || amount <= 0 || amount > 1000000) {
+      validationErrors.amount = 'Positive and less than or equal to 1000000';
+    }
+    if (!selectedDate || selectedDate > new Date()) {
+      validationErrors.date = 'Past or present';
+    }
+    return validationErrors;
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
-    const updatedTransaction = {
-      id: transactionId,
-      type: isIncome ? 'income' : 'expense',
-      category,
-      amount,
-      date: selectedDate.toISOString(),
-      comment,
-    };
+    const validationErrors = validate();
+    setErrors(validationErrors);
 
-    dispatch(updateTransaction(updatedTransaction))
-      .unwrap()
-      .then(() => {
-        onClose();
-        toast.success('Transaction updated successfully');
-      })
-      .catch(rejectedValueOrSerializedError => {
-        console.error(rejectedValueOrSerializedError);
-        toast.error(rejectedValueOrSerializedError);
-      });
+    if (Object.keys(validationErrors).length === 0) {
+      const updatedTransaction = {
+        id: transactionId,
+        type: isIncome ? 'income' : 'expense',
+        category,
+        amount,
+        date: selectedDate.toISOString(),
+        comment,
+      };
+
+      dispatch(updateTransaction(updatedTransaction))
+        .unwrap()
+        .then(() => {
+          onClose();
+          toast.success('Transaction updated successfully');
+        })
+        .catch(rejectedValueOrSerializedError => {
+          console.error(rejectedValueOrSerializedError);
+          toast.error(rejectedValueOrSerializedError);
+        });
+    }
   };
 
   const handleTypeChange = () => setIsIncome(!isIncome);
@@ -334,14 +352,19 @@ export const ModalEditTransaction = ({
             ) : null}
             <label className={css.sumLabel}>
               <input
-                className={css.sumInput}
+                className={`${css.sumInput} ${errors.amount ? css.error : ''}`}
                 type="number"
                 placeholder="0.00"
                 value={amount}
                 onChange={handleAmountChange}
               />
+              {errors.amount && (
+                <div className={css.formikMessage}>{errors.amount}</div>
+              )}
             </label>
-            <label className={css.dateLabel}>
+            <label
+              className={`${css.dateLabel} ${errors.date ? css.error : ''}`}
+            >
               <Datetime
                 value={selectedDate}
                 onChange={handleDateChange}
@@ -349,6 +372,9 @@ export const ModalEditTransaction = ({
                 dateFormat="DD-MM-YYYY"
                 timeFormat={false}
               />
+              {errors.date && (
+                <div className={css.formikMessageData}>{errors.date}</div>
+              )}
             </label>
             <textarea
               className={css.comment}

@@ -5,6 +5,7 @@ import { NavBalanceCurrency } from 'components/NavBalanceCurrency/NavBalanceCurr
 import { ButtonAddTransaction } from 'components/ButtonAddTransaction/ButtonAddTransaction';
 import css from './HomePage.module.css';
 import { useMediaQuery } from 'react-responsive';
+// import { Helper } from 'components/Helper/Helper';
 import HomeTab from 'components/HomeTab/HomeTab';
 
 export default function HomePage() {
@@ -28,6 +29,7 @@ export default function HomePage() {
       <div className={lineStyle}></div>
       <HomeTab />
       {/* <TransactionsList /> */}
+      {/* <Helper /> */}
       <ButtonAddTransaction />
     </BackgroundContainer>
   );
