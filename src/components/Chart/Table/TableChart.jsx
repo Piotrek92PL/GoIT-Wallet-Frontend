@@ -26,7 +26,18 @@ const monthToNumber = {
   November: '11',
   December: '12',
 };
-
+const colorsChart = [
+  '#FED057',
+  '#FFD8D0',
+  '#FD9498',
+  '#C5BAFF',
+  '#6E78E8',
+  '#4A56E2',
+  '#81E1FF',
+  '#24CCA7',
+  '#00AD84',
+  '#02FD84',
+];
 const TableChart = () => {
   const categoriesArr = useSelector(selectCategories);
   const transactions = useSelector(selectAllTransactions);
@@ -135,7 +146,7 @@ const TableChart = () => {
                   <div
                     className={css.colorBox}
                     style={{
-                      backgroundColor: color,
+                      backgroundColor: colorsChart[category],
                     }}
                   ></div>
                   <p className={css.category}>

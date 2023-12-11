@@ -45,10 +45,6 @@
   padding: 8px;
 }
 
-@media screen and (min-width: 1280px) {
-  .tableBody {}
-}
-
 .tableBodyRow {
   display: flex;
   align-items: center;
@@ -81,6 +77,8 @@
 }
 .tableBodyData:nth-child(4) {
   padding-left: 50px;
+  word-wrap: break-word;
+  max-width: 100px;
 }
 .tableBodyData:nth-child(5) {
   padding-left: 50px;
@@ -136,7 +134,7 @@
 }
 
 .mobileListPlus {
-  border-left-color: #24cca7;
+  border-left: 5px solid #24cca7;
 }
 
 .mobileListItem {
@@ -165,6 +163,8 @@
   font-size: 16px;
   line-height: 1.5;
   text-align: right;
+  word-wrap: break-word;
+  max-width: 100px;
 }
 
 .mobileListDataPlus {

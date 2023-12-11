@@ -15,7 +15,7 @@ import { toggleModalEditTransaction } from 'redux/global/slice';
 import { selectIsModalEditTransaction } from 'redux/global/selectors';
 import { getTransactionById } from 'redux/transactions/operations';
 import { selectCurrentTransaction } from 'redux/transactions/selectors';
-import { Pagination }  from '../Pagination/Pagination';
+import { Pagination } from '../Pagination/Pagination';
 
 function convertStringToDate(str = '2022-12-01T00:00:00.000Z') {
   return str.split('T')[0].split('-').reverse().join('.');
@@ -100,7 +100,10 @@ function HomeTab() {
                 <td className={styles.tableBodyData}>{result}</td>
                 <td className={styles.tableBodyData}>{item.category}</td>
                 <td className={styles.tableBodyData}>{item.comment}</td>
-                <td className={styles.tableBodyData}>
+                <td
+                  className={styles.tableBodyData}
+                  style={{ color: item.Expenses ? `#FF6596` : `#24CCA7` }}
+                >
                   {item.amount} {/* Dodanie kwoty transakcji */}
                 </td>
                 <td>
