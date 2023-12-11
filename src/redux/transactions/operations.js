@@ -10,12 +10,7 @@ export const getAllTransactions = createAsyncThunk(
     thunkAPI.dispatch(setLoading(true));
     try {
       const res = await axios.get('/api/transactions');
-      console.log(res.data);
-      const transactions = res.data.data.map(transaction => ({
-        ...transaction,
-        amount: transaction.amount ? parseFloat(transaction.amount) : 0,
-      }));
-      return { ...res.data, data: transactions };
+      return res.data;
     } catch (error) {
       if (!error.response) {
         return thunkAPI.rejectWithValue('Could not connect with the server');

@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import 'react-datetime/css/react-datetime.css';
 import css from './ModalEditTransaction.module.css';
 import { selectCategories } from 'redux/categories/selectors';
-import { useFormik } from 'formik';
-import { transactionValidationSchema } from './validationSchema';
 import { useDispatch } from 'react-redux';
 import { updateTransaction } from 'redux/transactions/operations';
 import { useSpring, animated } from 'react-spring';
@@ -17,6 +15,11 @@ export const ModalEditTransaction = ({
   onClose,
   transactionToEdit,
 }) => {
+  console.log('transactionToEditBefore', transactionToEdit);
+
+  const dispatch = useDispatch();
+  const categories = useSelector(selectCategories);
+
   const animation = useSpring({
     transform: isOpen ? 'scale(1)' : 'scale(0)',
     opacity: isOpen ? 1 : 0,
@@ -24,63 +27,74 @@ export const ModalEditTransaction = ({
     config: { duration: 300 },
   });
 
-  const dispatch = useDispatch();
-  const categories = useSelector(selectCategories);
+  const [isIncome, setIsIncome] = useState(false);
+  const [category, setCategory] = useState('');
+  const [amount, setAmount] = useState('');
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [comment, setComment] = useState('');
+  const [transactionId, setTransactionId] = useState(null);
 
-  const [isIncome, setIsIncome] = useState(transactionToEdit.type === 'income');
-  const [selectedDate, setSelectedDate] = useState(
-    new Date(transactionToEdit.date)
-  );
+  useEffect(() => {
+    if (transactionToEdit) {
+      setIsIncome(transactionToEdit.type === 'income');
+      setCategory(transactionToEdit.category ? transactionToEdit.category : '');
+      setAmount(transactionToEdit.amount || 0);
+      setSelectedDate(
+        transactionToEdit.date ? new Date(transactionToEdit.date) : new Date()
+      );
+      setComment(transactionToEdit.comment || '');
+      setTransactionId(transactionToEdit._id || null);
+    }
+  }, [transactionToEdit]);
 
-  const formik = useFormik({
-    initialValues: {
-      type: transactionToEdit.type,
-      category: transactionToEdit.category,
-      amount: transactionToEdit.amount,
-      date: new Date(transactionToEdit.date),
-      comment: transactionToEdit.comment,
-    },
-    validationSchema: transactionValidationSchema,
-    onSubmit: (values, { resetForm }) => {
-      console.log(values);
-      const updatedTransaction = {
-        ...transactionToEdit,
-        ...values,
-      };
+  console.log('transactionToEditAfter', transactionToEdit);
+  console.log(isIncome, category, amount, selectedDate, comment, transactionId);
 
-      dispatch(updateTransaction(updatedTransaction))
-        .unwrap()
-        .then(() => {
-          resetForm();
-          onClose();
-          toast.success('Transaction updated successfully');
-        })
-        .catch(rejectedValueOrSerializedError => {
-          console.error(rejectedValueOrSerializedError);
-          toast.error(rejectedValueOrSerializedError);
-        });
-    },
-  });
+  const handleSubmit = e => {
+    e.preventDefault();
+    const updatedTransaction = {
+      id: transactionId,
+      type: isIncome ? 'income' : 'expense',
+      category,
+      amount,
+      date: selectedDate.toISOString(),
+      comment,
+    };
 
-  console.log('formik', formik.values);
-  console.log('formik', formik.errors);
-  console.log('updateTranasction', updateTransaction);
-
-  const handleCheckboxChange = e => {
-    setIsIncome(e.target.checked);
-    formik.setFieldValue('category', e.target.checked ? '1' : '');
+    dispatch(updateTransaction(updatedTransaction))
+      .unwrap()
+      .then(() => {
+        onClose();
+        toast.success('Transaction updated successfully');
+      })
+      .catch(rejectedValueOrSerializedError => {
+        console.error(rejectedValueOrSerializedError);
+        toast.error(rejectedValueOrSerializedError);
+      });
   };
 
-  const handleCategoryChange = e => {
-    const newCategory = e.target.value;
-    formik.setFieldValue('category', newCategory);
+  const handleTypeChange = () => setIsIncome(!isIncome);
+  const handleCategoryChange = e => setCategory(e.target.value);
+  const handleAmountChange = e => setAmount(e.target.value);
+  const handleDateChange = newDate => {
+    if (newDate && newDate.isValid()) {
+      setSelectedDate(newDate.toDate());
+    } else {
+      setSelectedDate(new Date());
+    }
   };
 
-  const handleDataChange = date => {
-    const formattedDate = date ? date.toDate() : null;
-    setSelectedDate(formattedDate);
-    formik.setFieldValue('date', formattedDate);
-  };
+  useEffect(() => {
+    if (transactionToEdit && transactionToEdit.date) {
+      const editDate = new Date(transactionToEdit.date);
+      if (!isNaN(editDate.getTime())) {
+        setSelectedDate(editDate);
+      } else {
+        setSelectedDate(new Date());
+      }
+    }
+  }, [transactionToEdit]);
+  const handleCommentChange = e => setComment(e.target.value);
 
   const handleClose = e => {
     if (e.target.id === 'modalBackdrop') {
@@ -162,12 +176,12 @@ export const ModalEditTransaction = ({
             </svg>
           </button>
           <p className={css.headline}>Edit Transaction</p>
-          <form className={css.form} onSubmit={formik.handleSubmit}>
+          <form className={css.form} onSubmit={handleSubmit}>
             <label className={css.toggleButtonLabel}>
               <input
                 type="checkbox"
                 checked={isIncome}
-                onChange={handleCheckboxChange}
+                onChange={handleTypeChange}
                 className={css.toggleButtonInput}
                 name="type"
               />
@@ -302,15 +316,10 @@ export const ModalEditTransaction = ({
             {!isIncome ? (
               <div className={css.categoryWrapper}>
                 <select
-                  className={`${css.category} ${
-                    formik.touched.category && formik.errors.category
-                      ? css.error
-                      : ''
-                  }`}
+                  className={css.category}
                   name="category"
-                  value={formik.values.category}
+                  value={category}
                   onChange={handleCategoryChange}
-                  onBlur={formik.handleBlur}
                   required
                 >
                   <option value="" disabled>
@@ -322,50 +331,31 @@ export const ModalEditTransaction = ({
                     </option>
                   ))}
                 </select>
-                {formik.touched.category && formik.errors.category && (
-                  <div className={css.formikMessageRequired}>
-                    {formik.errors.category}
-                  </div>
-                )}
               </div>
             ) : null}
             <label className={css.sumLabel}>
               <input
-                className={`${css.sumInput} ${
-                  formik.touched.amount && formik.errors.amount ? css.error : ''
-                }`}
+                className={css.sumInput}
                 type="number"
                 placeholder="0.00"
-                {...formik.getFieldProps('amount')}
+                value={amount}
+                onChange={handleAmountChange}
               />
-              {formik.touched.amount && formik.errors.amount && (
-                <div className={css.formikMessage}>{formik.errors.amount}</div>
-              )}
             </label>
-            <label
-              className={`${css.dateLabel} ${
-                formik.touched.date && formik.errors.date ? css.error : ''
-              }`}
-            >
+            <label className={css.dateLabel}>
               <Datetime
                 value={selectedDate}
-                onChange={handleDataChange}
+                onChange={handleDateChange}
                 renderInput={renderInput}
                 dateFormat="DD-MM-YYYY"
                 timeFormat={false}
-                name="date"
-                onBlur={formik.handleBlur}
               />
-              {formik.touched.date && formik.errors.date && (
-                <div className={css.formikMessageData}>
-                  {formik.errors.date}
-                </div>
-              )}
             </label>
             <textarea
               className={css.comment}
               placeholder="Comment"
-              {...formik.getFieldProps('comment')}
+              value={comment}
+              onChange={handleCommentChange}
             />
             <button className={css.addBtn} type="submit">
               SAVE
@@ -383,12 +373,5 @@ export const ModalEditTransaction = ({
 ModalEditTransaction.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  // transactionToEdit: PropTypes.shape({
-  //   id: PropTypes.string.isRequired,
-  //   type: PropTypes.string.isRequired,
-  //   category: PropTypes.string.isRequired,
-  //   amount: PropTypes.number.isRequired,
-  //   date: PropTypes.string.isRequired,
-  //   comment: PropTypes.string.isRequired,
-  // }).isRequired,
+  transactionToEdit: PropTypes.object.isRequired,
 };

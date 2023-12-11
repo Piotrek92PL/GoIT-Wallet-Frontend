@@ -27,7 +27,7 @@ const transactionsSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(getAllTransactions.fulfilled, (state, action) => {
-        state.transactions = action.payload;
+        state.transactions = action.payload.data;
       })
       .addCase(getAllTransactions.rejected, (state, action) => {
         state.error = action.error.message;
