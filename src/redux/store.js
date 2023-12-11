@@ -16,7 +16,7 @@ import currencyReducer from './currency/slice';
 import categoriesReducer from './categories/slice';
 import { globalReducer } from './global/slice';
 import { transactionsReducer } from './transactions/slice';
-import financeReducer from './reducers/financeReducer';
+import { financeReducer } from './reducers/financeReducer';
 
 const authPersistConfig = {
   key: 'auth',
