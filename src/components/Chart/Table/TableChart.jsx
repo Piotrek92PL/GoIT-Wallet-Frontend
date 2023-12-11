@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 // import { useDispatch } from 'react-redux';
 import css from './TableChart.module.css';
 import { nanoid } from 'nanoid';
 import { useSelector } from 'react-redux';
-import { selectCategories } from 'redux/categories/selectors';
+import { getCategoryName, selectCategories } from 'redux/categories/selectors';
 import {
   selectAllTransactions,
   selectBalance,
@@ -29,22 +29,17 @@ const monthToNumber = {
 
 const TableChart = () => {
   const categoriesArr = useSelector(selectCategories);
-  const transactions = useSelector(selectAllTransactions).data;
+  const transactions = useSelector(selectAllTransactions);
   const balance = useSelector(selectBalance);
   const dataIncome = useSelector(selectIncome);
   const dataExpenses = useSelector(selectExpense);
-  const displayBalance = !isNaN(parseFloat(balance))
-    ? parseFloat(balance).toFixed(2)
-    : '0.00';
-  const formattedExpenses = !isNaN(parseFloat(dataExpenses))
-    ? parseFloat(balance).toFixed(2)
-    : '0.00';
-  const formattedIncome = !isNaN(parseFloat(dataIncome))
-    ? parseFloat(balance).toFixed(2)
-    : '0.00';
+  const moneyFormat = number =>
+    !isNaN(parseFloat(number)) ? parseFloat(number).toFixed(2) : '0.00';
+  const displayBalance = moneyFormat(balance);
 
   const incomeNr = categoriesArr.find(cat => cat.name === 'Income').id;
   const makeChartArr = data => {
+    // console.log(`TableChart makeChartArr data:`, data);
     let dataArr = [];
     data.forEach(tr => {
       if (tr.type === 'income') {
@@ -63,16 +58,13 @@ const TableChart = () => {
         };
       }
     });
-    // for (let index = dataArr.length - 1; index > 0; index--) {
-    //   if (dataArr[index] == null) {
-    //     console.log(`dataArr before slice [${index}]`, dataArr);
-    //     dataArr.slice(0, index).join(dataArr.slice(index, dataArr.length));
-    //     console.log(`dataArr after slice [${index}]`, dataArr);
-    //   }
-    // }
     return dataArr;
   };
-  const chartArr = makeChartArr(transactions);
+
+  const chartArr =
+    Array.isArray(transactions) && transactions.length > 0
+      ? makeChartArr(transactions)
+      : [];
 
   const [selectedMonth, setSelectedMonth] = useState('10');
   const [selectedYear, setSelectedYear] = useState('2023');
@@ -136,7 +128,7 @@ const TableChart = () => {
             <div className={css.headerItem}>Sum</div>
           </div>
 
-          {dataStatsArr.map(({ category, color, total }) => (
+          {dataStatsArr.map(({ category, color, amount }) => (
             <ul className={css.list} key={nanoid()}>
               <li className={css.listItem}>
                 <div className={css.listItemWrap}>
@@ -146,9 +138,11 @@ const TableChart = () => {
                       backgroundColor: color,
                     }}
                   ></div>
-                  <p className={css.category}>{category}</p>
+                  <p className={css.category}>
+                    {getCategoryName(category, categoriesArr)}
+                  </p>
                 </div>
-                <p>{displayBalance}</p>
+                <p>{moneyFormat(amount)}</p>
               </li>
             </ul>
           ))}
@@ -156,11 +150,11 @@ const TableChart = () => {
           <div className={css.resultsWrap}>
             <div className={css.results}>
               <p className={css.resultsTitle}>Expenses:</p>
-              <p className={css.resultsExpenses}>{formattedExpenses}</p>
+              <p className={css.resultsExpenses}>{moneyFormat(dataExpenses)}</p>
             </div>
             <div className={css.results}>
               <p className={css.resultsTitle}>Income:</p>
-              <p className={css.resultsIncome}>{formattedIncome}</p>
+              <p className={css.resultsIncome}>{moneyFormat(dataIncome)}</p>
             </div>
           </div>
         </div>
@@ -169,18 +163,18 @@ const TableChart = () => {
   );
 };
 
-TableChart.propTypes = {
-  dataToRender: PropTypes.shape({
-    stats: PropTypes.arrayOf(
-      PropTypes.shape({
-        category: PropTypes.string.isRequired,
-        total: PropTypes.number.isRequired,
-        color: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-    expenses: PropTypes.number.isRequired,
-    income: PropTypes.number.isRequired,
-  }).isRequired,
-};
+// TableChart.propTypes = {
+//   dataToRender: PropTypes.shape({
+//     stats: PropTypes.arrayOf(
+//       PropTypes.shape({
+//         category: PropTypes.string.isRequired,
+//         total: PropTypes.number.isRequired,
+//         color: PropTypes.string.isRequired,
+//       })
+//     ).isRequired,
+//     expenses: PropTypes.number.isRequired,
+//     income: PropTypes.number.isRequired,
+//   }).isRequired,
+// };
 
 export default TableChart;
