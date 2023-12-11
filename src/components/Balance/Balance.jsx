@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectBalance } from '../../redux/balance/selectors';
+import { selectBalance } from '../../redux/transactions/selectors';
 import styles from './Balance.module.css';
 
 export function Balance() {
   const balance = useSelector(selectBalance);
-  const [currency] = useState('PLN');
-  const displayBalance =
-    typeof balance === 'number' ? balance.toFixed(2) : '0.00';
+  console.log('Balance from selector:', balance);
+  const displayBalance = !isNaN(parseFloat(balance))
+    ? parseFloat(balance).toFixed(2)
+    : '0.00';
 
   return (
     <div className={styles.balance}>
       <div className={styles.balance__text}>Your balance</div>
       <div className={styles.balance__amount}>
-        <span className={styles.balance__currency}>{currency}</span>
+        <span className={styles.balance__currency}>PLN</span>
         {displayBalance}
       </div>
     </div>
