@@ -62,58 +62,60 @@ function HomeTab() {
 
   const renderDesktop = () => {
     return (
-      <table className={styles.table}>
-        <thead className={styles.tableHead}>
-          <tr className={styles.tableHeadRow}>
-            {tableHeadData.map(head => (
-              <th className={styles.tableHeadData} key={head}>
-                {head}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className={styles.tableBody}>
-          {Array.isArray(transactions) &&
-            transactions.map(item => {
-              const result = item.Expenses ? '-' : '+';
-              return (
-                <tr key={item._id} className={styles.tableBodyRow}>
-                  <td className={styles.tableBodyData}>
-                    {convertStringToDate(item.date)}
-                  </td>
-                  <td className={styles.tableBodyData}>{result}</td>
-                  <td className={styles.tableBodyData}>{item.category}</td>
-                  <td className={styles.tableBodyData}>{item.comment}</td>
-                  <td
-                    className={
-                      result === '+'
-                        ? styles.tableBodyDataPlus
-                        : styles.tableBodyDataMinus
-                    }
-                  >
-                    {item.amount}
-                  </td>
-                  <td>
-                    <button
-                      className={styles.buttonEdit}
-                      onClick={() => handleToggleModal(item._id)}
+      <>
+        <table className={styles.table}>
+          <thead className={styles.tableHead}>
+            <tr className={styles.tableHeadRow}>
+              {tableHeadData.map(head => (
+                <th className={styles.tableHeadData} key={head}>
+                  {head}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className={styles.tableBody}>
+            {Array.isArray(transactions) &&
+              transactions.map(item => {
+                const result = item.type === 'expense' ? '-' : '+';
+                return (
+                  <tr key={item._id} className={styles.tableBodyRow}>
+                    <td className={styles.tableBodyData}>
+                      {convertStringToDate(item.date)}
+                    </td>
+                    <td className={styles.tableBodyData}>{result}</td>
+                    <td className={styles.tableBodyData}>{item.category}</td>
+                    <td className={styles.tableBodyData}>{item.comment}</td>
+                    <td
+                      className={
+                        result === '+'
+                          ? styles.tableBodyDataPlus
+                          : styles.tableBodyDataMinus
+                      }
                     >
-                      <MdEdit size={24} />
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      className={styles.button}
-                      onClick={() => handleDelete(item._id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
+                      {item.amount}
+                    </td>
+                    <td>
+                      <button
+                        className={styles.buttonEdit}
+                        onClick={() => handleToggleModal(item._id)}
+                      >
+                        <MdEdit size={24} />
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        className={styles.button}
+                        onClick={() => handleDelete(item._id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
+      </>
     );
   };
 

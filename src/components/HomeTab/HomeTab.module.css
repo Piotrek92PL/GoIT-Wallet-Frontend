@@ -45,9 +45,7 @@
 }
 
 @media screen and (min-width: 1280px) {
-  .tableBody {
-    max-height: 80vh;
-  }
+  .tableBody {}
 }
 
 .tableBodyRow {
@@ -158,20 +156,20 @@
 
 .deleteButton {
   background-color: transparent;
-    border: none;
-    color: #fff;
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-family: 'Circe';
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    border-radius: 18px;
-    background: #24cca7;
+  border: none;
+  color: #fff;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: 'Circe';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border-radius: 18px;
+  background: #24cca7;
 
-    transition: background-color 250ms ease;
+  transition: background-color 250ms ease;
 }
 
 .deleteButton:hover,
@@ -180,7 +178,7 @@
 }
 
 .editButton {
-   background-color: transparent;
+  background-color: transparent;
   border: none;
   color: black;
   display: flex;
@@ -203,5 +201,5 @@
 
 .editButton:hover,
 .editButton:focus {
-   color: #1b977c;
+  color: #1b977c;
 }
