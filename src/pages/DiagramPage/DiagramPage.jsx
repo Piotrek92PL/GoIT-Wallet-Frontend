@@ -1,8 +1,8 @@
 import { Helmet } from 'react-helmet';
 import { BackgroundContainer } from 'components/BackgroundContainer/BackgroundContainer';
 import { NavBalanceCurrency } from 'components/NavBalanceCurrency/NavBalanceCurrency';
-// import Chart from 'components/Chart/Chart';
-// import TableChart from 'components/Chart/Table/TableChart';
+import Chart from 'components/Chart/Chart';
+import TableChart from 'components/Chart/Table/TableChart';
 // import { useSelector } from 'react-redux';
 // import { selectTransactionsData } from 'redux/finance/financeSelectors';
 
@@ -14,8 +14,8 @@ export default function DiagramPage() {
         <title>Statistics</title>
       </Helmet>
       <NavBalanceCurrency />
-      {/* <Chart /> */}
-      {/* <TableChart /> */}
+      <Chart />
+      <TableChart />
       {/* <selectTransactionsDataChart dataToRender={dataToRender} /> */}
     </BackgroundContainer>
   );

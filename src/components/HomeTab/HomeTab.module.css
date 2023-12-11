@@ -1,19 +1,20 @@
 /* Styles for HomeTabDesktop */
 .table {
   display: block;
-  min-width: 688px;
-  margin-left: 80px;
-  margin-right: 85px;
+  min-width: 704px;
+  margin-left: 10px;
+  margin-top: 40px;
 }
 
 @media screen and (min-width: 1280px) {
   .table {
-    width: 700px;
+    width: 715px;
   }
 }
 
 .tableHead {
   display: block;
+  min-width: 543px;
 }
 
 .tableHeadRow {
@@ -31,7 +32,7 @@
   font-size: 18px;
   line-height: 1.5;
   text-align: left;
-  flex-basis: 72px;
+  flex-basis: 105px;
   margin-right: 10px;
   /* ... additional styles for other tableHeadData elements ... */
 }
@@ -53,7 +54,11 @@
   align-items: center;
   min-height: 54px;
   padding: 0px 21px 0px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
   /* ... additional styles for tableBodyRow ... */
+}
+.tableBodyRow:last-child {
+  border-bottom: none;
 }
 
 .tableBodyData {
@@ -63,9 +68,22 @@
   font-size: 16px;
   line-height: 1.5;
   text-align: left;
-  flex-basis: 72px;
+  flex-basis: 110px;
   margin-right: 10px;
+
   /* ... additional styles for other tableBodyData elements ... */
+}
+.tableBodyData:nth-child(2) {
+  padding-left: 15px;
+}
+.tableBodyData:nth-child(3) {
+  padding-left: 40px;
+}
+.tableBodyData:nth-child(4) {
+  padding-left: 50px;
+}
+.tableBodyData:nth-child(5) {
+  padding-left: 50px;
 }
 
 .tableBodyDataPlus {
@@ -128,6 +146,9 @@
   padding: 0 20px;
   min-height: 47px;
   border-bottom: 1px solid #dcdcdf;
+}
+.mobileListItem:last-child {
+  margin-bottom: 10px;
 }
 
 .mobileListCategory {
@@ -202,4 +223,8 @@
 .editButton:hover,
 .editButton:focus {
   color: #1b977c;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> main

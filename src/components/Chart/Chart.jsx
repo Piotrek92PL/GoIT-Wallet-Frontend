@@ -27,13 +27,14 @@ ChartJS.register(ArcElement, Tooltip, Colors, Legend);
 
 const Chart = () => {
   const categoriesArr = useSelector(selectCategories);
-  const transactions = useSelector(selectAllTransactions).data;
+  const transactions = useSelector(selectAllTransactions);
   const balance = useSelector(selectBalance);
   const displayBalance = !isNaN(parseFloat(balance))
     ? parseFloat(balance).toFixed(2)
     : '0.00';
   const incomeNr = categoriesArr.find(cat => cat.name === 'Income').id;
   const makeChartArr = data => {
+    // console.log(`Chart makeChartArr data:`, data);
     let dataArr = [];
     data.forEach(tr => {
       if (tr.type === 'income') {
@@ -52,16 +53,23 @@ const Chart = () => {
         };
       }
     });
-    // for (let index = dataArr.length - 1; index > 0; index--) {
-    //   if (dataArr[index] == null) {
-    //     console.log(`dataArr before slice [${index}]`, dataArr);
-    //     dataArr.slice(0, index).join(dataArr.slice(index, dataArr.length));
-    //     console.log(`dataArr after slice [${index}]`, dataArr);
-    //   }
-    // }
+    //slicing off empty array cells
+    for (let index = dataArr.length - 1; index > 0; index--) {
+      if (dataArr[index] == null) {
+        // console.log(`dataArr before slice [${index}]`, dataArr);
+        dataArr = dataArr
+          .slice(0, index)
+          .concat(dataArr.slice(index + 1, dataArr.length));
+        // console.log(`dataArr after slice [${index}]`, dataArr);
+      }
+    }
     return dataArr;
   };
-  const chartArr = makeChartArr(transactions);
+  // const chartArr = makeChartArr(transactions);
+  const chartArr =
+    Array.isArray(transactions) && transactions.length > 0
+      ? makeChartArr(transactions)
+      : [];
 
   //category colors
   const makePalette = () => {
