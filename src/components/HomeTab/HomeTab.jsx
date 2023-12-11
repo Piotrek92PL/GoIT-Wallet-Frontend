@@ -100,16 +100,9 @@ function HomeTab() {
                 <td className={styles.tableBodyData}>{result}</td>
                 <td className={styles.tableBodyData}>{item.category}</td>
                 <td className={styles.tableBodyData}>{item.comment}</td>
-                <td
-                  className={
-                    result === '+'
-                      ? styles.tableBodyDataPlus
-                      : styles.tableBodyDataMinus
-                  }
-                >
-                  {item.sum}
+                <td className={styles.tableBodyData}>
+                  {item.amount} {/* Dodanie kwoty transakcji */}
                 </td>
-                {/* Corrected placement of <td> for Edit and Delete buttons */}
                 <td>
                   <button
                     className={styles.buttonEdit}
