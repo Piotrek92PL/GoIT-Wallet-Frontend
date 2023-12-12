@@ -6,3 +6,5 @@ export const selectCurrentTransaction = state =>
 export const selectBalance = state => state.finance.totalBalance;
 export const selectIncome = state => state.finance.totalIncome;
 export const selectExpense = state => state.finance.totalExpese;
+
+export const selectStatistics = state => state.transactions.statistics;

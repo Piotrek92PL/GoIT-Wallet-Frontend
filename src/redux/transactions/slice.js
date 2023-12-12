@@ -6,12 +6,14 @@ import {
   getTransactionById,
   deleteTransaction,
   updateTransaction,
+  getUserStatisticsByDate,
 } from './operations';
 
 const initialState = {
   transactions: [],
   error: null,
   currentTransaction: null,
+  statistics: null,
 };
 
 const transactionsSlice = createSlice({
@@ -52,6 +54,12 @@ const transactionsSlice = createSlice({
         );
       })
       .addCase(updateTransaction.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(getUserStatisticsByDate.fulfilled, (state, action) => {
+        state.statistics = action.payload.data;
+      })
+      .addCase(getUserStatisticsByDate.rejected, (state, action) => {
         state.error = action.error.message;
       });
   },
