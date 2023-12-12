@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 // import PropTypes from 'prop-types';
 // import { useDispatch } from 'react-redux';
 import css from './TableChart.module.css';
@@ -46,6 +46,7 @@ const TableChart = () => {
   const dataExpenses = useSelector(selectExpense);
   const moneyFormat = number =>
     !isNaN(parseFloat(number)) ? parseFloat(number).toFixed(2) : '0.00';
+  // eslint-disable-next-line no-unused-vars
   const displayBalance = moneyFormat(balance);
 
   const incomeNr = categoriesArr.find(cat => cat.name === 'Income').id;
