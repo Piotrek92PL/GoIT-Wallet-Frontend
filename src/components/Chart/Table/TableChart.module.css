@@ -38,9 +38,11 @@
     display: flex;
     position: relative;
   }
+
   .selectMonth {
     width: 160px;
   }
+
   .selectYear {
     margin-top: 0px;
     margin-left: 16px;
@@ -55,10 +57,12 @@
     max-width: 395px;
     display: flex;
   }
+
   .selectMonth {
     cursor: pointer;
     width: 181px;
   }
+
   .selectYear {
     margin-left: 32px;
     cursor: pointer;
@@ -184,5 +188,53 @@
 @media screen and (min-width: 1280px) {
   .statisticsList {
     width: 395px;
+  }
+}
+
+.containerChart {
+  display: flex;
+  flex-direction: column;
+
+  @media sreen and (min-width: 768px) {
+    flex-direction: row;
+    padding-left: 20px;
+    margin-top: 20px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-left: 100px;
+    margin-top: 50px;
+  }
+}
+
+.diagramWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+}
+
+.diagramTitle {
+  color: var(--color-text-main);
+  font-family: var(--font-family-sec);
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  margin-bottom: 8px;
+  line-height: normal;
+
+  @media (min-width: 768px) {
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+  @media (min-width: 1280px) {
+    margin-left: 15px;
+
   }
 }

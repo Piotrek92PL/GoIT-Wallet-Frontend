@@ -1,8 +1,8 @@
 import css from './Chart.module.css';
-import { useEffect, useState } from 'react';
 // import { selectUserToken } from '../../redux/user/userSelectors';
 // import { useSelector } from 'react-redux';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 import {
   Chart as ChartJS,
@@ -13,21 +13,16 @@ import {
 } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { BACKEND_BASE_URL } from 'redux/global/constants';
-import localStorage from 'redux-persist/es/storage';
 import { selectCategories } from 'redux/categories/selectors';
 import { useSelector } from 'react-redux';
-import {
-  selectAllTransactions,
-  selectBalance,
-} from 'redux/transactions/selectors';
+import { selectBalance } from 'redux/transactions/selectors';
 
 axios.defaults.baseURL = BACKEND_BASE_URL;
 
 ChartJS.register(ArcElement, Tooltip, Colors, Legend);
 
-const Chart = () => {
+const Chart = ({ transactions }) => {
   const categoriesArr = useSelector(selectCategories);
-  const transactions = useSelector(selectAllTransactions);
   const balance = useSelector(selectBalance);
   const displayBalance = !isNaN(parseFloat(balance))
     ? parseFloat(balance).toFixed(2)
@@ -140,6 +135,10 @@ const Chart = () => {
       {balance !== null && <p className={css.balance}>$ {displayBalance}</p>}
     </div>
   );
+};
+
+Chart.propTypes = {
+  transactions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Chart;
