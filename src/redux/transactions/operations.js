@@ -115,7 +115,7 @@ export const getUserStatisticsByDate = createAsyncThunk(
   async ({ year, month }, thunkAPI) => {
     thunkAPI.dispatch(setLoading(true));
     try {
-      const url = `/api/transactions/stats/${userId}/${year}/${month}`;
+      const url = `/api/transactions/stats/${year}/${month}`;
       const res = await axios.get(url);
       return res.data;
     } catch (error) {
