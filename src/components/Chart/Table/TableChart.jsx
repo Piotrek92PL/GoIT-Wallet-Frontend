@@ -2,6 +2,7 @@ import { useState } from 'react';
 // import PropTypes from 'prop-types';
 // import { useDispatch } from 'react-redux';
 import css from './TableChart.module.css';
+import Chart from '../Chart';
 import { nanoid } from 'nanoid';
 import { useSelector } from 'react-redux';
 import {
@@ -33,7 +34,7 @@ const monthToNumber = {
 
 const TableChart = () => {
   const categoriesArr = useSelector(selectCategories);
-  const transactions = useSelector(selectAllTransactions);
+  const allTransactions = useSelector(selectAllTransactions);
   const balance = useSelector(selectBalance);
   const dataIncome = useSelector(selectIncome);
   const dataExpenses = useSelector(selectExpense);
@@ -66,14 +67,33 @@ const TableChart = () => {
     return dataArr;
   };
 
-  const chartArr =
-    Array.isArray(transactions) && transactions.length > 0
-      ? makeChartArr(transactions)
-      : [];
+  const [selectedMonth, setSelectedMonth] = useState(
+    (new Date().getMonth() + 1).toString().padStart(2, '0')
+  );
+  const [selectedYear, setSelectedYear] = useState(
+    new Date().getFullYear().toString()
+  );
 
-  const [selectedMonth, setSelectedMonth] = useState('10');
-  const [selectedYear, setSelectedYear] = useState('2023');
-  // const dispatch = useDispatch();
+  const filterTransactionsByDate = (transactions, year, month) => {
+    return transactions.filter(tr => {
+      const transactionDate = new Date(tr.date);
+      return (
+        transactionDate.getFullYear().toString() === year &&
+        (transactionDate.getMonth() + 1).toString().padStart(2, '0') === month
+      );
+    });
+  };
+
+  const filteredTransactions = filterTransactionsByDate(
+    allTransactions,
+    selectedYear,
+    selectedMonth
+  );
+
+  const chartArr =
+    Array.isArray(filteredTransactions) && filteredTransactions.length > 0
+      ? makeChartArr(filteredTransactions)
+      : [];
 
   const handleMonthChange = event => {
     const selectedMonthNumber = event.target.value;
@@ -97,72 +117,80 @@ const TableChart = () => {
   // }, [dispatch, selectedMonth, selectedYear]);
 
   return (
-    <div className={css.chartWrap}>
-      <div className={css.tableWra}>
-        <div className={css.dateBox}>
-          <div className={css.month}>
-            <select
-              className={css.selectMonth}
-              value={selectedMonth}
-              onChange={handleMonthChange}
-            >
-              {Object.keys(monthToNumber).map(month => (
-                <option key={month} value={monthToNumber[month]}>
-                  {month}
-                </option>
-              ))}
-            </select>
-          </div>
-          <select
-            className={css.selectYear}
-            value={selectedYear}
-            onChange={handleYearChange}
-          >
-            {['2020', '2021', '2022', '2023', '2024', '2025', '2026'].map(
-              year => (
-                <option key={year} value={year}>
-                  {year}
-                </option>
-              )
-            )}
-          </select>
-        </div>
-        <div className={css.statisticsList}>
-          <div className={css.header}>
-            <div className={css.headerItem}>Category</div>
-            <div className={css.headerItem}>Sum</div>
-          </div>
+    <div className={css.containerChart}>
+      <p className={css.diagramTitle}>Statistics</p>
+      <div className={css.diagramWrap}>
+        <Chart transactions={filteredTransactions} />
+        <div className={css.chartWrap}>
+          <div className={css.tableWra}>
+            <div className={css.dateBox}>
+              <div className={css.month}>
+                <select
+                  className={css.selectMonth}
+                  value={selectedMonth}
+                  onChange={handleMonthChange}
+                >
+                  {Object.keys(monthToNumber).map(month => (
+                    <option key={month} value={monthToNumber[month]}>
+                      {month}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <select
+                className={css.selectYear}
+                value={selectedYear}
+                onChange={handleYearChange}
+              >
+                {['2020', '2021', '2022', '2023', '2024', '2025', '2026'].map(
+                  year => (
+                    <option key={year} value={year}>
+                      {year}
+                    </option>
+                  )
+                )}
+              </select>
+            </div>
+            <div className={css.statisticsList}>
+              <div className={css.header}>
+                <div className={css.headerItem}>Category</div>
+                <div className={css.headerItem}>Sum</div>
+              </div>
 
-          {dataStatsArr.map(({ category, color, amount }) => (
-            <ul className={css.list} key={nanoid()}>
-              <li className={css.listItem}>
-                <div className={css.listItemWrap}>
-                  <div
-                    className={css.colorBox}
-                    style={{
-                      backgroundColor: getCategoryColor(
-                        category,
-                        categoriesArr
-                      ),
-                    }}
-                  ></div>
-                  <p className={css.category}>
-                    {getCategoryName(category, categoriesArr)}
+              {dataStatsArr.map(({ category, color, amount }) => (
+                <ul className={css.list} key={nanoid()}>
+                  <li className={css.listItem}>
+                    <div className={css.listItemWrap}>
+                      <div
+                        className={css.colorBox}
+                        style={{
+                          backgroundColor: getCategoryColor(
+                            category,
+                            categoriesArr
+                          ),
+                        }}
+                      ></div>
+                      <p className={css.category}>
+                        {getCategoryName(category, categoriesArr)}
+                      </p>
+                    </div>
+                    <p>{moneyFormat(amount)}</p>
+                  </li>
+                </ul>
+              ))}
+
+              <div className={css.resultsWrap}>
+                <div className={css.results}>
+                  <p className={css.resultsTitle}>Expenses:</p>
+                  <p className={css.resultsExpenses}>
+                    {moneyFormat(dataExpenses)}
                   </p>
                 </div>
-                <p>{moneyFormat(amount)}</p>
-              </li>
-            </ul>
-          ))}
-
-          <div className={css.resultsWrap}>
-            <div className={css.results}>
-              <p className={css.resultsTitle}>Expenses:</p>
-              <p className={css.resultsExpenses}>{moneyFormat(dataExpenses)}</p>
-            </div>
-            <div className={css.results}>
-              <p className={css.resultsTitle}>Income:</p>
-              <p className={css.resultsIncome}>{moneyFormat(dataIncome)}</p>
+                <div className={css.results}>
+                  <p className={css.resultsTitle}>Income:</p>
+                  <p className={css.resultsIncome}>{moneyFormat(dataIncome)}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
