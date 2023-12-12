@@ -30,9 +30,11 @@
   font-weight: 700;
   font-size: 18px;
   line-height: 1.5;
-  text-align: left;
+  /* text-align: left; */
+  text-align: center;
   flex-basis: 105px;
-  margin-right: 10px;
+  /* margin-right: 10px; */
+  /* padding-right: 10px; */
   /* ... additional styles for other tableHeadData elements ... */
 }
 
@@ -63,29 +65,27 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 1.5;
-  text-align: left;
+  /* text-align: left; */
+  text-align: center;
   flex-basis: 110px;
-  margin-right: 10px;
+  /* padding: 0; */
+  /* margin-right: 10px; */
+  /* padding-right: 10px; */
 
   /* ... additional styles for other tableBodyData elements ... */
 }
 
-.tableBodyData:nth-child(2) {
+/* .tableBodyData:nth-child(2) {
   padding-left: 15px;
-}
-
-.tableBodyData:nth-child(3) {
+} */
+/* .tableBodyData:nth-child(3) {
   padding-left: 40px;
-}
+} */
 
 .tableBodyData:nth-child(4) {
-  padding-left: 50px;
+  /* padding-left: 50px; */
   word-wrap: break-word;
   max-width: 100px;
-}
-
-.tableBodyData:nth-child(5) {
-  padding-left: 50px;
 }
 
 .tableBodyDataPlus {
