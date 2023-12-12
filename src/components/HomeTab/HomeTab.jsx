@@ -167,7 +167,9 @@ function HomeTab() {
               </li>
               <li className={styles.mobileListItem}>
                 <span className={styles.mobileListCategory}>Category</span>
-                <span className={styles.mobileListData}>{item.category}</span>
+                <span className={styles.mobileListData}>
+                  {getCategoryName(item.category, categoriesArr)}
+                </span>
               </li>
               <li className={styles.mobileListItem}>
                 <span className={styles.mobileListCategory}>Comment</span>
