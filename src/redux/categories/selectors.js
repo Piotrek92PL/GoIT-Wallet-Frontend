@@ -7,12 +7,12 @@ export const getCategory = (nr, arr) => {
 };
 
 export const getCategoryName = (nr, arr) => {
-  const found = arr.find(cat => cat.id === nr);
+  const found = Array.isArray(arr) ? arr.find(cat => cat.id === nr) : false;
   return found ? (found.name ? found.name : 'Other') : 'Other';
 };
 
 export const getCategoryColor = (nr, arr) => {
-  const found = arr.find(cat => cat.id === nr);
+  const found = Array.isArray(arr) ? arr.find(cat => cat.id === nr) : false;
   return found
     ? found.color
       ? found.color
