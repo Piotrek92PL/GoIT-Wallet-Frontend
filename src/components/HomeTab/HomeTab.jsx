@@ -93,7 +93,7 @@ function HomeTab() {
         </thead>
         <tbody className={styles.tableBody}>
           {currentTransactions.map(item => {
-            const result = item.Expenses ? '-' : '+';
+            const result = item.type === 'expense' ? '-' : '+';
             return (
               <tr key={item.id} className={styles.tableBodyRow}>
                 <td className={styles.tableBodyData}>
