@@ -16,6 +16,7 @@ import { selectIsModalEditTransaction } from 'redux/global/selectors';
 import { getTransactionById } from 'redux/transactions/operations';
 import { selectCurrentTransaction } from 'redux/transactions/selectors';
 import { Pagination } from '../Pagination/Pagination';
+import { getCategoryName, selectCategories } from 'redux/categories/selectors';
 
 function convertStringToDate(str = '2022-12-01T00:00:00.000Z') {
   return str.split('T')[0].split('-').reverse().join('.');
@@ -29,6 +30,7 @@ function HomeTab() {
   const isMobile = useMedia('(max-width: 768px)');
   const dispatch = useDispatch();
   const transactions = useSelector(selectAllTransactions);
+  const categoriesArr = useSelector(selectCategories);
 
   useEffect(() => {
     dispatch(getAllTransactions());
@@ -91,14 +93,16 @@ function HomeTab() {
         </thead>
         <tbody className={styles.tableBody}>
           {currentTransactions.map(item => {
-            const result = item.Expenses ? '-' : '+';
+            const result = item.type === 'expense' ? '-' : '+';
             return (
               <tr key={item.id} className={styles.tableBodyRow}>
                 <td className={styles.tableBodyData}>
                   {convertStringToDate(item.date)}
                 </td>
                 <td className={styles.tableBodyData}>{result}</td>
-                <td className={styles.tableBodyData}>{item.category}</td>
+                <td className={styles.tableBodyData}>
+                  {getCategoryName(item.category, categoriesArr)}
+                </td>
                 <td className={styles.tableBodyData}>{item.comment}</td>
                 <td
                   className={styles.tableBodyData}
