@@ -81,61 +81,63 @@ function HomeTab() {
 
   const renderDesktop = () => {
     return (
-      <table className={styles.table}>
-        <thead className={styles.tableHead}>
-          <tr className={styles.tableHeadRow}>
-            {tableHeadData.map(head => (
-              <th className={styles.tableHeadData} key={head}>
-                {head}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className={styles.tableBody}>
-          {currentTransactions.map(item => {
-            const result = item.type === 'expense' ? '-' : '+';
-            return (
-              <tr key={item.id} className={styles.tableBodyRow}>
-                <td className={styles.tableBodyData}>
-                  {convertStringToDate(item.date)}
-                </td>
-                <td className={styles.tableBodyData}>{result}</td>
-                <td className={styles.tableBodyData}>
-                  {getCategoryName(item.category, categoriesArr)}
-                </td>
-                <td className={styles.tableBodyData}>{item.comment}</td>
-                <td
-                  className={styles.tableBodyData}
-                  style={{ color: item.Expenses ? `#FF6596` : `#24CCA7` }}
-                >
-                  {item.amount} {/* Dodanie kwoty transakcji */}
-                </td>
-                <td>
-                  <button
-                    className={styles.buttonEdit}
-                    onClick={() => handleToggleModal(item._id)}
+      <>
+        <table className={styles.table}>
+          <thead className={styles.tableHead}>
+            <tr className={styles.tableHeadRow}>
+              {tableHeadData.map(head => (
+                <th className={styles.tableHeadData} key={head}>
+                  {head}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className={styles.tableBody}>
+            {currentTransactions.map(item => {
+              const result = item.type === 'expense' ? '-' : '+';
+              return (
+                <tr key={item._id} className={styles.tableBodyRow}>
+                  <td className={styles.tableBodyData}>
+                    {convertStringToDate(item.date)}
+                  </td>
+                  <td className={styles.tableBodyData}>{result}</td>
+                  <td className={styles.tableBodyData}>
+                    {getCategoryName(item.category, categoriesArr)}
+                  </td>
+                  <td className={styles.tableBodyData}>{item.comment}</td>
+                  <td
+                    className={styles.tableBodyData}
+                    style={{ color: item.Expenses ? `#FF6596` : `#24CCA7` }}
                   >
-                    <MdEdit size={24} />
-                  </button>
-                </td>
-                <td>
-                  <button
-                    className={styles.button}
-                    onClick={() => handleDelete(item._id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
+                    {item.amount} {/* Dodanie kwoty transakcji */}
+                  </td>
+                  <td>
+                    <button
+                      className={styles.buttonEdit}
+                      onClick={() => handleToggleModal(item._id)}
+                    >
+                      <MdEdit size={24} />
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      className={styles.button}
+                      onClick={() => handleDelete(item._id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
         <Pagination
           transactionsPerPage={transactionsPerPage}
           totalTransactions={transactions.length}
           paginate={paginate}
         />
-      </table>
+      </>
     );
   };
 
@@ -144,7 +146,7 @@ function HomeTab() {
       <>
         {currentTransactions.map(item => {
           const borderColor = item.Expenses ? '#ff6596' : '#24cca7';
-          const result = item.Expenses ? '-' : '+';
+          const result = item.type === 'expense' ? '-' : '+';
           return (
             <ul
               key={item._id}
