@@ -109,3 +109,22 @@ export const updateTransaction = createAsyncThunk(
     }
   }
 );
+
+export const getUserStatisticsByDate = createAsyncThunk(
+  'transactions/getUserStatisticsByDate',
+  async ({ year, month }, thunkAPI) => {
+    thunkAPI.dispatch(setLoading(true));
+    try {
+      const url = `/api/transactions/stats/${year}/${month}`;
+      const res = await axios.get(url);
+      return res.data;
+    } catch (error) {
+      if (!error.response) {
+        return thunkAPI.rejectWithValue('Could not connect with the server');
+      }
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    } finally {
+      thunkAPI.dispatch(setLoading(false));
+    }
+  }
+);
