@@ -4,7 +4,11 @@ import { useState } from 'react';
 import css from './TableChart.module.css';
 import { nanoid } from 'nanoid';
 import { useSelector } from 'react-redux';
-import { getCategoryName, selectCategories } from 'redux/categories/selectors';
+import {
+  getCategoryColor,
+  getCategoryName,
+  selectCategories,
+} from 'redux/categories/selectors';
 import {
   selectAllTransactions,
   selectBalance,
@@ -26,18 +30,7 @@ const monthToNumber = {
   November: '11',
   December: '12',
 };
-const colorsChart = [
-  '#FED057',
-  '#FFD8D0',
-  '#FD9498',
-  '#C5BAFF',
-  '#6E78E8',
-  '#4A56E2',
-  '#81E1FF',
-  '#24CCA7',
-  '#00AD84',
-  '#02FD84',
-];
+
 const TableChart = () => {
   const categoriesArr = useSelector(selectCategories);
   const transactions = useSelector(selectAllTransactions);
@@ -147,7 +140,10 @@ const TableChart = () => {
                   <div
                     className={css.colorBox}
                     style={{
-                      backgroundColor: colorsChart[category],
+                      backgroundColor: getCategoryColor(
+                        category,
+                        categoriesArr
+                      ),
                     }}
                   ></div>
                   <p className={css.category}>
